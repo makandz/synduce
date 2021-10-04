@@ -125,7 +125,7 @@ In our second meeting...
 
 We will be holding weekly meetings where we assign stories to members and discuss progress on stories. Weekly meetings will fit more inline with our schedules rather than daily standups since work throughout the week might be sparse.  For organizational purposes we will be using a free solution to manage and assign our stories: Trello. Trello will let us mange what features are in backlog, in-development, testing, and release phases. We will prioritize tasks by assigning story points/task points per feature as well as prioritization markers: urgent, critical, medium, high, low. These task points will be discussed during the weekly meeting of the amount of work and priority of the feature. Tasks will be assigned to team members based on their roles. Those doing backend will pickup backend stories and frontend will pick up frontend etc. Work progress will be measured by the list the story is placed within the board either development, testing, or release. This is also supplemented in by progress discussions in our meetings. 
 
-
+![image](Trello_board.png)
 
 
 List/describe the artifacts you will produce in order to organize your team.
