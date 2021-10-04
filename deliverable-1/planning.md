@@ -141,19 +141,26 @@ List/describe the artifacts you will produce in order to organize your team.
 
 Describe your team's working culture.
 
-**Communications:**
-It is not too difficult for us to communicate with each other effectively. Since we are using Discord, the frequency can potentially be daily.
+**Communications:** It is not too difficult for us to communicate with each other effectively. Since we are using Discord, the frequency can potentially be daily.
+As mentioned in Q7, our partner can communicate with us through discord for any quick question or concerns. If there is a meeting to be held, it would be done through Zoom on Monday's from 8pm - 9pm.
+*What is the expected frequency? What methods/channels are appropriate?
+*If you have a partner project, what is your process (in detail) for communicating with your partner?
 
-As mentioned in Q7, our partner can commincate with us through discord for any quick question or concerns. If there is a meeting to be held, it would be done through Zoom on Monday's from 8pm - 9pm.
-
-> - What is the expected frequency? What methods/channels are appropriate?
-> - If you have a partner project, what is your process (in detail) for communicating with your partner?
-
-**Meetings:**
-
-> - How are people held accountable for attending meetings, completing action items? Is there a moderator or process?
+**Meetings:** Everyone is expected to attend meetings unless of exceptional circumstances that cannot be foreseen. If someone cannot attend a meeting they must vocalize that 24hrs prior to the meeting at least. People who do not attend will be talked to and formalize a solution of how they can attend the meeting further. If it continues then it will escalate with the entire team, possibly our TA if escalation does not work. This will give a fair chance for the member to step up and be responsible before escalating further. Per meeting there will be a scrum master which will rotate each meeting through all members so that each member can have a turn moderating the meeting.
+How are people held accountable for attending meetings, completing action items? Is there a moderator or process?
 
 **Conflict Resolution:**
+**Scenario 1 Indecision:** A member has pushed a feature branch and is asking for it to be reviewed. Another member responds with criticisms of the person code. The member who pushed the feature rejects their comments and tells them this is the best way to do it. This leads to an argument of what approach is better.
+
+**Resolution 1:** Ask for additional team members to give their perspectives. If the member still remains insecure with criticisms, try to make a compromise and/or try to explain that the criticism is not meant to belittle them but rather make positive adjustments.
+
+**Scenario 2 Non-responsiveness:** A team member has been missing from meetings and/or not responding to discord messages.
+
+**Resolution 2:** Try to speak directly to the team member asking for justification and a warning (not inclusive of exceptional circumstances). If the member continues after the warning have a team meeting and give final warning. After the member's behavior continues, escalate to our TA and possibly Professor as a last resort.
+
+**Scenario 3 Completion of Features:** A team member has not been up to par with allocated work is causing backlogs to occur and possibly blocking other members from completing their tasks.
+
+**Resolution 3:** Based on the roles/group of responsibility the member is in, those directly working on that side of features will talk individually with them. If no change, will be brought up in our meeting discussing if there is anything going on that prevents them from succeeding and adjusting as needed. After that, if no work is being done still, escalate to our TA and then prof if needed.
 
 - List at least three team scenarios/conflicts you discussed in lecture and how you decided you will resolve them. Indecisions? Non-responsive team members? Any other scenarios you can think of?
 
