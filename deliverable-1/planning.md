@@ -24,7 +24,7 @@ We will be buliding an online web code editor that users can use to write code a
 
 #### Q2: Who are your target users?
 
-Our target users are mainly researchers that would be willing to work or are already currently working with Synduce (the program we are interfacing with). Another type of user would be anyone that would like to introduce themselves to the capabilities/functionality of Synduce.
+Our target users are mainly researchers/graduate students that would be willing to work or are already currently working with Synduce (the program we are interfacing with). Another type of user would be anyone that would like to introduce themselves to the capabilities/functionality of Synduce.
 
 > Question details:
 >
@@ -35,7 +35,7 @@ Our target users are mainly researchers that would be willing to work or are alr
 
 #### Q3: Why would your users choose your product? What are they using today to solve their problem/need?
 
-The purpose of the product is to firstly allow for a web application that does not require a user to dowload the Synduce project, build it, feed it code, and run it in the command line. It would be much more easily accessible to not only researchers, but anyone else interseted in learning about Synduce if everything was online. The convenience of accessing, and using the Synduce software through a web app would be appealing. Secondly, a user might want to better understand what Synduce is doing behind the scenes but looking at command line output is not necessarily attractive. Our product would enhance this experience leaving the command line entirely and displaying log information elegantly and intuitively so it easier for one to read.
+The purpose of the product is to firstly allow for a web application that does not require a user to download the Synduce project, build it, feed it code, and run it in the command line. It would be much more easily accessible to not only researchers, but anyone else interseted in learning about Synduce if everything was online. The convenience of accessing, and using the Synduce software through a web app would be appealing. Secondly, a user might want to better understand what Synduce is doing behind the scenes but looking at command line output is not necessarily attractive. Our product would enhance this experience leaving the command line entirely and displaying log information elegantly and intuitively so it easier for one to read.
 
 > Question Details:
 >
@@ -89,6 +89,10 @@ The purpose of the product is to firstly allow for a web application that does n
 #### Q6: What are the roles & responsibilities on the team?
 
 Describe the different roles on the team and the responsibilities associated with each role.
+
+- Frontend?
+- Backend?
+- DevOps?
 
 - Roles should reflect the structure of your team and be appropriate for your project. Not necessarily one role to one team member.
 
