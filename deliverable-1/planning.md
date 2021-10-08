@@ -39,8 +39,9 @@ Our main target users are researchers/graduate students that are currently worki
 
 
 ### Q3: Why would your users choose your product? What are they using today to solve their problem/need?
-Currently, the Software Engineering Lab at UofT currently does not provide pre-built binaries for Synduce; hence, users wishing to utilize its capabilities must download the source, manually build it, and then use it via a command-line interface. Such a workflow is very inconvenient for users who simply want quick access to Synduce.
-Our application will solve this issue by providing a simple and easy-to-access interface to users, making it simple for users to work and keep up-to-date with the latest version of Sundyce. In addition, our application will also offer extra convenience features, such as the ability to store their scripts in the cloud and access them from any machine, much more readable diagnostics and debug information, etc. Users would choose our product because of this simplicity and convenience.It makes Synduce far more accessible to those less familiar with manual building and related technologies.
+Currently, the Software Engineering Lab at UofT does not provide pre-built binaries for Synduce; hence, users wishing to utilize its capabilities must download the source, manually build it, and then use it via a command-line interface. Such a workflow is very inconvenient for users who simply want quick access to Synduce.
+
+Our application will solve this issue by providing a simple and easy-to-access interface to users, making it straightforward for users to work and keep up-to-date with the latest version of Synduce. In addition, our application will also offer extra convenience features, such as the ability to store their scripts in the cloud and access them from any machine, much more readable diagnostics and debug information, etc. Users would choose our product because of its simplicity and convenience. It makes Synduce far more accessible to those less familiar with manual building and related technologies.
 
 
 ### Q4: How will you build it?
@@ -62,7 +63,7 @@ We have a number of technologies that we are considering for this application. C
     * CI/CD: GitHub Actions or a similar AWS service depending on ease of integration.
 
 The aforementioned components will be used as follows:
-* The frontend will provide a user interface to the user. This will center around a code editor with syntax highlighting, etc., an output box, and a tab for diagnostic information. Different views and modals will allow the user to register for an account, login, manage their account, and view and manage their cloud scripts.
+* The frontend will provide a user interface to the user. This will center around a code editor with syntax highlighting, etc., an output box, and a tab for diagnostic information. Different views and modals will allow the user to register, login, adjust account details, and a way to manage their previous script executions.
 * The backend will handle running the Synduce binary on the user’s code and sending Synduce’s output back to the frontend.
 * The database will be used to store authentication details, user information, and any other relevant information.
 * The storage will store the user’s cloud scripts and logs.
@@ -96,10 +97,10 @@ Tech stack #1 will be used with options 1 and 3, while stack #2 will be used wit
 <p align=center><b><em>As a researcher, I want to visualize log outputs in an intuitive manner in order to better understand Synduce’s output.</em></b></p>
 
 *Acceptance Criteria*:
-* Given the input from the user, the output from Synduce’s synthesis is displayed in a intuitive manner 
+* Given the input from the user, the output from Synduce’s synthesis is displayed in an intuitive manner 
 
 #### Story #3
-<p align=center><b><em>As a general user I want to sign up and signin in order to access a personalized Synduce experience including personal files.</em></b></p>
+<p align=center><b><em>As a general user I want to sign up and sign in in order to access a personalized Synduce experience including personal files.</em></b></p>
 
 *Acceptance criteria*:
 * Given an account registration page, a user can sign up for an account, which then redirects them to their homepage.
@@ -122,30 +123,31 @@ Tech stack #1 will be used with options 1 and 3, while stack #2 will be used wit
 * **Aarya Patel**: I will be working on the frontend as well as helping in configuring cloud based services (AWS most likely) with our application. I will aid in creating the UI, help setup databases to store user information and utilize S3 buckets to store user code/log files.
 * **Asadullah Ahmed**: Will work on the backend. Specifically will work on routing Synduce synthesization requests, running them through workers, and sending back results. He will also work on sending log requests as we get them.
 * **Daniel Saunders**: I will be working on backend, infrastructure, and aiding in Frontend if needed. I will predominantly work on enabling Oauth and user registration. For infrastructure I will build out logging interactions of our jobs and endpoints.
-* **Makan Dehizadeh**: Frontend.
+* **Makan Dehizadeh**: I'll be in charge of coordinating the apps UX design as well as frontend work. I'll also be open to aiding Vedang with various DevOps tasks if needed given my experience in server management.  
 * **Steven Ung**: Will be playing a more flexible role. Starting off by working on backend and databases, then transitioning to other parts as required.
 * **Vedang Ashwin Naik**: I will work on the DevOps, testing, database and backend components, in that order of priority. In the initial phases, I will concentrate on exploring a static-page, serverless architecture for the app.
 
 ### Q7: What operational events will you have as a team?
-We are planning to communicate mostly over Discord. We have set up a private Discord server for this purpose. All team members are very active on the platform and usually reply within 15-30 minutes. Our partners are also on this server, and can be consulted at any time.
+We are mostly planning to communicate over Discord. We have set up a private Discord server for this purpose. All team members are very active on the platform and usually reply within 15-30 minutes. Our partners are also on this server and can be consulted at any time.
 
 We have decided to meet our partners “face-to-face” on Zoom every other Friday at 6 PM or Tuesday at 6 PM. These meetings will be used to demonstrate our progress, discuss changes to the project’s scope, clarify questions about functionality, etc. 
 
 If there is any reason to meet this way outside these times, we will use Discord to coordinate a Zoom meeting with our partners.
 
-All team members share the same CSC301 lecture and tutorial slot (M6-8, M8-9), so it is very simple for the entire team to touch base regularly. Additionally many team members share other classes, so discussions will happen on an almost-daily basis.
+All team members share the same CSC301 lecture and tutorial slot (M6-8, M8-9), so it is very simple for the entire team to touch base regularly. Additionally, many team members share other classes, so discussions will happen on an almost-daily basis.
 
 #### First Meeting Minutes
-In our first meeting with our partner we clarified the current scope of the project (as described in the previous questions). We discussed the purpose and key elements of the application and built a mental model of what the application will look like. We also discussed further communication methods and agreed upon a schedule (as described above). This meeting lasted approximately 45 minutes.
+In our first meeting with our partner, we clarified the current scope of the project (as described in the previous questions). We discussed the purpose and key elements of the application and built a mental model of what the application will look like. We also discussed further communication methods and agreed upon a schedule (as described above). This meeting lasted approximately 45 minutes.
 
 #### Second Meeting Minutes
-In our second meeting we went over a basic prototype of the web application and demonstrated key functionality. We verified that our current prototype does satisfy our partners’ interests. We also went over our user stories and clarified the different use cases for the application. One thing that we realized in the meeting was the possible long wait times for a complete Synduce synthesis. We went over our possible tech stacks with our partner. Some of the tools we may use are insufficient with free tier versions due to long computation times of synduce. We asked our partners to see if there are any solutions that the UofT labs can provide for us. Finally, we finalized a meeting schedule (Friday/Tuesday 6 PM).
+In our second meeting, we went over a basic prototype of the web application and demonstrated key functionality. We verified that our current prototype does satisfy our partners’ interests. We also went over our user stories and clarified the different use cases for the application. One thing that we realized in the meeting was the possible long wait times for a complete Synduce synthesis. We went over our possible tech stacks with our partner. Some of the tools we may use are insufficient with free tier versions due to long computation times of Synduce. We asked our partners to see if there are any solutions that the UofT labs can provide for us. Finally, we finalized a meeting schedule (Friday/Tuesday 6 PM).
 
 ## Q8: What artifacts will you use to self-organize?
-We hold weekly meetings (likely in person before or after the Monday lecture) where we assign stories to members and discuss progress on stories. Weekly meetings will fit more inline with our schedules rather than daily standups since work throughout the week might be sparse. Throughout the week, we will use Discord to keep in touch and stay on track.
-For organizational purposes we will be using [this Trello Board](https://trello.com/b/PyrsRJ3T/csc301-synduce-project) to manage and assign our stories. Trello will allow us to quickly identify features that are in the backlog, in development, in testing, have been released, etc. We will order tasks by using story/task points and prioritization markers such as urgent, critical, medium, high,  and low. The points and priority of the highest features will be the focus of each week’s meeting.
+We hold weekly meetings (likely in person before or after the Monday lecture) where we assign stories to members and discuss progress on stories. Weekly meetings will fit more in line with our schedules rather than daily standups since work throughout the week might be sparse. Throughout the week, we will use Discord to keep in touch and stay on track.
 
-Team members will self-assign tasks based on their proficiency with the technologies involved. As the term progresses, members will communicate to pick up slack and/or drop work depending on their individual course load and schedules. Members will be responsible for updating the Trello board with their progress and task status in a timely manner, as well as keeping the rest of the team up-to-date via Discord.
+For organizational purposes we will be using [this Trello Board](https://trello.com/b/PyrsRJ3T/csc301-synduce-project) to manage and assign our stories. Trello will allow us to quickly identify features that are in the backlog, in development, in testing, have been released, etc. We will order tasks by using story/task points and prioritization markers such as urgent, critical, high, medium, and low. The points and priority of the highest features will be the focus of each week’s meeting.
+
+Team members will self-assign tasks based on their proficiency with the technologies involved. As the term progresses, members will communicate to pick up the slack and/or drop work depending on their individual course load and schedules. Members will be responsible for updating the Trello board with their progress and task status in a timely manner, as well as keeping the rest of the team up-to-date via Discord.
 
 ![image](https://user-images.githubusercontent.com/25436568/136580020-e4595953-3309-4ef0-b42a-a914bb7d23ad.png)
 <p align=center><em>Our Trello Board</em></p>
@@ -170,7 +172,7 @@ A member has pushed a feature to the dev branch and is asking for a review. Anot
 #### Scenario 2: Non-responsiveness
 A member has been missing from meetings and/or not responding to online communication.
 
-*Resolution*: Attempts will be made to try and catch the offender in-person. If any provided justification is judged to not be sufficient, a warning will be issued. If the member continues to behave in such a manner after this warning, the matter will be escalated to the TA.
+*Resolution*: If the team was not notified of the absence prior, attempts will be made to try and catch the offender in-person. If any provided justification is judged to not be sufficient, a warning will be issued. If the member continues to behave in such a manner after this warning, the matter will be escalated to the TA.
 
 #### Scenario 3: Failure to Complete Features
 A member has not been keeping up with their work. This is causing backlogs and possibly blocking other members from completing their tasks.
@@ -178,7 +180,7 @@ A member has not been keeping up with their work. This is causing backlogs and p
 *Resolution*: Based on the member’s tasks and their role, those most directly affected by the lack of the feature will attempt to talk in-person with them to sort the matter out. If no suitable reason is given, and/or the tardiness continues for a significant period beyond this meeting, the matter will be escalated to the TA.
 
 ## Highlights
-The first key decision we made with our partners was the scope of the project. Our partners are extremely flexible in terms of the finished product they expect from us. During our meetings, we discussed the base requirements:  browser-based code editor, a backend that runs Synduce on a user’s code, and the history of a user’s runs. We also suggested a few extra convenience features such as cloud saves and shareable code links that we could add to improve the user experience while still keeping the scope manageable. Our partners received these positively, but reiterated that they were not mandatory whatsoever. Thus, we decided to first focus on building a MVP with only the basic requirements. If time permits, we will then add the extra features.
+The first key decision we made with our partners was the scope of the project. Our partners are extremely flexible in terms of the finished product they expect from us. During our meetings, we discussed the base requirements: browser-based code editor, a backend that runs Synduce on a user’s code, and the history of a user’s runs. We also suggested a few extra convenience features such as cloud saves and shareable code links that we could add to improve the user experience while still keeping the scope manageable. Our partners received these positively but reiterated that they were not mandatory whatsoever. Thus, we decided to first focus on building a MVP with only the basic requirements. If time permits, we will then add the extra features.
 
 Our next few decisions regarded the actual deployment of the application. We discussed three approaches with our partners, detailed in Q4. Our reasonings for these are below:
 1. Heroku: Heroku is easy to use, has many free add-ons like databases, message queues, etc. which makes it an attractive choice for a backend-heavy application like ours. However, its free tier is not the most generous.
