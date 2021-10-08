@@ -127,6 +127,13 @@ Tech stack #1 will be used with options 1 and 3, while stack #2 will be used wit
 * **Steven Ung**: Will be playing a more flexible role. Starting off by working on backend and databases, then transitioning to other parts as required.
 * **Vedang Ashwin Naik**: I will work on the DevOps, testing, database and backend components, in that order of priority. In the initial phases, I will concentrate on exploring a static-page, serverless architecture for the app.
 
+<p align=center>
+ <img src="https://user-images.githubusercontent.com/25436568/136634227-94efd6f4-b9d0-44ed-9538-08f74ab14c9b.png">
+</p>
+<p align=center>
+ <em>A chart of our roles</em>
+</p>
+
 ### Q7: What operational events will you have as a team?
 We are mostly planning to communicate over Discord. We have set up a private Discord server for this purpose. All team members are very active on the platform and usually reply within 15-30 minutes. Our partners are also on this server and can be consulted at any time.
 
