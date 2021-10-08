@@ -119,6 +119,9 @@ For organizational purposes we will be using [this Trello Board](https://trello.
 
 Team members will self-assign tasks based on their proficiency with the technologies involved. As the term progresses, members will communicate to pick up slack and/or drop work depending on their individual course load and schedules. Members will be responsible for updating the Trello board with their progress and task status in a timely manner, as well as keeping the rest of the team up-to-date via Discord.
 
+![image](https://user-images.githubusercontent.com/25436568/136580020-e4595953-3309-4ef0-b42a-a914bb7d23ad.png)
+<p align=center><em>Our Trello Board</em></p>
+
 ## Q9: What are the rules regarding how your team works?
 ### Communications
 As mentioned before, we will mainly use Discord to communicate. Communication frequency will be at least daily, and potentially multiple times a day. Our partners can also communicate via Discord.
