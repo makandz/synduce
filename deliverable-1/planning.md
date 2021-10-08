@@ -1,150 +1,206 @@
-# YOUR PRODUCT/TEAM NAME
-> _Note:_ This document is meant to evolve throughout the planning phase of your project.   That is, it makes sense for you commit regularly to this file while working on the project (especially edits/additions/deletions to the _Highlights_ section). Most importantly, it is a reflection of all the planning you work you've done in the first iteration. 
- > **This document will serve as a master plan between your team, your partner and your TA.**
+<h1 align="center">Synduce / 6 Devs 1 App</h1>
+
+- [Product Details](#product-details)
+  * [Q1: What are you planning to build?](#q1-what-are-you-planning-to-build)
+  * [Q2: Who are your target users?](#q2-who-are-your-target-users)
+  * [Q3: Why would your users choose your product? What are they using today to solve their problem/need?](#q3-why-would-your-users-choose-your-product-what-are-they-using-today-to-solve-their-problemneed)
+  * [Q4: How will you build it?](#q4-how-will-you-build-it)
+    + [Tech stack and testing](#tech-stack-and-testing)
+    + [Deployment](#deployment)
+  * [Q5: What are the user stories that make up the MVP?](#q5-what-are-the-user-stories-that-make-up-the-mvp)
+    + [Story #1](#story-1)
+    + [Story #2](#story-2)
+    + [Story #3](#story-3)
+    + [Story #4](#story-4)
+    + [Story #5](#story-5)
+- [Process Details](#process-details)
+  * [Q6: What are the roles & responsibilities on the team?](#q6-what-are-the-roles--responsibilities-on-the-team)
+  * [Q7: What operational events will you have as a team?](#q7-what-operational-events-will-you-have-as-a-team)
+    + [First Meeting Minutes](#first-meeting-minutes)
+    + [Second Meeting Minutes](#second-meeting-minutes)
+- [Q8: What artifacts will you use to self-organize?](#q8-what-artifacts-will-you-use-to-self-organize)
+- [Q9: What are the rules regarding how your team works?](#q9-what-are-the-rules-regarding-how-your-team-works)
+  * [Communications](#communications)
+  * [Meetings](#meetings)
+  * [Conflict Resolution](#conflict-resolution)
+    + [Scenario 1: Indecision](#scenario-1-indecision)
+    + [Scenario 2: Non-responsiveness](#scenario-2-non-responsiveness)
+    + [Scenario 3: Failure to Complete Features](#scenario-3-failure-to-complete-features)
+- [Highlights](#highlights)
+- [Intellectual Property Confidentiality Agreement](#intellectual-property-confidentiality-agreement)
 
 ## Product Details
- 
-#### Q1: What are you planning to build?
-
- > Short (1 - 2 min' read)
- * Start with a single sentence, high-level description of the product.
- * Be clear - Describe the problem you are solving in simple terms.
- * Be concrete. For example:
-    * What are you planning to build? Is it a website, mobile app,
-   browser extension, command-line app, etc.?      
-    * When describing the problem/need, give concrete examples of common use cases.
-    * Assume your the reader knows nothing about the problem domain and provide the necessary context. 
- * Focus on *what* your product does, and avoid discussing *how* you're going to implement it.      
-   For example: This is not the time or the place to talk about which programming language and/or framework you are planning to use.
- * **Feel free (and very much encouraged) to include useful diagrams, mock-ups and/or links**.
+### Q1: What are you planning to build?
+We will be building a web-based wrapper around Synduce, an automatic recursive function transformer. This will take the form of an online code editor that users can use to write code and send to Synduce, which will then return synthesized code completions and other diagnostic information. Diagnostic information from Synduce will be displayed in a more readable and intuitive format. The application will also feature user logins and the ability to store scripts and logs in the cloud and access them from any machine.
 
 
-#### Q2: Who are your target users?
+### Q2: Who are your target users?
+Our main target users are researchers/graduate students that are currently working with Synduce or are looking to work with it in the future. However, our application will also be open to other types of users, such as hobbyists exploring the domain and others who would like to learn more about Synduce’s capabilities.
 
-Our target users are mainly researchers that would be willing to work or are already currently working with Synduce (the program we are interfacing with). Another type of user would be anyone that would like to introduce themselves to the capabilities/functionality of Synduce.
 
-> Question details:
->  > Short (1 - 2 min' read max) 
->* Be specific (e.g. a 'a third-year university student studying Computer Science' and not 'a student')
-> * **Feel free to use personas. You can create your personas as part of this Markdown file, or add a link to an external site (for example, [Xtensio](https://xtensio.com/user-persona/)).**
+### Q3: Why would your users choose your product? What are they using today to solve their problem/need?
+Currently, the Software Engineering Lab at UofT does not provide pre-built binaries for Synduce; hence, users wishing to utilize its capabilities must download the source, manually build it, and then use it via a command-line interface. Such a workflow is very inconvenient for users who simply want quick access to Synduce.
 
-#### Q3: Why would your users choose your product? What are they using today to solve their problem/need?
+Our application will solve this issue by providing a simple and easy-to-access interface to users, making it straightforward for users to work and keep up-to-date with the latest version of Synduce. In addition, our application will also offer extra convenience features, such as the ability to store their scripts in the cloud and access them from any machine, much more readable diagnostics and debug information, etc. Users would choose our product because of its simplicity and convenience. It makes Synduce far more accessible to those less familiar with manual building and related technologies.
 
-The purpose of the product is to firstly allow for a web application that does not require a user to dowload the Synduce project, build it, feed it code, and run it in the command line. It would be much more easily accessible to not only researchers, but anyone else interseted in learning about Synduce if everything was online. The convenience of accessing, and using the Synduce software through a web app would be appealing. Secondly, a user might want to better understand what Synduce is doing behind the scenes but looking at command line output is not necessarily attractive. Our product would enhance this experience leaving the command line entirely and displaying log information elegantly and intuitively so it easier for one to read. 
 
-> Question Details:
-> > Short (1 - 2 min' read max)
-> * We want you to "connect the dots" for us - Why does your product (as described in your answer to Q1) fits the needs of your users (as described in your answer to Q2)?
-> * Explain the benefits of your product explicitly & clearly. For example:
-    * Save users time (how much?)
-    * Allow users to discover new information (which information? And, why couldn't they discover it before?)
-    * Provide users with more accurate and/or informative data (what kind of data? Why is it useful to them?)
-    * Does this application exist in another form? If so, how does your differ and provide value to the users?
-    * How does this align with your partner's organization's values/mission/mandate?
+### Q4: How will you build it?
+#### Tech stack and testing
+We have a number of technologies that we are considering for this application. Currently, we have decided to experiment with two approaches:
+1. A full-stack app with our own full-fledged backend, deployed to a suitable cloud provider like Heroku. We have shortlisted the following:
+    * Frontend: React
+    * Backend: The Python-based FastAPI
+    * Database: AWS DynamoDB or MongoDB
+    * Storage: Direct storage inside MongoDB if file sizes are small enough, or AWS S3
+    * Testing: pytest with FastAPI for backend unit testing and Selenium with an appropriate language for frontend testing
+    * CI/CD: GitHub Actions
+2. A serverless static site utilizing AWS Lambdas or similar technology from other cloud providers. We have shortlisted the following: 
+    * Frontend: React on AWS Amplify
+    * Backend: AWS Lambda or a related higher-level services from AWS will be used as the ‘backend’
+    * Database: AWS DynamoDB or MongoDB
+    * Storage: Direct storage inside MongoDB if file sizes are small enough, or AWS S3
+    * Testing: pytest with FastAPI for backend unit testing and Selenium with an appropriate language for frontend testing
+    * CI/CD: GitHub Actions or a similar AWS service depending on ease of integration.
 
-#### Q4: How will you build it?
+The aforementioned components will be used as follows:
+* The frontend will provide a user interface to the user. This will center around a code editor with syntax highlighting, etc., an output box, and a tab for diagnostic information. Different views and modals will allow the user to register, login, adjust account details, and a way to manage their previous script executions.
+* The backend will handle running the Synduce binary on the user’s code and sending Synduce’s output back to the frontend.
+* The database will be used to store authentication details, user information, and any other relevant information.
+* The storage will store the user’s cloud scripts and logs.
 
-> Short (1-2 min' read max)
- * What is the technology stack? Specify any and all languages, frameworks, libraries, PaaS products or tools. 
- * How will you deploy the application?
- * Describe the architecture - what are the high level components or patterns you will use? Diagrams are useful here. 
- * Will you be using third party applications or APIs? If so, what are they?
- * What is your testing strategy?
+![image](https://user-images.githubusercontent.com/25436568/136577819-6c007eec-1ebd-472f-8898-19b8b817e958.png)
+<p align=center><em>Tech Stack #1</em></p>
 
-#### Q5: What are the user stories that make up the MVP?
+![image](https://user-images.githubusercontent.com/25436568/136577996-90701945-1fd9-4acc-a78d-114aa9efd9fb.png)
+<p align=center><em>Tech Stack #2</em></p>
 
- * At least 5 user stories concerning the main features of the application - note that this can broken down further
- * You must follow proper user story format (as taught in lecture) ```As a <user of the app>, I want to <do something in the app> in order to <accomplish some goal>```
- * User stories must contain acceptance criteria. Examples of user stories with different formats can be found here: https://www.justinmind.com/blog/user-story-examples/. **It is important that you provide a link to an artifact containing your user stories**.
- * If you have a partner, these must be reviewed and accepted by them
+#### Deployment
+For deployment, we are considering the following options:
+1. A standard frontend and backend deployment on a service like Heroku.
+2. A serverless backend and static frontend deployment on AWS.
+3. A fully managed deployment on the CSLabs compute and login servers.
 
-----
-## Intellectual Property Confidentiality Agreement 
-> Note this section is **not marked** but must be completed briefly if you have a partner. If you have any questions, please contact David and Adam.
->  
-**By default, you own any work that you do as part of your coursework.** However, some partners may want you to keep the project confidential after the course is complete. As part of your first deliverable, you should discuss and agree upon an option with your partner. Examples include:
-1. You can share the software and the code freely with anyone with or without a license, regardless of domain, for any use.
-2. You can upload the code to GitHub or other similar publicly available domains.
-3. You will only share the code under an open-source license with the partner but agree to not distribute it in any way to any other entity or individual. 
-4. You will share the code under an open-source license and distribute it as you wish but only the partner can access the system deployed during the course.
+Tech stack #1 will be used with options 1 and 3, while stack #2 will be used with option 2.
 
-**Briefly describe which option you have agreed to. Your partner cannot ask you to sign any legally binding agreements or documents pertaining to non-disclosure, confidentiality, IP ownership, etc.**
 
-----
+### Q5: What are the user stories that make up the MVP?
+#### Story #1
+<p align=center><b><em>As a researcher, I want to remotely run Synduce on my OCaml scripts in order to get synthesized code completions.</em></b></p>
+
+*Acceptance criteria*:
+* Available code editor that OCaml script can be written into.
+* Run button that sends OCaml scripts to be analyzed by Synduce.
+* Console output component to visualize the output returned from Synduce. Displays basic output.
+* Console output component to visualize the advanced log output.
+
+#### Story #2
+<p align=center><b><em>As a researcher, I want to visualize log outputs in an intuitive manner in order to better understand Synduce’s output.</em></b></p>
+
+*Acceptance Criteria*:
+* Given the input from the user, the output from Synduce’s synthesis is displayed in an intuitive manner 
+
+#### Story #3
+<p align=center><b><em>As a general user I want to sign up and sign in in order to access a personalized Synduce experience including personal files.</em></b></p>
+
+*Acceptance criteria*:
+* Given an account registration page, a user can sign up for an account, which then redirects them to their homepage.
+
+#### Story #4
+<p align=center><b><em>As an account owner I want to be able view all my saved files in order to manage, delete or upload them.</em></b></p>
+
+*Acceptance criteria*: 
+* Given a work management page, the users can view their saved files and then manipulate them to their liking
+
+#### Story #5
+<p align=center><b><em>As an account owner I want to be able to view my profile information to be able to update passwords, usernames, etc.</em></b></p>
+
+*Acceptance criteria*:
+* Given an account management page, the user can see their entire profile and update their personal information
+
 
 ## Process Details
+### Q6: What are the roles & responsibilities on the team?
+* **Aarya Patel**: I will be working on the frontend as well as helping in configuring cloud based services (AWS most likely) with our application. I will aid in creating the UI, help setup databases to store user information and utilize S3 buckets to store user code/log files.
+* **Asadullah Ahmed**: Will work on the backend. Specifically will work on routing Synduce synthesization requests, running them through workers, and sending back results. He will also work on sending log requests as we get them.
+* **Daniel Saunders**: I will be working on backend, infrastructure, and aiding in Frontend if needed. I will predominantly work on enabling Oauth and user registration. For infrastructure I will build out logging interactions of our jobs and endpoints.
+* **Makan Dehizadeh**: I'll be in charge of coordinating the apps UX design as well as frontend work. I'll also be open to aiding Vedang with various DevOps tasks if needed given my experience in server management.  
+* **Steven Ung**: Will be playing a more flexible role. Starting off by working on backend and databases, then transitioning to other parts as required.
+* **Vedang Ashwin Naik**: I will work on the DevOps, testing, database and backend components, in that order of priority. In the initial phases, I will concentrate on exploring a static-page, serverless architecture for the app.
 
-#### Q6: What are the roles & responsibilities on the team?
+### Q7: What operational events will you have as a team?
+We are mostly planning to communicate over Discord. We have set up a private Discord server for this purpose. All team members are very active on the platform and usually reply within 15-30 minutes. Our partners are also on this server and can be consulted at any time.
 
-Describe the different roles on the team and the responsibilities associated with each role. 
- * Roles should reflect the structure of your team and be appropriate for your project. Not necessarily one role to one team member.
+We have decided to meet our partners “face-to-face” on Zoom every other Friday at 6 PM or Tuesday at 6 PM. These meetings will be used to demonstrate our progress, discuss changes to the project’s scope, clarify questions about functionality, etc. 
 
-List each team member and:
- * A description of their role(s) and responsibilities including the components they'll work on and non-software related work
- * 3 technical strengths and weaknesses each (e.g. languages, frameworks, libraries, development methodologies, etc.)
+If there is any reason to meet this way outside these times, we will use Discord to coordinate a Zoom meeting with our partners.
 
-#### Q7: What operational events will you have as a team?
+All team members share the same CSC301 lecture and tutorial slot (M6-8, M8-9), so it is very simple for the entire team to touch base regularly. Additionally, many team members share other classes, so discussions will happen on an almost-daily basis.
 
-Currently we are planning to have a flexible meeting schedule where we will use an ad-hoc approach through Discord, for any quick questions/comments/concerns. If we require any additional information that may be more easily communicated via a "face-to-face" meeting, we will do so through Zoom. These Zoom meetings will most likely occur during our scheduled tutorial time (Monday 8pm - 9pm).
+#### First Meeting Minutes
+In our first meeting with our partner, we clarified the current scope of the project (as described in the previous questions). We discussed the purpose and key elements of the application and built a mental model of what the application will look like. We also discussed further communication methods and agreed upon a schedule (as described above). This meeting lasted approximately 45 minutes.
 
-The purpose of each of the Zoom meeting would be to discuss any extra-ordinary issues or changes that needs to be communicated to our partner. If our partner also has such concerns those can be addressed there as well. We use the meetings to demo our current, under-development application to verify if our partner is still on board with our decisions, if they have any suggestions for improvement, or if we are missing some key required elements. Otherwise if we have any simpler questions, Discord would be more convenient for both the team and our partner.
+#### Second Meeting Minutes
+In our second meeting, we went over a basic prototype of the web application and demonstrated key functionality. We verified that our current prototype does satisfy our partners’ interests. We also went over our user stories and clarified the different use cases for the application. One thing that we realized in the meeting was the possible long wait times for a complete Synduce synthesis. We went over our possible tech stacks with our partner. Some of the tools we may use are insufficient with free tier versions due to long computation times of Synduce. We asked our partners to see if there are any solutions that the UofT labs can provide for us. Finally, we finalized a meeting schedule (Friday/Tuesday 6 PM).
 
-Since our entire team is in the same lecture and tutorial slot, it would be trivial for us to hold a quick sync meeting to make sure everyone is on track and knows what they are doing. If there are any other issues, those can also be dealt with.  
+## Q8: What artifacts will you use to self-organize?
+We hold weekly meetings (likely in person before or after the Monday lecture) where we assign stories to members and discuss progress on stories. Weekly meetings will fit more in line with our schedules rather than daily standups since work throughout the week might be sparse. Throughout the week, we will use Discord to keep in touch and stay on track.
 
-In our first meeting with our partner we clarified what the scope of the project was. We discussed the purpose and key elements of the application to get an idea of what they were looking for. We also discussed further communication methods and were mostly in agreement with the schedule and platform details that we would use as described above. This meeting lasted approximately 45 minutes. 
+For organizational purposes we will be using [this Trello Board](https://trello.com/b/PyrsRJ3T/csc301-synduce-project) to manage and assign our stories. Trello will allow us to quickly identify features that are in the backlog, in development, in testing, have been released, etc. We will order tasks by using story/task points and prioritization markers such as urgent, critical, high, medium, and low. The points and priority of the highest features will be the focus of each week’s meeting.
 
-In our second meeting...
+Team members will self-assign tasks based on their proficiency with the technologies involved. As the term progresses, members will communicate to pick up the slack and/or drop work depending on their individual course load and schedules. Members will be responsible for updating the Trello board with their progress and task status in a timely manner, as well as keeping the rest of the team up-to-date via Discord.
 
-> Question Details:
->Describe meetings (and other events) you are planning to have. 
-> * When and where? Recurring or ad hoc? In-person or online?
-> * What's the purpose of each meeting?
-> * Other events could be coding sessions, code reviews, quick weekly sync meeting online, etc.
-> * You must have at least 2 meetings with your project partner (if you have one) before D1 is due. Describe them here:
->   * What did you discuss during the meetings?
->   * What were the outcomes of each meeting?
->   * You must provide meeting minutes.
->   * You must have a regular meeting schedule established by the second meeting.  
-  
-#### Q8: What artifacts will you use to self-organize?
+![image](https://user-images.githubusercontent.com/25436568/136580020-e4595953-3309-4ef0-b42a-a914bb7d23ad.png)
+<p align=center><em>Our Trello Board</em></p>
 
-List/describe the artifacts you will produce in order to organize your team.       
+## Q9: What are the rules regarding how your team works?
+### Communications
+As mentioned before, we will mainly use Discord to communicate. Communication frequency will be at least daily, and potentially multiple times a day. Our partners can also communicate via Discord.
 
- * Artifacts can be To-Do lists, Task boards, schedule(s), meeting minutes, etc.
- * We want to understand:
-   * How do you keep track of what needs to get done?
-   * **How do you prioritize tasks?**
-   * How do tasks get assigned to team members?
-   * How do you determine the status of work from inception to completion?
+### Meetings
+Barring exceptional circumstances, everyone is expected to attend the weekly meeting and keep in touch on Discord. If someone knows they cannot attend a meeting, they must inform the others at least 6 hours prior.
 
-#### Q9: What are the rules regarding how your team works?
+If a member does not attend meetings or contribute regularly, a meeting will be held to determine the cause of this and potential solutions. If a compromise cannot be had, the situation will be brought up with our TA.
 
-Describe your team's working culture.
+For each meeting, a SCRUM master will rotate through all members to ensure that each member has a turn moderating the meeting.
 
-**Communications:**
-It is not too difficult for us to communicate with each other effectively. Since we are using Discord, the frequency can potentially be daily. 
+### Conflict Resolution
+#### Scenario 1: Indecision
+A member has pushed a feature to the dev branch and is asking for a review. Another member responds with criticism. This leads to a possibly subjective argument (i.e. a “flame war”) of which approach is better.
 
-As mentioned in Q7, our partner can commincate with us through discord for any quick question or concerns. If there is a meeting to be held, it would be done through Zoom on Monday's from 8pm - 9pm.
+*Resolution*: Other team members will be asked to give their perspectives. If the author is still steadfast in their claims, a compromise will attempt to be reached which is most in line with the application’s goals while still remaining respectful to everyone’s opinions
 
- >* What is the expected frequency? What methods/channels are appropriate? 
- >* If you have a partner project, what is your process (in detail) for communicating with your partner?
- 
-**Meetings:**
- >* How are people held accountable for attending meetings, completing action items? Is there a moderator or process?
- 
-**Conflict Resolution:**
- * List at least three team scenarios/conflicts you discussed in lecture and how you decided you will resolve them. Indecisions? Non-responsive team members? Any other scenarios you can think of?
+#### Scenario 2: Non-responsiveness
+A member has been missing from meetings and/or not responding to online communication.
 
-----
+*Resolution*: If the team was not notified of the absence prior, attempts will be made to try and catch the offender in-person. If any provided justification is judged to not be sufficient, a warning will be issued. If the member continues to behave in such a manner after this warning, the matter will be escalated to the TA.
+
+#### Scenario 3: Failure to Complete Features
+A member has not been keeping up with their work. This is causing backlogs and possibly blocking other members from completing their tasks.
+
+*Resolution*: Based on the member’s tasks and their role, those most directly affected by the lack of the feature will attempt to talk in-person with them to sort the matter out. If no suitable reason is given, and/or the tardiness continues for a significant period beyond this meeting, the matter will be escalated to the TA.
+
 ## Highlights
+The first key decision we made with our partners was the scope of the project. Our partners are extremely flexible in terms of the finished product they expect from us. During our meetings, we discussed the base requirements: browser-based code editor, a backend that runs Synduce on a user’s code, and the history of a user’s runs. We also suggested a few extra convenience features such as cloud saves and shareable code links that we could add to improve the user experience while still keeping the scope manageable. Our partners received these positively but reiterated that they were not mandatory whatsoever. Thus, we decided to first focus on building a MVP with only the basic requirements. If time permits, we will then add the extra features.
 
-Specify 3 - 5 key decisions and/or insights that came up during your meetings
-and/or collaborative process.
+Our next few decisions regarded the actual deployment of the application. We discussed three approaches with our partners, detailed in Q4. Our reasonings for these are below:
+1. Heroku: Heroku is easy to use, has many free add-ons like databases, message queues, etc. which makes it an attractive choice for a backend-heavy application like ours. However, its free tier is not the most generous.
+2. AWS: A serverless backend with AWS is attractive because AWS automatically handles scaling, isolation of running instances, and much more, while having a much more generous free tier. Also, other AWS services for authentication, databases, etc. play well with each other. However, AWS is difficult to learn and configure correctly.
+3. CSLabs: A deployment on CSLabs gives our partners the most control over the application, since they have direct access to these machines. They are also completely free to use due to our partner’s affiliation with them. However, setting up a backend with proper security, isolation of instances, etc. will be very difficult as there is no framework for this.
 
- * Short (5 min' read max)
- * Decisions can be related to the product and/or the team process.
-    * Mention which alternatives you were considering.
-    * Present the arguments for each alternative.
-    * Explain why the option you decided on makes the most sense for your team/product/users.
- * Essentially, we want to understand how (and why) you ended up with your current product and process plan.
- * This section is useful for important information regarding your decision making process that may not necessarily fit in other sections. 
+After debating the pros and cons of these approaches, we decided to keep all three options open. We then tentatively decided what tech stacks to use based on what these deployment options accept. Our two tech stacks are detailed in Q4 as well. Our justification for choosing them are below:
+1. Standard full-stack app: We were unanimous about most components like the frontend, database, etc. due to shared experience. We only had contention regarding the choice of FastAPI over Express. We opted to choose FastAPI for our backend over Express.js despite most of our members knowing Express, because FastAPI leverages the simpler nature of Python syntax while still offering sophisticated features in its framework. Documentation is a vital component of any project; unlike Express, FastAPI automatically generates OpenAPI schemas for all endpoints, which makes it much easier for users to explore the API. Additionally, request/response validation with FastAPI is extremely intuitive, with in-built readable type annotations. However, with Express, another library would be required to do so. For our final hand-off, we believe that FastAPI would be a great option as it is quite easy to set up and deploy.
+2. AWS: Since AWS services such as Lambda, Cognito, etc. all play well with each other, we decided to go with mostly AWS services for as many components as possible.
+
+## Intellectual Property Confidentiality Agreement
+After discussion with our partner, we have agreed upon Option 2:
+<p align=center><em>You can upload the code to GitHub or other similar publicly available domains.</em></p>
+
+Specifically, this will take the form of a MIT License, the same license under which Synduce is distributed at the time of writing. Enclosed below is a copy of the MIT License:
+
+> MIT License 
+> 
+> Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+> 
+> The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+> 
+> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
