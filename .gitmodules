@@ -1,0 +1,3 @@
+[submodule "Synduce"]
+	path = Synduce
+	url = https://github.com/victornicolet/Synduce.git
