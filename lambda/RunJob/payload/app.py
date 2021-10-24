@@ -1,5 +1,17 @@
+import boto3
+import os
+
 def handler(event, context):
     print(f"Whoa, someone's dispatched a job! This is what it says: {event}")
+    
+    client = boto3.client('sns')
+    response = client.publish(
+        TopicArn=os.environ['FinishedJobsARN'],
+        Message="Hello from RunJob! This is just a test, don't worry :)",
+    )
+    print(response)
+
+
 
 # import subprocess
 # import json
