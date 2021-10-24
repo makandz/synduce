@@ -7,11 +7,14 @@ exports.handler = async (event) => {
   const jobID = uuidv4();
 
   // Message payload to send to runJob.
-  // TODO: Extract code body from http request.
+  // Extract code body from http request body.
+  const body = JSON.parse(event["body"]);
+  const code = body["code"];
   const messagePayload = {
     "jobID": jobID,
-    "code": ""
+    "code": code
   };
+  
   // Publish message to SNS
   const client = new SNSClient();
   const command = new PublishCommand({
