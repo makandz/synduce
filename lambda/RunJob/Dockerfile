@@ -36,4 +36,4 @@ ENTRYPOINT [ "/usr/bin/python3", "-m", "awslambdaric" ]
 CMD [ "app.handler" ]
 
 # Put copies at the end cause otherwise rebuilding takes a long time
-COPY ./lambda/* ${FUNCTION_DIR}
+COPY ./payload/* ${FUNCTION_DIR}
