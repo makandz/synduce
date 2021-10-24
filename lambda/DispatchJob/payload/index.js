@@ -18,8 +18,9 @@ exports.handler = async (event) => {
     Message: JSON.stringify(messagePayload),
     TopicArn: process.env.QueuedJobsARN
   });
-  const response = await client.send(command);
-  console.log(response);
+  await client.send(command);
+
+  // TODO: Insert status=RUNNING into DB here.
   
   // Return jobID to frontend.
   return {
