@@ -61,9 +61,9 @@ resource "aws_iam_role" "RoleForLambdaDispatchJob" {
 }
 # Paylod for the above.
 data "archive_file" "DispatchJobPayload" {
-  type             = "zip"
-  source_dir      = "lambda/DispatchJob/payload"
-  output_path      = "build/DispatchJobPayload.zip"
+  type        = "zip"
+  source_dir  = "lambda/DispatchJob/payload"
+  output_path = "build/DispatchJobPayload.zip"
 }
 
 # Queue for jobs that have been dispatched.
@@ -119,9 +119,9 @@ resource "aws_iam_role" "RoleForLambdaRunJob" {
 }
 # Paylod for the above.
 data "archive_file" "RunJobPayload" {
-  type             = "zip"
-  source_dir      = "lambda/RunJob/payload"
-  output_path      = "build/RunJobPayload.zip"
+  type        = "zip"
+  source_dir  = "lambda/RunJob/payload"
+  output_path = "build/RunJobPayload.zip"
 }
 # Subscription for above to topic.
 resource "aws_sns_topic_subscription" "RunJobSubscriptionToQueuedJobs" {
@@ -170,9 +170,9 @@ resource "aws_iam_role" "RoleForLambdaUpdateJobStatus" {
 }
 # Paylod for the above.
 data "archive_file" "UpdateJobStatusPayload" {
-  type             = "zip"
-  source_dir      = "lambda/UpdateJobStatus/payload"
-  output_path      = "build/UpdateJobStatusPayload.zip"
+  type        = "zip"
+  source_dir  = "lambda/UpdateJobStatus/payload"
+  output_path = "build/UpdateJobStatusPayload.zip"
 }
 # Subscription for above to topic.
 resource "aws_sns_topic_subscription" "UpdateJobStatusSubscriptionToFinishedJobs" {
@@ -186,4 +186,22 @@ resource "aws_lambda_permission" "AllowExecutionFromSNSTopicFinishedJobs" {
   function_name = aws_lambda_function.UpdateJobStatus.function_name
   principal     = "sns.amazonaws.com"
   source_arn    = aws_sns_topic.FinishedJobs.arn
+}
+
+# Database to hold job statuses and the users who dispatched them, if any.
+resource "aws_dynamodb_table" "JobStatuses" {
+  name         = "JobStatuses"
+  hash_key     = "jobID"
+  range_key    = "userID"
+  billing_mode = "PAY_PER_REQUEST"
+
+  attribute {
+    name = "jobID"
+    type = "S"
+  }
+
+  attribute {
+    name = "userID"
+    type = "S"
+  }
 }
