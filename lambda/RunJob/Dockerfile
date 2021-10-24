@@ -21,9 +21,9 @@ RUN wget -q https://github.com/CVC4/CVC4/releases/download/1.8/cvc4-1.8-x86_64-l
 USER opam
 ENV HOME=/home/opam
 RUN opam install core -y
-COPY --chown=opam:opam ./Synduce /home/opam/synduce
-RUN ls /home/opam/synduce
-RUN cd /home/opam/synduce && \
+COPY --chown=opam:opam ./Synduce /home/opam/Synduce
+RUN ls /home/opam/Synduce
+RUN cd /home/opam/Synduce && \
     opam install . --deps-only -y && \
     eval $(opam env) && \
     dune build bin/Synduce.exe && \
@@ -37,3 +37,6 @@ CMD [ "app.handler" ]
 
 # Put copies at the end cause otherwise rebuilding takes a long time
 COPY ./payload/* ${FUNCTION_DIR}
+
+# Install dependencies for handler.
+RUN pip install -r ${FUNCTION_DIR}/requirements.txt
