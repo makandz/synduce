@@ -4,6 +4,7 @@ import NavBar from "./components/NavBar/NavBar";
 import { useState } from "react";
 import { auth } from "./firebase/FireBaseAuth";
 import AuthContext from "./contexts/authContext";
+import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(auth.currentUser);
@@ -11,8 +12,20 @@ function App() {
   return (
     <>
       <AuthContext.Provider value={[currentUser, setCurrentUser]}>
-        <NavBar />
-        <LoginPage isRegister={false} />
+        <Router forceRefresh={false}>
+          <NavBar />
+          <Switch>
+            <Route exact path="/">
+              <HomePage />
+            </Route>
+            <Route exact path="/login">
+              <LoginPage isRegister={false} />
+            </Route>
+            <Route exact path="/register">
+              <LoginPage isRegister={true} />
+            </Route>
+          </Switch>
+        </Router>
       </AuthContext.Provider>
     </>
   );

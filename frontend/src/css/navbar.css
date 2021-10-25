@@ -31,3 +31,13 @@
     opacity: 50%;
 }
 
+.synduce-navbar-button-container {
+    display: flex;
+    align-self: center;
+    flex-grow: 2;
+}
+
+.synduce-navbar-button-container > {
+    display: flex;
+}
+
