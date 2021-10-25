@@ -1,23 +1,14 @@
 const { DynamoDBClient, BatchExecuteStatementCommand } = require("@aws-sdk/client-dynamodb");
 
-exports.handler = async (event) => {    
-
-	// Config
-	const dbConfig = {
-		region: 'us-east-1'
-	}; 	
-
+exports.handler = async (event) => {
 	// Extract code body from http request body.
 	const message = JSON.parse(event['Records'][0]["Sns"]["Message"]);
 	const jobID = message["jobID"];
 	const logs = message["logs"];
 	const status = message["status"];
 
-	// Client
-	const dbClient = new DynamoDBClient(dbConfig);
-
-	// Updating job in DynamoDB
-	// Statement Params
+	// Update job in DB.
+	const dbClient = new DynamoDBClient({ region: 'us-east-1' });
   const params = {
     Statements: [
       {
@@ -29,24 +20,11 @@ exports.handler = async (event) => {
         ]
       }
     ]
-  }
-
-	const command = new BatchExecuteStatementCommand(params);
-
+  };
 	try {
-		const response = await dbClient.send(command);
+		const response = await dbClient.send(new BatchExecuteStatementCommand(params));
 		console.log('dbClient Response', response.Responses[0].Error);
 	} catch (err) {
 		console.error("Error:", err);
-		return {
-			statusCode: 500,
-			body: JSON.stringify('Unable to insert job!')
-		}
 	}
-
-	return {
-		statusCode: 200,
-		body: JSON.stringify('Job updated successfully!')
-	}
-    
 };
