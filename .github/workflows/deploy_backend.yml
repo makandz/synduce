@@ -30,4 +30,10 @@ jobs:
         npm ci
         zip DispatchJobPayload.zip *
         aws lambda update-function-code --function-name DispatchJob --zip-file fileb://DispatchJobPayload.zip
-        ls -la
+
+    - name: Upload to DispatchJob
+      run: |
+        cd $GITHUB_WORKSPACE/lambda/UpdateJobStatus/payload
+        npm ci
+        zip UpdateJobStatusPayload.zip *
+        aws lambda update-function-code --function-name UpdateJobStatus --zip-file fileb://UpdateJobStatusPayload.zip
