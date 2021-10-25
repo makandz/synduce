@@ -22,7 +22,7 @@ exports.handler = async (event) => {
 
   // Adding job to DynamoDB
   const job = {
-    userID: 'guest', // Change this field when you encounter a token
+    userID: event.userID, // Change this field when you encounter a token
     jobID: uuidv4(16),
     status: 'RUNNING',
     logs: ''
@@ -31,7 +31,7 @@ exports.handler = async (event) => {
   const params = {
     Statements: [
       {
-        Statement: `INSERT INTO JobStatuses VALUE {'userID':?, 'jobID':?, 'status':?, 'logs':?  }`,
+        Statement: "INSERT INTO JobStatuses VALUE {'userID':?, 'jobID':?, 'status':?, 'logs':?  }",
         Parameters: [
           {'S': job.userID},
           {'S': job.jobID},
@@ -41,10 +41,18 @@ exports.handler = async (event) => {
       }
     ]
   }
-  
+
   const command = new BatchExecuteStatementCommand(params);
-  const response = await dbClient.send(command);
-  console.log('dbClient Response', response);
+  try {
+    const response = await dbClient.send(command);
+    console.log('dbClient Response', response);
+  } catch (err) {
+    console.error("Error:", err);
+    return {
+      statusCode: 500,
+      body: JSON.stringify('Unable to insert job!')
+    }
+  }
   
   return {
       statusCode: 200,
