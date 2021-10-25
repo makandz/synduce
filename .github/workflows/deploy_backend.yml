@@ -26,5 +26,8 @@ jobs:
 
     - name: Upload to Lambdas
       run: |
-        aws --version
+        zip DispatchJobPayload.zip ./lambda/DispatchJob/payload/*
+        aws lambda update-function-code --function-name DispatchJob --zip-file fileb://DispatchJobPayload.zip
+        zip UpdateJobStatusPayload.zip ./lambda/UpdateJobStatue/payload/*
+        aws lambda update-function-code --function-name UpdateJobStatus --zip-file fileb://UpdateJobStatusPayload.zip
         ls -la
