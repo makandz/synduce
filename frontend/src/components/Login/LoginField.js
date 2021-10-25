@@ -10,6 +10,7 @@ const LoginField = (props) => {
         placeholder={props.label}
         value={props.value}
         onChange={(e) => props.setValue(e.target.value)}
+        type={props.type}
       ></input>
     </div>
   );
