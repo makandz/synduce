@@ -58,8 +58,26 @@ resource "aws_iam_role" "RoleForLambdaDispatchJob" {
       ]
     })
   }
+  inline_policy {
+    name = "WriteToDynamoDBTableJobStatuses"
+    policy = jsonencode({
+      "Version" : "2012-10-17",
+      "Statement" : [
+        {
+          "Action" : [
+            "dynamodb:BatchWriteItem",
+            "dynamodb:PutItem",
+            "dynamodb:UpdateItem",
+            "dynamodb:PartiQLInsert"
+          ],
+          "Effect" : "Allow",
+          "Resource" : aws_dynamodb_table.JobStatuses.arn
+        }
+      ]
+    })
+  }
 }
-# Paylod for the above.
+# Payload for the above.
 data "archive_file" "DispatchJobPayload" {
   type        = "zip"
   source_dir  = "lambda/DispatchJob/payload"
@@ -160,6 +178,24 @@ resource "aws_iam_role" "RoleForLambdaUpdateJobStatus" {
     ]
   })
   managed_policy_arns = ["arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"]
+  inline_policy {
+    name = "UpdateDynamoDBTableJobStatuses"
+    policy = jsonencode({
+      "Version" : "2012-10-17",
+      "Statement" : [
+        {
+          "Action" : [
+            "dynamodb:Query",
+            "dynamodb:PutItem",
+            "dynamodb:UpdateItem",
+            "dynamodb:PartiQLUpdate"
+          ],
+          "Effect" : "Allow",
+          "Resource" : aws_dynamodb_table.JobStatuses.arn
+        }
+      ]
+    })
+  }
 }
 # Paylod for the above.
 data "archive_file" "UpdateJobStatusPayload" {
@@ -185,16 +221,10 @@ resource "aws_lambda_permission" "AllowExecutionFromSNSTopicFinishedJobs" {
 resource "aws_dynamodb_table" "JobStatuses" {
   name         = "JobStatuses"
   hash_key     = "jobID"
-  range_key    = "userID"
   billing_mode = "PAY_PER_REQUEST"
 
   attribute {
     name = "jobID"
-    type = "S"
-  }
-
-  attribute {
-    name = "userID"
     type = "S"
   }
 }
