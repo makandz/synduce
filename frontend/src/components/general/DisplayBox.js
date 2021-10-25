@@ -8,7 +8,7 @@ const DisplayBox = (props) => {
             borderRadius: "3px",
             width: props.w,
             height: props.h,
-            padding: "16px 8px",
+            padding: "16px 2px 16px 2px",
             ...props.style
           }
         }
