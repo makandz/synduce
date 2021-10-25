@@ -1,4 +1,3 @@
-import "./NavBar.css";
 import { AiOutlineArrowRight } from "react-icons/ai";
 
 const NavBar = () => {
