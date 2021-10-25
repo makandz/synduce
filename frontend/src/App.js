@@ -1,6 +1,7 @@
 import HomePage from "./views/HomePage";
 import LoginPage from "./views/LoginPage";
 import NavBar from "./components/NavBar/NavBar";
+import Profile from "./components/Profile/Profile";
 import { useState } from "react";
 import { auth } from "./firebase/FireBaseAuth";
 import AuthContext from "./contexts/authContext";
@@ -23,6 +24,9 @@ function App() {
             </Route>
             <Route exact path="/register">
               <LoginPage isRegister={true} />
+            </Route>
+            <Route exact path="/profile">
+              <Profile />
             </Route>
           </Switch>
         </Router>
