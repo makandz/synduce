@@ -1,0 +1,27 @@
+name: Deploy Backend
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy_backend:
+    name: Upload to Lambda
+    runs-on: ubuntu-latest
+    # These permissions are needed to interact with GitHub's OIDC Token endpoint.
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Configure AWS credentials from Test account
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: arn:aws:iam::441747338187:role/RoleForGithubActionsUploadToLambda
+        aws-region: us-east-1
+
+    - name: Upload to Lambdas
+      run: |
+        aws --version
+        ls -la
