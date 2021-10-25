@@ -24,10 +24,10 @@ jobs:
         role-duration-seconds: 1200
         aws-region: us-east-1
 
-    - name: Upload to Lambdas
+    - name: Upload to DispatchJob
       run: |
-        zip DispatchJobPayload.zip ./lambda/DispatchJob/payload/*
+        cd $GITHUB_WORKSPACE/lambda/DispatchJob/payload
+        npm ci
+        zip DispatchJobPayload.zip *
         aws lambda update-function-code --function-name DispatchJob --zip-file fileb://DispatchJobPayload.zip
-        zip UpdateJobStatusPayload.zip ./lambda/UpdateJobStatue/payload/*
-        aws lambda update-function-code --function-name UpdateJobStatus --zip-file fileb://UpdateJobStatusPayload.zip
         ls -la
