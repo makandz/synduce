@@ -8,21 +8,31 @@ exports.handler = async (event) => {
     region: 'us-east-1'
   }; 
 
+  // Message payload to send to runJob.
+  // Extract code body from http request body.
+  const body = JSON.parse(event["body"]);
+  const code = body["code"];
+  const messagePayload = {
+    "jobID": jobID,
+    "code": code
+  };
+
   // Clients
   const client = new SNSClient();
   const dbClient = new DynamoDBClient(dbConfig);
 
-  // SNS Message
+  // Publish message to SNS
+  const client = new SNSClient();
   const command = new PublishCommand({
-    Message: "Hello from DispatchJob! This is just a test, don't worry :)",
+    Message: JSON.stringify(messagePayload),
     TopicArn: process.env.QueuedJobsARN
   });
-  const response = await client.send(command);
-  console.log(response);
+  await client.send(command);
 
   // Adding job to DynamoDB
+  const userID = body["userID"] ? "guest" : body["userID"];
   const job = {
-    userID: event.userID, // Change this field when you encounter a token
+    userID: userID, // Change this field when you encounter a token
     jobID: uuidv4(16),
     status: 'RUNNING',
     logs: ''
@@ -54,8 +64,12 @@ exports.handler = async (event) => {
     }
   }
   
+  // Return jobID to frontend.
   return {
-      statusCode: 200,
-      body: JSON.stringify('Sent message!'),
-    };
+    statusCode: 200,
+    body: JSON.stringify({
+      jobID: jobID
+    })
+  };
 };
+

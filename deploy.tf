@@ -75,9 +75,8 @@ resource "aws_sns_topic" "QueuedJobs" {
 resource "aws_lambda_function" "RunJob" {
   function_name = "RunJob"
   role          = aws_iam_role.RoleForLambdaRunJob.arn
-  handler       = "app.handler"
-  runtime       = "python3.9"
-  filename      = "build/RunJobPayload.zip"
+  package_type  = "Image"
+  image_uri     = format("%s:latest", aws_ecr_repository.runjob_ecr_repo.repository_url)
   memory_size   = 1024
   timeout       = 90
   environment {
@@ -116,12 +115,6 @@ resource "aws_iam_role" "RoleForLambdaRunJob" {
       ]
     })
   }
-}
-# Paylod for the above.
-data "archive_file" "RunJobPayload" {
-  type        = "zip"
-  source_dir  = "lambda/RunJob/payload"
-  output_path = "build/RunJobPayload.zip"
 }
 # Subscription for above to topic.
 resource "aws_sns_topic_subscription" "RunJobSubscriptionToQueuedJobs" {
@@ -204,4 +197,9 @@ resource "aws_dynamodb_table" "JobStatuses" {
     name = "userID"
     type = "S"
   }
+}
+
+# ECR repository for holding container image for RunJob Lambda.
+resource "aws_ecr_repository" "runjob_ecr_repo" {
+  name = "runjob_ecr_repo"
 }

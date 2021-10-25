@@ -1,32 +1,31 @@
 const { DynamoDBClient, BatchExecuteStatementCommand } = require("@aws-sdk/client-dynamodb");
 
 exports.handler = async (event) => {    
-	console.log(`Whoa, a job's done! This is what it says: ${event}`);
 
 	// Config
 	const dbConfig = {
 		region: 'us-east-1'
-	}; 
+	}; 	
+
+	// Extract code body from http request body.
+	const message = JSON.parse(event['Records'][0]["Sns"]["Message"]);
+	const jobID = message["jobID"];
+	const logs = message["logs"];
+	const status = message["status"];
 
 	// Client
 	const dbClient = new DynamoDBClient(dbConfig);
 
-	// Updating job to DynamoDB
-  const job = {
-    jobID: event.jobID,
-    status: event.status,
-    logs: event.logs
-  }
-
+	// Updating job in DynamoDB
 	// Statement Params
   const params = {
     Statements: [
       {
         Statement: "UPDATE JobStatuses SET status=?,logs=? WHERE jobID=?",
         Parameters: [
-          {'S': job.status},
-          {'S': job.logs},
-          {'S': job.jobID},
+          {'S': status},
+          {'S': logs},
+          {'S': jobID},
         ]
       }
     ]
@@ -49,4 +48,5 @@ exports.handler = async (event) => {
 		statusCode: 200,
 		body: JSON.stringify('Job updated successfully!')
 	}
+    
 };

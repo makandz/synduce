@@ -1,37 +1,34 @@
 import boto3
 import os
+import subprocess
+import json
 
 def handler(event, context):
-    print(f"Whoa, someone's dispatched a job! This is what it says: {event}")
+    # Extract code from SNS message.
+    message = json.loads(event['Records'][0]["Sns"]["Message"])
+    jobID = message["jobID"]
+    code = message["code"]
+    status = ""
     
+    # Write code to temporary file for Synduce to read.
+    # Forcibly terminate this if it runs for more than 00:14:30 = 870 seconds.
+    with open("/tmp/tmp.ml", "w") as f:
+        f.writelines(code)
+    try:
+        proc = subprocess.run(["/home/opam/Synduce/_build/default/bin/Synduce.exe", "/tmp/tmp.ml"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=870)
+        status = "FINISHED"
+    except subprocess.TimeoutExpired:
+        status = "TIMEOUT"
+    logs = proc.stdout.decode("utf-8")
+    
+    # Publish Synduce's output and jobID to SNS once done.
+    messagePayload = {
+        "jobID": jobID,
+        "logs": logs,
+        "status": status
+    }
     client = boto3.client('sns')
-    response = client.publish(
+    client.publish(
         TopicArn=os.environ['FinishedJobsARN'],
-        Message="Hello from RunJob! This is just a test, don't worry :)",
+        Message=json.dumps(messagePayload),
     )
-    print(response)
-
-
-
-# import subprocess
-# import json
-
-# def handler(event, context):
-#     print("Running Synduce...")
-
-#     text = json.loads(event["body"])["code"]
-#     print(text)
-    
-#     with open("/tmp/tmp.ml", "w") as f:
-#         f.writelines(text)
-
-#     a = subprocess.run(["/home/opam/synduce/_build/default/bin/Synduce.exe", "/tmp/tmp.ml"], capture_output=True)
-#     print(a)
-
-#     return {
-#         "statusCode": '200',
-#         "headers": {
-#             "Access-Control-Allow-Origin": "*",
-#         },
-#         "body": a.stdout
-#     }
