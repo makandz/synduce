@@ -18,6 +18,7 @@ jobs:
     - name: Configure AWS credentials from Test account
       uses: aws-actions/configure-aws-credentials@v1
       with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         role-to-assume: arn:aws:iam::441747338187:role/RoleForGithubActionsUploadToLambda
         aws-region: us-east-1
 
