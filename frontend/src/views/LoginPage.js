@@ -18,7 +18,7 @@ const LoginPage = (props) => {
   };
 
   const loginUser = () => {
-      
+
   }
 
   return (
@@ -29,8 +29,9 @@ const LoginPage = (props) => {
 
       {error && (
         <DisplayBox
-          bgColor="#d1797b"
-          borderColor="#911416"
+          bgColor="#f8d7da"
+          borderColor="#f8d7da"
+          color="#721c24"
           w="40%"
           h="auto"
           text={error}

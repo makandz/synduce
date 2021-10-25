@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <NavBar />
-      <HomePage />
+      <LoginPage isRegister={true} />
     </>
   );
 }
