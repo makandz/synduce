@@ -1,8 +1,6 @@
 const { DynamoDBClient, BatchExecuteStatementCommand } = require("@aws-sdk/client-dynamodb");
 
 exports.handler = async (event) => {
-	// Test commment to see if stuff got uploaded :)
-
 	// Extract code body from http request body.
 	const message = JSON.parse(event['Records'][0]["Sns"]["Message"]);
 	const jobID = message["jobID"];

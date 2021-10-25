@@ -3,8 +3,6 @@ const { DynamoDBClient, BatchExecuteStatementCommand } = require("@aws-sdk/clien
 const { v4: uuidv4 } = require('uuid');
 
 exports.handler = async (event) => {
-  // Test commment to see if stuff got uploaded :)
-
   // Create jobID
   const jobID = uuidv4();
   
