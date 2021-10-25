@@ -3,9 +3,9 @@
     background: #F7ECE1;
     display: flex;
     flex-flow: column;
-    flex-grow: 1;
     overflow: hidden;
     position: relative;
+    height: calc(100% - 91px);
 }
 
 .synduce-typography {
@@ -44,12 +44,14 @@
 }
 
 .synduce-tryout-btn {
+    font-size: 24px;
+    font-weight: 600;
     height: 62px;
     width: 231px;
 }
 
 .synduce-tryout > p {
-    font-size: 24px;
+    font-size: 16px;
     font-family: Montserrat;
     font-style: normal;
     font-weight: 700;

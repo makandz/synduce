@@ -2,7 +2,6 @@
 .login-form {
     display: flex;
     flex-flow: column;
-    height: 100%;
 }
 
 .login-form-field {
