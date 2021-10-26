@@ -1,0 +1,39 @@
+name: Deploy Backend
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy_backend:
+    name: Upload to Lambda
+    runs-on: ubuntu-latest
+    # These permissions are needed to interact with GitHub's OIDC Token endpoint.
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Configure AWS credentials from Test account
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        role-to-assume: ${{ secrets.ROLE_TO_ASSUME }}
+        role-duration-seconds: 1200
+        aws-region: us-east-1
+
+    - name: Upload to DispatchJob
+      run: |
+        cd $GITHUB_WORKSPACE/lambda/DispatchJob/payload
+        npm ci
+        zip DispatchJobPayload.zip *
+        aws lambda update-function-code --function-name DispatchJob --zip-file fileb://DispatchJobPayload.zip
+
+    - name: Upload to UpdateJobStatus
+      run: |
+        cd $GITHUB_WORKSPACE/lambda/UpdateJobStatus/payload
+        npm ci
+        zip UpdateJobStatusPayload.zip *
+        aws lambda update-function-code --function-name UpdateJobStatus --zip-file fileb://UpdateJobStatusPayload.zip

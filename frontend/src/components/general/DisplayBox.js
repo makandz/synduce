@@ -3,10 +3,12 @@ const DisplayBox = (props) => {
     <div
       style={
           { background: props.bgColor, 
-            border: `3px solid ${props.borderColor}`,
+            color: props.color,
+            border: `1px solid ${props.borderColor}`,
+            borderRadius: "3px",
             width: props.w,
             height: props.h,
-            padding: "8px 4px 8px 4px",
+            padding: "16px 2px 16px 2px",
             ...props.style
           }
         }
