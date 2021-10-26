@@ -1,5 +1,5 @@
 {
-  "name": "driver",
+  "name": "payload",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,8 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@aws-sdk/client-dynamodb": "^3.38.0",
-    "@aws-sdk/client-sns": "^3.38.0",
-    "uuid": "^8.3.2"
+    "@aws-sdk/client-dynamodb": "^3.38.0"
   }
 }

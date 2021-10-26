@@ -58,8 +58,26 @@ resource "aws_iam_role" "RoleForLambdaDispatchJob" {
       ]
     })
   }
+  inline_policy {
+    name = "WriteToDynamoDBTableJobStatuses"
+    policy = jsonencode({
+      "Version" : "2012-10-17",
+      "Statement" : [
+        {
+          "Action" : [
+            "dynamodb:BatchWriteItem",
+            "dynamodb:PutItem",
+            "dynamodb:UpdateItem",
+            "dynamodb:PartiQLInsert"
+          ],
+          "Effect" : "Allow",
+          "Resource" : aws_dynamodb_table.JobStatuses.arn
+        }
+      ]
+    })
+  }
 }
-# Paylod for the above.
+# Payload for the above.
 data "archive_file" "DispatchJobPayload" {
   type        = "zip"
   source_dir  = "lambda/DispatchJob/payload"
@@ -75,9 +93,8 @@ resource "aws_sns_topic" "QueuedJobs" {
 resource "aws_lambda_function" "RunJob" {
   function_name = "RunJob"
   role          = aws_iam_role.RoleForLambdaRunJob.arn
-  handler       = "app.handler"
-  runtime       = "python3.9"
-  filename      = "build/RunJobPayload.zip"
+  package_type  = "Image"
+  image_uri     = format("%s:latest", aws_ecr_repository.runjob_ecr_repo.repository_url)
   memory_size   = 1024
   timeout       = 90
   environment {
@@ -116,12 +133,6 @@ resource "aws_iam_role" "RoleForLambdaRunJob" {
       ]
     })
   }
-}
-# Paylod for the above.
-data "archive_file" "RunJobPayload" {
-  type        = "zip"
-  source_dir  = "lambda/RunJob/payload"
-  output_path = "build/RunJobPayload.zip"
 }
 # Subscription for above to topic.
 resource "aws_sns_topic_subscription" "RunJobSubscriptionToQueuedJobs" {
@@ -167,6 +178,24 @@ resource "aws_iam_role" "RoleForLambdaUpdateJobStatus" {
     ]
   })
   managed_policy_arns = ["arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"]
+  inline_policy {
+    name = "UpdateDynamoDBTableJobStatuses"
+    policy = jsonencode({
+      "Version" : "2012-10-17",
+      "Statement" : [
+        {
+          "Action" : [
+            "dynamodb:Query",
+            "dynamodb:PutItem",
+            "dynamodb:UpdateItem",
+            "dynamodb:PartiQLUpdate"
+          ],
+          "Effect" : "Allow",
+          "Resource" : aws_dynamodb_table.JobStatuses.arn
+        }
+      ]
+    })
+  }
 }
 # Paylod for the above.
 data "archive_file" "UpdateJobStatusPayload" {
@@ -192,16 +221,15 @@ resource "aws_lambda_permission" "AllowExecutionFromSNSTopicFinishedJobs" {
 resource "aws_dynamodb_table" "JobStatuses" {
   name         = "JobStatuses"
   hash_key     = "jobID"
-  range_key    = "userID"
   billing_mode = "PAY_PER_REQUEST"
 
   attribute {
     name = "jobID"
     type = "S"
   }
+}
 
-  attribute {
-    name = "userID"
-    type = "S"
-  }
+# ECR repository for holding container image for RunJob Lambda.
+resource "aws_ecr_repository" "runjob_ecr_repo" {
+  name = "runjob_ecr_repo"
 }

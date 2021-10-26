@@ -21,6 +21,9 @@ function App() {
             <Route exact path="/register">
               <LoginPage isRegister={true} />
             </Route>
+            <Route exact path="/profile">
+              <Profile />
+            </Route>
           </Switch>
         </Router>
       </ProvideAuth>
