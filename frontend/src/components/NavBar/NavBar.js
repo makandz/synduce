@@ -38,7 +38,7 @@ const NavBar = () => {
         </div>
       ) : (
         <div className="synduce-navbar-opts">
-          <p>{auth.user.email}</p>
+          <p onClick={() => history.push("/profile")}>{auth.user.email}</p>
           <button className="synduce-button" onClick={handleLogout}>
             <p>Logout</p>
             <AiOutlineArrowRight />
