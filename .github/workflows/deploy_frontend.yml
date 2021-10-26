@@ -1,0 +1,27 @@
+name: Frontend Deployment
+
+on:
+  workflow_dispatch:
+
+jobs:                  
+  deploy-frontend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    env:
+      URL: https://synduce.herokuapp.com
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Deploy a1-storefront-staging
+        uses: AkhileshNS/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          heroku_app_name: "synduce"
+          buildpack: https://github.com/heroku/heroku-buildpack-nodejs
+          appdir: frontend
+          healthcheck: ${{env.URL}}/
+          delay: 30
+          rollbackonhealthcheckfailed: yes
+          
+      - run: echo "🍺🎉🥳 Frontend Deployment Successfully Released to Staging! 🥳🎉🍺"
