@@ -1,6 +1,7 @@
 import HomePage from "./views/HomePage";
 import LoginPage from "./views/LoginPage";
 import NavBar from "./components/NavBar/NavBar";
+import Profile from "./components/Profile/Profile";
 import PrivateRoute from "./components/Authentication/PrivateRoute";
 import ProvideAuth from "./components/Authentication/ProvideAuth";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -21,9 +22,9 @@ function App() {
             <Route exact path="/register">
               <LoginPage isRegister={true} />
             </Route>
-            <Route exact path="/profile">
+            <PrivateRoute exact path="/profile">
               <Profile />
-            </Route>
+            </PrivateRoute>
           </Switch>
         </Router>
       </ProvideAuth>
