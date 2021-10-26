@@ -1,0 +1,16 @@
+# Everything
+*
+# except
+!deliverable-1
+!deliverable-1/**
+!frontend
+!frontend/**
+!lambda
+!lambda/**
+!.gitignore
+!.gitmodules
+!.terraform.lock.hcl
+!deploy.tf
+!README.md
+# Ignore all nested node_modules even in included dirs.
+*/**/node_modules
