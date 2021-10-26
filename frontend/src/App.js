@@ -1,17 +1,18 @@
-import HomePage from "./views/HomePage";
-import LoginPage from "./views/LoginPage";
-import NavBar from "./components/NavBar/NavBar";
-import Profile from "./views/ProfilePage";
+import HomePage from "./views/Home/HomePage";
+import LoginPage from "./views/Login/LoginPage";
+import Navbar from "./components/NavBar/Navbar";
+import Profile from "./views/Profile/ProfilePage";
 import PrivateRoute from "./components/Authentication/PrivateRoute";
 import ProvideAuth from "./components/Authentication/ProvideAuth";
+import CodeView from "./views/Code/CodeView";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-function App() {
+export default function App() {
   return (
     <>
       <ProvideAuth>
         <Router forceRefresh={false}>
-          <NavBar />
+          <Navbar />
           <Switch>
             <Route exact path="/">
               <HomePage />
@@ -25,11 +26,12 @@ function App() {
             <PrivateRoute exact path="/profile">
               <Profile />
             </PrivateRoute>
+            <Route exact path="/code">
+              <CodeView />
+            </Route>
           </Switch>
         </Router>
       </ProvideAuth>
     </>
   );
 }
-
-export default App;

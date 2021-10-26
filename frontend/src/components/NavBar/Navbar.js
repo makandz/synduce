@@ -1,8 +1,8 @@
 import { AiOutlineArrowRight } from "react-icons/ai";
-import { useAuth } from "../../hooks/Auth";
+import { useAuth } from "../../libs/hooks/Auth";
 import { useHistory } from "react-router";
 
-const NavBar = () => {
+const Navbar = () => {
   
   const auth = useAuth();
   const history = useHistory();
@@ -49,4 +49,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default Navbar;

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import LoginField from "../components/Login/LoginField";
-import DisplayBox from "../components/general/DisplayBox";
-import { useAuth } from "../hooks/Auth";
+import LoginField from "../../components/Login/LoginField";
+import DisplayBox from "../../components/general/DisplayBox";
+import { useAuth } from "../../libs/hooks/Auth";
 
 const LoginPage = (props) => {
   const [name, setName] = useState("");

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useAuth } from "../hooks/Auth";
-import LoginField from "../components/Login/LoginField";
-import DisplayBox from "../components/general/DisplayBox";
+import { useAuth } from "../../libs/hooks/Auth";
+import LoginField from "../../components/Login/LoginField";
+import DisplayBox from "../../components/general/DisplayBox";
 
 const Profile = () => {
   const [password, setPassword] = useState("");

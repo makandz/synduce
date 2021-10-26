@@ -1,21 +1,21 @@
-.synduce-button > p {
+.btn > p {
     flex-grow: 1;
     align-self: center;
 }
 
-.synduce-button:hover {
+.btn:hover {
     cursor: pointer;
     opacity: 90%;
     --tw-scale-x: 1.05;
-    --tw-scale-y: 1.05; 
+    --tw-scale-y: 1.05;
 }
 
-.synduce-button > svg {
+.btn > svg {
     margin-right: 20px;
     align-self: center;
 }
 
-.synduce-button {
+.btn {
     background: #8D86C9;
     border-radius: 5px;
     color: whitesmoke;
@@ -40,5 +40,6 @@
     --tw-skew-y: 0;
     --tw-scale-x: 1;
     --tw-scale-y: 1;
-    transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+    transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate))
+        skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }

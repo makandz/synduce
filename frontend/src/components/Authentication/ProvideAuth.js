@@ -1,5 +1,5 @@
-import AuthContext from "../../contexts/authContext";
-import { useProvideAuth } from "../../hooks/Auth";
+import AuthContext from "../../libs/contexts/authContext";
+import { useProvideAuth } from "../../libs/hooks/Auth";
 
 const ProvideAuth = ({ children }) => {
   const auth = useProvideAuth();
