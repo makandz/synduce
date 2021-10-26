@@ -31,12 +31,12 @@ function useProvideAuth() {
     if (user) cb();
   };
 
-  const updateEmail = (newEmail, setError) => {
-    updateTheEmail(newEmail, setError);
+  const updateEmail = (currentPassword, newEmail, setError, setSuccess) => {
+    updateTheEmail(currentPassword, newEmail, setError, setUser, setSuccess);
   }
 
-  const updatePassword = (newPassword, setError) => {
-    updateThePassword(newPassword, setError);
+  const updatePassword = (currentPassword, newPassword, setError, setSuccess) => {
+    updateThePassword(currentPassword, newPassword, setError, setUser, setSuccess);
   }
 
   return {
