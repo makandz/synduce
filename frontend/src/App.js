@@ -1,17 +1,14 @@
 import HomePage from "./views/HomePage";
 import LoginPage from "./views/LoginPage";
 import NavBar from "./components/NavBar/NavBar";
-import { useState } from "react";
-import { auth } from "./firebase/FireBaseAuth";
-import AuthContext from "./contexts/authContext";
-import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import PrivateRoute from "./components/Authentication/PrivateRoute";
+import ProvideAuth from "./components/Authentication/ProvideAuth";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
-  const [currentUser, setCurrentUser] = useState(auth.currentUser);
-
   return (
     <>
-      <AuthContext.Provider value={[currentUser, setCurrentUser]}>
+      <ProvideAuth>
         <Router forceRefresh={false}>
           <NavBar />
           <Switch>
@@ -26,7 +23,7 @@ function App() {
             </Route>
           </Switch>
         </Router>
-      </AuthContext.Provider>
+      </ProvideAuth>
     </>
   );
 }
