@@ -3,8 +3,10 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  updateEmail, 
-  updatePassword
+  updateEmail,
+  updatePassword,
+  reauthenticateWithCredential,
+  EmailAuthProvider,
 } from "firebase/auth";
 import firebaseApp from "./FireBaseConfig";
 
@@ -13,7 +15,7 @@ const auth = getAuth(firebaseApp);
 const registerUser = (email, password, setError, setCurrentUser) => {
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      setCurrentUser(userCredential.user);
+      setCurrentUser({...userCredential.user});
     })
     .catch((error) => {
       setError(
@@ -25,7 +27,7 @@ const registerUser = (email, password, setError, setCurrentUser) => {
 const loginUser = (email, password, setError, setCurrentUser) => {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      setCurrentUser(userCredential.user);
+      setCurrentUser({...userCredential.user});
     })
     .catch((error) => {
       setError(
@@ -39,34 +41,56 @@ const logoutUser = (setCurrentUser) => {
     .then(() => {
       setCurrentUser(null);
     })
+    .catch((error) => {});
+};
+
+const updateTheEmail = (currentPassword, newEmail, setError, setUser, setSuccess) => {
+  const credential = EmailAuthProvider.credential(
+    auth.currentUser.email,
+    currentPassword
+  );
+  reauthenticateWithCredential(auth.currentUser, credential)
+    .then((userCredential) => {
+      updateEmail(userCredential.user, newEmail)
+        .then(() => {
+          setUser({...userCredential.user});
+          setSuccess("Email updated succesfully!");
+        })
+        .catch((error) => {
+          setError("Email already in-use.");
+        });
+    })
     .catch((error) => {
-      
+      setError("Could not reauthenticate!");
     });
 };
 
-const updateTheEmail = (newEmail, setError) => {
-  console.log(auth.currentUser);
-  updateEmail(auth.currentUser, newEmail).then(() => {
-    console.log("Updated username!")
-  }).catch((error) => {
-    setError(
-      "Email already in-use."
-    )
-    console.log("Something went wrong!")
+const updateThePassword = (currentPassword, newPassword, setError, setUser, setSuccess) => {
+  const credential = EmailAuthProvider.credential(
+    auth.currentUser.email,
+    currentPassword
+  );
+  reauthenticateWithCredential(auth.currentUser, credential)
+  .then((userCredential) => {
+    updatePassword(userCredential.user, newPassword)
+    .then(() => {
+      setUser({...userCredential.user});
+      setSuccess("Password updated succesfully!");
+    })
+    .catch((error) => {
+      setError("Could not update password, please try again later.");
+    });
+  })
+  .catch((error) => {
+    setError("Could not reauthenticate!");
   })
 };
 
-const updateThePassword = (newPassword, setError) => {
-  console.log(auth.currentUser);
-  updatePassword(auth.currentUser, newPassword).then(() => {
-    console.log("Updated password!")  
-  }).catch((error) => {
-    setError(
-      "Could not update password, please try again later."
-    )
-    console.log("Something went wrong!")
-  })
+export {
+  auth,
+  registerUser,
+  loginUser,
+  logoutUser,
+  updateTheEmail,
+  updateThePassword,
 };
-
-export { auth, registerUser, loginUser, logoutUser, 
-          updateTheEmail, updateThePassword };
