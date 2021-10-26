@@ -3,6 +3,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  updateEmail, 
+  updatePassword
 } from "firebase/auth";
 import firebaseApp from "./FireBaseConfig";
 
@@ -42,4 +44,27 @@ const logoutUser = (setCurrentUser) => {
     });
 };
 
-export { auth, registerUser, loginUser, logoutUser };
+const updateTheEmail = (newEmail, setError) => {
+  updateEmail(auth.currentUser, newEmail).then(() => {
+    console.log("Updated username!")
+  }).catch((error) => {
+    setError(
+      "Error"
+    )
+    console.log("Something went wrong!")
+  })
+};
+
+const updateThePassword = (newPassword, setError) => {
+  updatePassword(auth.currentUser, newPassword).then(() => {
+    console.log("Updated password!")  
+  }).catch((error) => {
+    setError(
+      "Error"
+    )
+    console.log("Somethign went wrong!")
+  })
+};
+
+export { auth, registerUser, loginUser, logoutUser, 
+          updateTheEmail, updateThePassword };
