@@ -4,6 +4,8 @@ import {
   loginUser,
   logoutUser,
   registerUser,
+  updateTheEmail,
+  updateThePassword,
 } from "../firebase/FireBaseAuth";
 import { useState, useContext } from "react";
 
@@ -29,11 +31,21 @@ function useProvideAuth() {
     if (user) cb();
   };
 
+  const updateEmail = (newEmail, setError) => {
+    updateTheEmail(newEmail, setError);
+  }
+
+  const updatePassword = (newPassword, setError) => {
+    updateThePassword(newPassword, setError);
+  }
+
   return {
     user,
     signin,
     signout,
-    register
+    register,
+    updateEmail,
+    updatePassword,
   };
 }
 
