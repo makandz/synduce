@@ -1,8 +1,3 @@
-.btn > p {
-    flex-grow: 1;
-    align-self: center;
-}
-
 .btn:hover {
     cursor: pointer;
     opacity: 90%;
@@ -11,21 +6,21 @@
 }
 
 .btn > svg {
-    margin-right: 20px;
-    align-self: center;
+    vertical-align: middle;
+    margin-bottom: 3px;
+    margin-left: 0.2rem;
 }
 
 .btn {
+    font-family: "Manrope", sans-serif;
+
     background: #8D86C9;
     border-radius: 5px;
     color: whitesmoke;
-    height: 50px;
-    width: 200px;
-    min-width: 50px;
-    display: flex;
+    padding: 15px;
     border: none;
     font-size: 16px;
-    font-weight: bold;
+
     --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 
@@ -42,4 +37,11 @@
     --tw-scale-y: 1;
     transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate))
         skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.header {
+    font-family: "Manrope", sans-serif;
+    font-weight: 800;
+    text-align: center;
+    font-size: 2.5rem;
 }

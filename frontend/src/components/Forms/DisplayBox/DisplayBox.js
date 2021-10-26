@@ -1,14 +1,15 @@
-const DisplayBox = (props) => {
+import styles from "./DisplayBox.module.css";
+
+export default function DisplayBox(props) {
   return (
     <div
+      className={styles.displayBox}
       style={
           { background: props.bgColor, 
             color: props.color,
             border: `1px solid ${props.borderColor}`,
-            borderRadius: "3px",
             width: props.w,
             height: props.h,
-            padding: "16px 2px 16px 2px",
             ...props.style
           }
         }
@@ -17,5 +18,3 @@ const DisplayBox = (props) => {
     </div>
   );
 };
-
-export default DisplayBox;

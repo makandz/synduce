@@ -1,0 +1,12 @@
+.main {
+    margin-top: 1.5rem;
+}
+
+.editorWrapper {
+    margin: auto;
+    max-width: 1000px;
+}
+
+.editorWrapper > div > div {
+    height: 400px;
+}

@@ -1,10 +1,10 @@
 import HomePage from "./views/Home/HomePage";
 import LoginPage from "./views/Login/LoginPage";
-import Navbar from "./components/NavBar/Navbar";
+import Navbar from "./components/Navbar/Navbar";
 import Profile from "./views/Profile/ProfilePage";
 import PrivateRoute from "./components/Authentication/PrivateRoute";
 import ProvideAuth from "./components/Authentication/ProvideAuth";
-import CodeView from "./views/Code/CodeView";
+import CodePage from "./views/Code/CodePage";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 export default function App() {
@@ -27,7 +27,7 @@ export default function App() {
               <Profile />
             </PrivateRoute>
             <Route exact path="/code">
-              <CodeView />
+              <CodePage />
             </Route>
           </Switch>
         </Router>

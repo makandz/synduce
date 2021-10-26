@@ -1,17 +1,18 @@
 import TopLeftBlob from "./svgs/topleftblob.svg";
 import BottomRightBlob from "./svgs/bottomrightblob.svg";
 import styles from './HomePage.module.css';
-import baseStyles from '../Styling.module.css';
+import baseStyles from '../../components/Styling.module.css';
+import {Link} from "react-router-dom";
 
 export default function HomePage() {
   return (
     <div className={styles.body}>
       {/* Blobs */}
       <div>
-        <img src={TopLeftBlob} alt="left blob" className={styles.leftBlob} />
+        <img src={TopLeftBlob} className={styles.leftBlob} alt="left blob" />
       </div>
       <div>
-        <img src={BottomRightBlob} alt="right blob" className={styles.rightBlob} />
+        <img src={BottomRightBlob} className={styles.rightBlob} alt="right blob" />
       </div>
 
       {/* Title */}
@@ -24,9 +25,11 @@ export default function HomePage() {
 
       {/* Tryout */}
       <div className={styles.tryoutWrapper}>
-        <button className={`${baseStyles.btn} ${styles.tryoutBtn}`}>
-          <p>Try it Online</p>
-        </button>
+        <Link to="/code">
+          <button className={`${baseStyles.btn} ${styles.tryoutBtn}`}>
+            Try it online!
+          </button>
+        </Link>
         <p>or view the source <a href="https://github.com/victornicolet/Synduce">on Github</a></p>
       </div>
     </div>

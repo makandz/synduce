@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../../libs/hooks/Auth";
-import LoginField from "../../components/Login/LoginField";
-import DisplayBox from "../../components/general/DisplayBox";
+import TextInput from "../../components/Forms/TextInput/TextInput";
+import DisplayBox from "../../components/Forms/DisplayBox/DisplayBox";
 
 const Profile = () => {
   const [password, setPassword] = useState("");
@@ -60,14 +60,14 @@ const Profile = () => {
           />
         )}
 
-        <LoginField
+        <TextInput
           id="profile-email"
           label="Email"
           value={email}
           setValue={setEmail}
         />
 
-        <LoginField
+        <TextInput
           id="profile-current-password"
           label="Current Password"
           required
@@ -76,7 +76,7 @@ const Profile = () => {
           type="password"
         />
 
-        <LoginField
+        <TextInput
           id="profile-password"
           label="Password"
           value={password}

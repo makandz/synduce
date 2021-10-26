@@ -1,28 +1,19 @@
 import { useState } from "react";
-import LoginField from "../../components/Login/LoginField";
-import DisplayBox from "../../components/general/DisplayBox";
+import TextInput from "../../components/Forms/TextInput/TextInput";
+import DisplayBox from "../../components/Forms/DisplayBox/DisplayBox";
 import { useAuth } from "../../libs/hooks/Auth";
+import styles from './LoginPage.module.css';
+import baseStyles from '../../components/Styling.module.css';
 
-const LoginPage = (props) => {
-  const [name, setName] = useState("");
+export default function LoginPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmedPassword, setConfirmedPassword] = useState("");
   const [error, setError] = useState("");
 
   const auth = useAuth();
 
-  const handleRegistration = () => {
-    if (password !== confirmedPassword) {
-      setError("Passwords do match, please review them.");
-    } else if (!password.length || !email.length || !name.length) {
-      setError("Cannot leave required fields blank.");
-    } else {
-      auth.register(email, password, setError, () => {});
-    }
-  };
-
-  const handleLogin = () => {
+  const handleLogin = (e) => {
+    e.preventDefault();
     auth.signin(email, password, setError, () => {})
     if (!error) {
       // Redirect the page
@@ -31,82 +22,50 @@ const LoginPage = (props) => {
   };
 
   return (
-    <div className="login-form">
-      <h1 className="login-header">
-        {props.isRegister ? "Register for an account" : "Log In"}
+    <>
+      <h1 className={baseStyles.header}>
+        Account Login
       </h1>
 
-      <div style={{ alignSelf: "center", display: "flex", flexFlow: "column" }}>
-        {error && (
-          <DisplayBox
-            bgColor="#f8d7da"
-            borderColor="#f8d7da"
-            color="#721c24"
-            w="100%"
-            h="auto"
-            text={error}
-            style={{ alignSelf: "center", marginBottom: "1em" }}
-          />
-        )}
+      <div className={styles.form}>
+        <form onSubmit={handleLogin}>
+          {error && (
+            <DisplayBox
+              bgColor="#f8d7da"
+              borderColor="#f8d7da"
+              color="#721c24"
+              w="100%"
+              h="auto"
+              text={error}
+              style={{ alignSelf: "center", marginBottom: "20px" }}
+            />
+          )}
 
-        {props.isRegister && (
-          <LoginField
-            id="login-name"
-            label="Name"
+          <TextInput
+            id="login-email"
+            label="Email"
             required
-            value={name}
-            setValue={setName}
+            value={email}
+            setValue={setEmail}
           />
-        )}
 
-        <LoginField
-          id="login-email"
-          label="Email"
-          required
-          value={email}
-          setValue={setEmail}
-        />
-
-        <LoginField
-          id="login-password"
-          label="Password"
-          required
-          value={password}
-          setValue={setPassword}
-          type="password"
-        />
-
-        {props.isRegister && (
-          <LoginField
-            id="login-conf-password"
-            label="Confirm Password"
+          <TextInput
+            id="login-password"
+            label="Password"
             required
-            value={confirmedPassword}
-            setValue={setConfirmedPassword}
+            value={password}
+            setValue={setPassword}
             type="password"
           />
-        )}
 
-        {props.isRegister && (
           <button
-            className="synduce-button register-button"
-            onClick={handleRegistration}
+            className={baseStyles.btn}
+            type="submit"
           >
-            <p>Register</p>
+            Login
           </button>
-        )}
-
-        {!props.isRegister && (
-          <button
-            className="synduce-button register-button"
-            onClick={handleLogin}
-          >
-            <p>login</p>
-          </button>
-        )}
+        </form>
       </div>
-    </div>
+    </>
   );
 };
-
-export default LoginPage;
