@@ -1,8 +1,7 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import LoginField from "../components/Login/LoginField";
 import DisplayBox from "../components/general/DisplayBox";
-import { registerUser, loginUser } from "../firebase/FireBaseAuth";
-import AuthContext from "../contexts/authContext";
+import { useAuth } from "../hooks/Auth";
 
 const LoginPage = (props) => {
   const [name, setName] = useState("");
@@ -10,7 +9,8 @@ const LoginPage = (props) => {
   const [password, setPassword] = useState("");
   const [confirmedPassword, setConfirmedPassword] = useState("");
   const [error, setError] = useState("");
-  const [, setCurrentUser] = useContext(AuthContext);
+
+  const auth = useAuth();
 
   const handleRegistration = () => {
     if (password !== confirmedPassword) {
@@ -18,12 +18,12 @@ const LoginPage = (props) => {
     } else if (!password.length || !email.length || !name.length) {
       setError("Cannot leave required fields blank.");
     } else {
-      registerUser(email, password, setError, setCurrentUser);
+      auth.register(email, password, setError, () => {});
     }
   };
 
   const handleLogin = () => {
-    loginUser(email, password, setError, setCurrentUser);
+    auth.signin(email, password, setError, () => {})
     if (!error) {
       // Redirect the page
       console.log("login has succeeded");
