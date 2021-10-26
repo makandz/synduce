@@ -45,24 +45,26 @@ const logoutUser = (setCurrentUser) => {
 };
 
 const updateTheEmail = (newEmail, setError) => {
+  console.log(auth.currentUser);
   updateEmail(auth.currentUser, newEmail).then(() => {
     console.log("Updated username!")
   }).catch((error) => {
     setError(
-      "Error"
+      "Email already in-use."
     )
     console.log("Something went wrong!")
   })
 };
 
 const updateThePassword = (newPassword, setError) => {
+  console.log(auth.currentUser);
   updatePassword(auth.currentUser, newPassword).then(() => {
     console.log("Updated password!")  
   }).catch((error) => {
     setError(
-      "Error"
+      "Could not update password, please try again later."
     )
-    console.log("Somethign went wrong!")
+    console.log("Something went wrong!")
   })
 };
 
