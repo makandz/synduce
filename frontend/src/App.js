@@ -1,7 +1,7 @@
 import HomePage from "./views/HomePage";
 import LoginPage from "./views/LoginPage";
 import NavBar from "./components/NavBar/NavBar";
-import Profile from "./components/Profile/Profile";
+import Profile from "./views/ProfilePage";
 import PrivateRoute from "./components/Authentication/PrivateRoute";
 import ProvideAuth from "./components/Authentication/ProvideAuth";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
