@@ -5,7 +5,7 @@ const { v4: uuidv4 } = require('uuid');
 exports.handler = async (event) => {
   // Create jobID
   const jobID = uuidv4();
-  
+
   // Extract code body from http request body.
   const body = JSON.parse(event["body"]);
   const code = body["code"];
@@ -46,7 +46,7 @@ exports.handler = async (event) => {
     Message: JSON.stringify(messagePayload),
     TopicArn: process.env.QueuedJobsARN
   }));
-  
+
   // Return jobID to frontend.
   return {
     statusCode: 200,
@@ -60,4 +60,3 @@ exports.handler = async (event) => {
     })
   };
 };
-
