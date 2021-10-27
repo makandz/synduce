@@ -19,7 +19,7 @@ const registerUser = (email, password, setError, setCurrentUser) => {
     })
     .catch((error) => {
       setError(
-        "Email already exists, please use registered email. If not, try with a different email."
+        error.message
       );
     });
 };
@@ -31,7 +31,7 @@ const loginUser = (email, password, setError, setCurrentUser) => {
     })
     .catch((error) => {
       setError(
-        "Invalid credentials, please check login information and try again."
+        error.message
       );
     });
 };

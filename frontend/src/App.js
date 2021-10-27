@@ -6,6 +6,7 @@ import PrivateRoute from "./components/Authentication/PrivateRoute";
 import ProvideAuth from "./components/Authentication/ProvideAuth";
 import CodePage from "./views/Code/CodePage";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import RegisterPage from "./views/Register/RegisterPage";
 
 export default function App() {
   return (
@@ -18,10 +19,10 @@ export default function App() {
               <HomePage />
             </Route>
             <Route exact path="/login">
-              <LoginPage isRegister={false} />
+              <LoginPage />
             </Route>
             <Route exact path="/register">
-              <LoginPage isRegister={true} />
+              <RegisterPage />
             </Route>
             <PrivateRoute exact path="/profile">
               <Profile />
