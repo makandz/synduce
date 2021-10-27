@@ -40,13 +40,13 @@
 
 .opts > a {
     color: #8D86C9;
-    padding: 32px;
+    padding: 0 25px;
     margin: 0px;
     font-weight: bold;
 }
 
 .opts > a:hover {
-    opacity: 50%;
+    color: #b2ace1;
 }
 
 .optsBtn {

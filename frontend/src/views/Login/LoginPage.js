@@ -4,6 +4,7 @@ import DisplayBox from "../../components/Forms/DisplayBox/DisplayBox";
 import { useAuth } from "../../libs/hooks/Auth";
 import styles from './LoginPage.module.css';
 import baseStyles from '../../components/Styling.module.css';
+import { useHistory } from 'react-router-dom';
 
 export default function LoginPage(props) {
   const [email, setEmail] = useState("");
@@ -11,14 +12,16 @@ export default function LoginPage(props) {
   const [error, setError] = useState("");
 
   const auth = useAuth();
+  const history = useHistory();
 
   const handleLogin = (e) => {
     e.preventDefault();
-    auth.signin(email, password, setError, () => {})
-    if (!error) {
+    auth.signin(email, password, setError, () => {
       // Redirect the page
       console.log("login has succeeded");
-    }
+      history.push("/code");
+    })
+    
   };
 
   return (
