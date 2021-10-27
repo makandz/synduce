@@ -33,7 +33,7 @@ jobs:
 
     - name: Upload to RunJob
       run: |
-        cd $GITHUB_WORKSPACE/lambda/RunJob/payload
+        cd $GITHUB_WORKSPACE/lambda/RunJob
         docker build -t runjob_ecr_repo .
         docker tag runjob_ecr_repo:latest 441747338187.dkr.ecr.us-east-1.amazonaws.com/runjob_ecr_repo:latest
         docker push 441747338187.dkr.ecr.us-east-1.amazonaws.com/runjob_ecr_repo:latest
