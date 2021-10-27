@@ -28,9 +28,11 @@ export default function Navbar() {
               Login
             </Link>
 
-            <button className={baseStyles.btn}>
-              Register for free <AiOutlineArrowRight />
-            </button>
+            <Link to="/register">
+              <button className={baseStyles.btn}>
+                Register for free <AiOutlineArrowRight />
+              </button>
+            </Link>
           </div>
         ) : (
           <div className={styles.opts}>
