@@ -5,6 +5,8 @@
 !.github/**
 !deliverable-1
 !deliverable-1/**
+!deploy
+!deploy/**
 !frontend
 !frontend/**
 !lambda
@@ -14,5 +16,10 @@
 !.terraform.lock.hcl
 !deploy.tf
 !README.md
-# Ignore all nested node_modules even in included dirs.
+# Ignore all nested stuff even in included dirs.
 */**/node_modules
+*.tfstate
+*.tfstate.backup
+*.zip
+*.terraform
+*.
