@@ -15,7 +15,7 @@ resource "aws_lambda_function" "DispatchJob" {
   role          = aws_iam_role.RoleForLambdaDispatchJob.arn
   handler       = "index.handler"
   runtime       = "nodejs14.x"
-  filename      = "deploy/dummy.zip"
+  filename      = "dummy.zip"
   timeout       = 29
   environment {
     variables = {
@@ -142,7 +142,7 @@ resource "aws_lambda_function" "UpdateJobStatus" {
   role          = aws_iam_role.RoleForLambdaUpdateJobStatus.arn
   handler       = "index.handler"
   runtime       = "nodejs14.x"
-  filename      = "deploy/dummy.zip"
+  filename      = "dummy.zip"
 }
 # Role for the above.
 resource "aws_iam_role" "RoleForLambdaUpdateJobStatus" {
@@ -192,4 +192,46 @@ resource "aws_lambda_permission" "AllowExecutionFromSNSTopicFinishedJobs" {
   function_name = aws_lambda_function.UpdateJobStatus.function_name
   principal     = "sns.amazonaws.com"
   source_arn    = aws_sns_topic.FinishedJobs.arn
+}
+
+# 4. Lambda to query database for finished job as proxy for frontend.
+resource "aws_lambda_function" "QueryJobStatus" {
+  function_name = "QueryJobStatus"
+  role          = aws_iam_role.RoleForLambdaQueryJobStatus.arn
+  handler       = "index.handler"
+  runtime       = "nodejs14.x"
+  filename      = "dummy.zip"
+}
+# Role for the above.
+resource "aws_iam_role" "RoleForLambdaQueryJobStatus" {
+  name = "RoleForLambdaQueryJobStatus"
+  assume_role_policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Action" : "sts:AssumeRole",
+        "Principal" : {
+          "Service" : "lambda.amazonaws.com"
+        },
+        "Effect" : "Allow",
+        "Sid" : ""
+      }
+    ]
+  })
+  managed_policy_arns = ["arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"]
+  inline_policy {
+    name = "QueryDynamoDBTableJobStatuses"
+    policy = jsonencode({
+      "Version" : "2012-10-17",
+      "Statement" : [
+        {
+          "Action" : [
+            "dynamodb:Query"
+          ],
+          "Effect" : "Allow",
+          "Resource" : aws_dynamodb_table.JobStatuses.arn
+        }
+      ]
+    })
+  }
 }
