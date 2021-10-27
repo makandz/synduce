@@ -13,35 +13,35 @@ import firebaseApp from "./FireBaseConfig";
 const auth = getAuth(firebaseApp);
 
 const registerUser = (email, password, setError, setCurrentUser) => {
-  createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      setCurrentUser({...userCredential.user});
-    })
-    .catch((error) => {
-      setError(
-        error.message
-      );
-    });
+  return createUserWithEmailAndPassword(auth, email, password)
+    // .then((userCredential) => {
+    //   setCurrentUser({...userCredential.user});
+    // })
+    // .catch((error) => {
+    //   setError(
+    //     error.message
+    //   );
+    // });
 };
 
 const loginUser = (email, password, setError, setCurrentUser) => {
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      setCurrentUser({...userCredential.user});
-    })
-    .catch((error) => {
-      setError(
-        error.message
-      );
-    });
+  return signInWithEmailAndPassword(auth, email, password)
+    // .then((userCredential) => {
+    //   setCurrentUser({...userCredential.user});
+    // })
+    // .catch((error) => {
+    //   setError(
+    //     error.message
+    //   );
+    // });
 };
 
 const logoutUser = (setCurrentUser) => {
-  signOut(auth)
-    .then(() => {
-      setCurrentUser(null);
-    })
-    .catch((error) => {});
+  return signOut(auth);
+    // .then(() => {
+    //   setCurrentUser(null);
+    // })
+    // .catch((error) => {});
 };
 
 const updateTheEmail = (currentPassword, newEmail, setError, setUser, setSuccess) => {
