@@ -72,6 +72,13 @@ resource "aws_iam_role" "RoleForLambdaDispatchJob" {
     })
   }
 }
+# Resource based permission to allow trigger from API Gateway.
+resource "aws_lambda_permission" "AllowDispatchJobExecutionFromAPIGateway" {
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.DispatchJob.function_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "${aws_apigatewayv2_api.SynduceHTTPApi.execution_arn}/*/*/dispatchjob"
+}
 
 # 2. Lambda for running Synduce. Backed by Docker container hosted on ECR.
 resource "aws_lambda_function" "RunJob" {
@@ -195,16 +202,16 @@ resource "aws_lambda_permission" "AllowExecutionFromSNSTopicFinishedJobs" {
 }
 
 # 4. Lambda to query database for finished job as proxy for frontend.
-resource "aws_lambda_function" "QueryJobStatus" {
-  function_name = "QueryJobStatus"
-  role          = aws_iam_role.RoleForLambdaQueryJobStatus.arn
+resource "aws_lambda_function" "QueryJob" {
+  function_name = "QueryJob"
+  role          = aws_iam_role.RoleForLambdaQueryJob.arn
   handler       = "index.handler"
   runtime       = "nodejs14.x"
   filename      = "dummy.zip"
 }
 # Role for the above.
-resource "aws_iam_role" "RoleForLambdaQueryJobStatus" {
-  name = "RoleForLambdaQueryJobStatus"
+resource "aws_iam_role" "RoleForLambdaQueryJob" {
+  name = "RoleForLambdaQueryJob"
   assume_role_policy = jsonencode({
     "Version" : "2012-10-17",
     "Statement" : [
@@ -234,4 +241,11 @@ resource "aws_iam_role" "RoleForLambdaQueryJobStatus" {
       ]
     })
   }
+}
+# Resource based permission to allow trigger from API Gateway.
+resource "aws_lambda_permission" "AllowQueryJobExecutionFromAPIGateway" {
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.QueryJob.function_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "${aws_apigatewayv2_api.SynduceHTTPApi.execution_arn}/*/*/queryjob"
 }
