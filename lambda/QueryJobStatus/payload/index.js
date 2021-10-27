@@ -18,9 +18,10 @@ exports.handler = async (event) => {
     ]
   };
   // Return 500 if error.
+  let response;
 	try {
-		const response = await dbClient.send(new BatchExecuteStatementCommand(params));
-		console.log('dbClient Response', response.Responses[0].Error);
+		response = await dbClient.send(new BatchExecuteStatementCommand(params));
+		console.log('dbClient Response Item', response.Responses[0].Item);
 	} catch (err) {
 		console.error("Error:", err);
     return {
@@ -30,7 +31,6 @@ exports.handler = async (event) => {
 	}
 
   // Return jobID status to frontend.
-  // TODO: Extract jobID from response.
   return {
     statusCode: 200,
     headers: {
@@ -39,7 +39,7 @@ exports.handler = async (event) => {
       "Access-Control-Allow-Methods": "OPTIONS,POST"
     },
     body: JSON.stringify({
-      jobID: jobID
+      response: response.Responses[0].Item
     })
   };
 };
