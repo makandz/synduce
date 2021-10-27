@@ -30,7 +30,7 @@ export default function Navbar() {
 
             <Link to="/register">
               <button className={baseStyles.btn}>
-                  Register for free <AiOutlineArrowRight />
+                Register for free <AiOutlineArrowRight />
               </button>
             </Link>
           </div>
