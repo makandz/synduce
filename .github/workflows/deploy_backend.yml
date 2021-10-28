@@ -47,7 +47,7 @@ jobs:
     #     aws lambda update-function-code --function-name RunJob --image-uri $ECR_REGISTRY/runjob_ecr_repo
     - name: Test jq
       run: |
-        aws ecr describe-images --repository-name runjob_ecr_repo --filter tagStatus=TAGGED | jq -r .imageDetails
+        aws ecr describe-images --repository-name runjob_ecr_repo --filter tagStatus=TAGGED | jq -r .imageDetails.[0].imageDigest
 
     - name: Upload to UpdateJobStatus
       run: |
