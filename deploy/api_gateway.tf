@@ -20,6 +20,7 @@ resource "aws_apigatewayv2_api" "SynduceHTTPApi" {
 # Create prod stage and deployment to it.
 resource "aws_apigatewayv2_deployment" "DeployToProd" {
   api_id = aws_apigatewayv2_stage.prod.api_id
+  description = "Deployed at ${timestamp()}"
 
   lifecycle {
     create_before_destroy = true
