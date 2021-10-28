@@ -1,6 +1,20 @@
 resource "aws_apigatewayv2_api" "SynduceHTTPApi" {
   name          = "SynduceHTTPApi"
   protocol_type = "HTTP"
+  cors_configuration {
+    allow_credentials = false
+    allow_headers = [
+      "*",
+    ]
+    allow_methods = [
+      "POST",
+    ]
+    allow_origins = [
+      "*",
+    ]
+    expose_headers = []
+    max_age        = 0
+  }
 }
 
 # Create prod stage and deployment to it.
