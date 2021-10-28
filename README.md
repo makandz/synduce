@@ -81,3 +81,5 @@ We chose this workflow because it provides a simple.
 We will be using an MIT license. This is because the Synduce application is already under the MIT licence and to keep things consistent we will also make our code open source and use an MIT licence.
 
 ## Link to Application
+
+[Synduce](https://synduce.herokuapp.com/)
