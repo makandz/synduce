@@ -12,7 +12,7 @@ Sometimes using a command line interface is not so friendly. It can be very unin
  * Provide a breakdown or detail for each feature that is most appropriate for your application
  * This section will be used to assess the value of the features built
 
-There are three main features that are currently functional in the application. Firstly we have the code editor. A user can access the code editor from the home page either as an existing user of the application or they can sign in as a guest. Next, we have the login and profile pages. The login page allows a user to login or register for an account, whereas the profile page allows you to update the email and password of your account. Finally, the main purpose of this application is to allow you to run the Synduce application, and this is done at the click of a button on the code editor page.   
+There are three main features that are currently functional in the application. Firstly we have the code editor. A user can access the code editor from the home page either as an existing user or they can sign in as a guest. Next, we have the login and profile pages. The login page allows a user to login or register for an account, whereas the profile page allows you to update the email and password of your account. Finally, the main purpose of this application is to allow you to run Synduce, and this is done at the click of a button on the code editor page. Once you have submitted a job for Synduce to run and it has completed, it will return to you the log output from Synduce. You can also check and update the job status also done through a button on the code editor page.
 
 ## Instructions
  * Clear instructions for how to use the application from the end-user's perspective
@@ -20,7 +20,16 @@ There are three main features that are currently functional in the application. 
  * Provide clear steps for using each feature described above
  * This section is critical to testing your application and must be done carefully and thoughtfully
  
-After typing in the URL for the application a user will be brought to the splash page of the website. Here there are 3 main options: Login as an existing user, register for an account using and email and a password or login as a guest. You can also view the synduce source code for Synduce on github if you wish from this page. By clicking on the login button a user will be brought to a login page where you can enter your credentials. If you choose to register, you will be brought to a registration page and you can register for an account with your email and password. In both cases you will be brought to the code editor page. If you choose neither you can click on the 'Try it For Free' button and you will be brought to the code editor. Here you can type in your OCaml scripts and once you are ready you can hit the run button to synthesize the script with Synduce. After the code has executed you will be able to see the log output of the job that you had sent.
+After typing in the URL for the application a user will be brought to the splash page of the website. Here there are 3 main options:
+
+- Login as an existing user
+    - The button for this option is available in the navigation bar. Once you click it you will be taken to the login page where you can enter your credentials. After you have logged in you will be taken to the code editor page.
+- Register for an account using an email and password 
+    - This button is also located in the nav bar. Again you will be taken to a page where you can enter your email and password and your account will be registered. 
+- Login as a guest
+    - This will take you directly to the code editor page and you can start entering your code here.
+
+You can also view the synduce source code for Synduce on github if you wish from this page. By clicking on the login button a user will be brought to a login page where you can enter your credentials. If you choose to register, you will be brought to a registration page and you can register for an account with your email and password. In both cases you will be brought to the code editor page. If you choose neither you can click on the 'Try it For Free' button and you will be brought to the code editor. Here you can type in your OCaml scripts and once you are ready you can hit the run button to synthesize the script with Synduce. After the code has executed you will be able to see the log output of the job that you had sent.
 
  ## Development requirements
  * If a developer were to set this up on their machine or a remote server, what are the technical requirements (e.g. OS, libraries, etc.)?
