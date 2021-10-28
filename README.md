@@ -5,7 +5,7 @@
  * What is the problem you're trying to solve?
  * Is there any context required to understand **why** the application solves this problem?
 
-Sometimes using a command line interface is not so friendly. It can be very unintuitive to use or can be a very boring wall of text to look at. Our web application is a tool enabling you to interface with the Synduce application online with a much friendlier interface. You can write OCaml scripts in the built-in text editor or upload them. Once you are done, you can feed the scripts to Synduce and the application will run in the cloud. Once it has run it will return the log output, all in one click. Our product gives ease of mind to any user. They do not have to look at a command line and they have the convenience of running Synduce on the web.
+Sometimes using a command line interface is not so friendly. It can be very unintuitive to use or can be a very boring wall of text to look at. Our web application is a tool enabling you to interface with the Synduce application online with a much friendlier interface. You can write OCaml scripts in the built-in text editor. Once you are done, you can execute Synduce to begin synthesizing your code and the application will run in the cloud. Once it has run it will return the log output. Our product gives ease of mind to any user. They do not have to look at a command line and they have the convenience of running Synduce online with the ability to create accounts as well.
 
 ## Key Features
  * Described the key features in the application that the user can access
@@ -79,3 +79,5 @@ We chose this workflow because it provides a simple.
  * Why did you or your partner make this choice?
 
 We will be using an MIT license. This is because the Synduce application is already under the MIT licence and to keep things consistent we will also make our code open source and use an MIT licence.
+
+## Link to Application
