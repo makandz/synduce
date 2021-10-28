@@ -233,7 +233,8 @@ resource "aws_iam_role" "RoleForLambdaQueryJob" {
       "Statement" : [
         {
           "Action" : [
-            "dynamodb:Query"
+            "dynamodb:Query",
+            "dynamodb:PartiQLSelect"
           ],
           "Effect" : "Allow",
           "Resource" : aws_dynamodb_table.JobStatuses.arn

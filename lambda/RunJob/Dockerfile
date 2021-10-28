@@ -36,7 +36,7 @@ ENTRYPOINT [ "/usr/bin/python3", "-m", "awslambdaric" ]
 CMD [ "app.handler" ]
 
 # Put copies at the end cause otherwise rebuilding takes a long time
-COPY ./payload/* ${FUNCTION_DIR}
+COPY ./payload/* "${FUNCTION_DIR}/"
 
 # Install dependencies for handler.
 RUN pip install -r ${FUNCTION_DIR}/requirements.txt
