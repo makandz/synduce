@@ -37,18 +37,15 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
 
-    # - name: Upload to RunJob
-    #   env:
-    #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-    #   run: |
-    #     cd $GITHUB_WORKSPACE/lambda/RunJob
-    #     docker build -t $ECR_REGISTRY/runjob_ecr_repo:latest .
-    #     docker push $ECR_REGISTRY/runjob_ecr_repo:latest
-    #     aws lambda update-function-code --function-name RunJob --image-uri $ECR_REGISTRY/runjob_ecr_repo
-    - name: Test jq
+    - name: Upload to RunJob
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
       run: |
-        aws ecr describe-images --repository-name runjob_ecr_repo --filter tagStatus=TAGGED | jq -r .imageDetails.[0].imageDigest
-
+        cd $GITHUB_WORKSPACE/lambda/RunJob
+        docker build -t $ECR_REGISTRY/runjob_ecr_repo:latest .
+        docker push $ECR_REGISTRY/runjob_ecr_repo:latest
+        aws lambda update-function-code --function-name RunJob --image-uri $ECR_REGISTRY/runjob_ecr_repo@$(aws ecr describe-images --repository-name runjob_ecr_repo --filter tagStatus=TAGGED | jq -r .imageDetails[0].imageDigest)
+    
     - name: Upload to UpdateJobStatus
       run: |
         cd $GITHUB_WORKSPACE/lambda/UpdateJobStatus/payload
