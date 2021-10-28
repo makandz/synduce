@@ -54,7 +54,7 @@ You will also see any lint errors in the console.
 Launches the test runner in the interactive watch mode.<br />
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
- ## Deployment and Github Workflow
+## Deployment and Github Workflow
 
 Describe your Git / GitHub workflow. Essentially, we want to understand how your team members shares a codebase, avoid conflicts and deploys the application.
 
@@ -64,7 +64,11 @@ Describe your Git / GitHub workflow. Essentially, we want to understand how your
  * What deployment tool(s) are you using and how
  * Don't forget to **briefly explain why** you chose this workflow or particular aspects of it!
 
-The initial step is to first decide what specific part of the application each team member wants to work on. Once this is decided we go ahead and all of the team members use a separate branch whenever for each individual task. If we are adding some feature related to a task we can branch further from there and once done, merge into the respective task branch. In this part of the project the development branches were seperated into frontend and backend, and each member merged to the respective portion of the development branch. 
+### GitHub Workflow
+
+The initial step is to first decide what specific part of the application each team member wants to work on. Once this is decided we go ahead and all of the team members use a separate branch whenever for each individual task. If we are adding some feature related to a task we can branch further from there and once done, merge into the respective task branch. In this part of the project the development branches were seperated into frontend and backend, and each member merged to the respective portion of the development branch.
+
+### Deployment
 
 The deployment of the application is done through GitHub Actions. When deploying to the backend we update all the AWS Lambda functions that we are using, downloads all the dependencies with npm, bundle it all together, create and build the Docker image. The cloud service we are using to host our web application is Heroku and there is a GitHub actions set up for this as well.
 
