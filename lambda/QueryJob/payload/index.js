@@ -30,7 +30,7 @@ exports.handler = async (event) => {
     };
 	}
 
-  // Return jobID status to frontend.
+  // Return jobID status, logs, etc. to frontend.
   return {
     statusCode: 200,
     headers: {
@@ -39,7 +39,7 @@ exports.handler = async (event) => {
       "Access-Control-Allow-Methods": "OPTIONS,POST"
     },
     body: JSON.stringify({
-      response: response.Responses[0].Item
+      row: response.Responses[0].Item
     })
   };
 };

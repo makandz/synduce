@@ -31,9 +31,23 @@ jobs:
         zip -r DispatchJobPayload.zip *
         aws lambda update-function-code --function-name DispatchJob --zip-file fileb://DispatchJobPayload.zip
 
+    - name: Upload to RunJob
+      run: |
+        cd $GITHUB_WORKSPACE/lambda/RunJob
+        docker build -t runjob_ecr_repo .
+        docker tag runjob_ecr_repo:latest 441747338187.dkr.ecr.us-east-1.amazonaws.com/runjob_ecr_repo:latest
+        docker push 441747338187.dkr.ecr.us-east-1.amazonaws.com/runjob_ecr_repo:latest
+
     - name: Upload to UpdateJobStatus
       run: |
         cd $GITHUB_WORKSPACE/lambda/UpdateJobStatus/payload
         npm ci
         zip -r UpdateJobStatusPayload.zip *
         aws lambda update-function-code --function-name UpdateJobStatus --zip-file fileb://UpdateJobStatusPayload.zip
+    
+    - name: Upload to QueryJob
+      run: |
+        cd $GITHUB_WORKSPACE/lambda/QueryJob/payload
+        npm ci
+        zip -r QueryJobPayload.zip *
+        aws lambda update-function-code --function-name QueryJob --zip-file fileb://QueryJobPayload.zip

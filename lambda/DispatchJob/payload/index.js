@@ -47,7 +47,7 @@ exports.handler = async (event) => {
     TopicArn: process.env.QueuedJobsARN
   }));
 
-  // Return whole row to frontend.
+  // Return jobID to frontend.
   return {
     statusCode: 200,
     headers: {
@@ -56,7 +56,7 @@ exports.handler = async (event) => {
       "Access-Control-Allow-Methods": "OPTIONS,POST"
     },
     body: JSON.stringify({
-      // TODO
+      jobID: jobID
     })
   };
 };
