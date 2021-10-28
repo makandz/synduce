@@ -16,6 +16,7 @@
 !.terraform.lock.hcl
 !deploy.tf
 !README.md
+!iteration-02-review.md
 # Ignore all nested stuff even in included dirs.
 */**/node_modules
 *.tfstate
