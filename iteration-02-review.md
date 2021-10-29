@@ -1,14 +1,9 @@
 # Synduce / 6 Devs 1 App
 
- > _Note:_ This document is meant to be written during (or shortly after) your review meeting, which should happen fairly close to the due date.      
- >      
- > _Suggestion:_ Have your review meeting a day or two before the due date. This way you will have some time to go over (and edit) this document, and all team members should have a chance to make their contribution.
-
-
 ## Iteration 02 - Review & Retrospect
 
- * When: FILL IN THE DATE WHEN YOU ACTUALLY HAD YOUR REVIEW MEETING
- * Where: PHYSICAL LOCATION AND/OR ONLINE
+ * When: Friday, Oct 29
+ * Where: Over Zoom
 
 ## Process - Reflection
 
@@ -50,3 +45,13 @@ List any **process-related** (i.e. team organization and how you work) changes y
  * Were there change requests?
  * What did you learn from the demo from either a process or product perspective?
  * *This section will be marked very leniently so keep it brief and just make sure the points are addressed*
+
+The preparation for the demo involved making sure the application and the features we had decided to complete for this iteration were complete and actually working. Then we just followed the basic steps to start up and use the application and provided a basic overview of what is working and what is to come.
+
+We were able to demo how to access the application and logging in or register for an account. Next we showed them how to open up the code editor and execute Synduce.
+
+For the most part our partner was happy with the current state of the application as the main feature, that being executing Synduce over the web, is functional. The home page look and feel was also appreciated.
+
+There were a few changes that they would like to see added. Firstly, Synduce actually has certain options that can be used in the command line. They would like to be able to select these options as well. Secondly, Synduce prints output to the console occasionally over the course of program execution. They would like to have the log output be displayed on the website in the same fashion, continuosly over the course of execution, rather than all th output bundled into one complete log at the end of execution.
+
+What we learned from this demo was that the functionality for a product like this is more important then the looks. Having the ability to see the output continuosly and selecting the options were some things that they would like to see. However having a good looking product is appreciated simply due to it being more appealing to use in general. 
