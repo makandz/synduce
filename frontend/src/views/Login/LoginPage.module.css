@@ -1,0 +1,12 @@
+/* @todo later these pages should be merged with register */
+
+.form {
+    display: flex;
+    flex-flow: column;
+}
+
+.form > form {
+    align-self: center;
+    display: flex;
+    flex-flow: column;
+}

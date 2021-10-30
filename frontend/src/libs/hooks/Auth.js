@@ -16,19 +16,34 @@ function useAuth() {
 function useProvideAuth() {
   const [user, setUser] = useState(auth.currentUser);
 
-  const signin = (email, password, setError, cb) => {
-    loginUser(email, password, setError, setUser);
-    if (user) cb();
+  const signin = async (email, password, setError, cb) => {
+    try{
+      const userCredential = await loginUser(email, password, setError, setUser);
+      setUser({...userCredential.user});
+      cb();
+    } catch (error){
+      setError(error.message);
+    }
   };
 
-  const signout = (cb) => {
-    logoutUser(setUser);
-    cb();
+  const signout = async (cb) => {
+    try{
+      logoutUser(setUser);
+      setUser(null);
+      cb();
+    } catch (error){
+      console.error("Signout Error");
+    }
   };
 
-  const register = (email, password, setError, cb) => {
-    registerUser(email, password, setError, setUser);
-    if (user) cb();
+  const register = async (email, password, setError, cb) => {
+    try {
+      const userCredential = await registerUser(email, password, setError, setUser);
+      setUser({...userCredential.user});
+      cb();
+    } catch(error) {
+      setError(error.message);
+    }
   };
 
   const updateEmail = (currentPassword, newEmail, setError, setSuccess) => {
