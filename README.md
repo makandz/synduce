@@ -12,7 +12,15 @@ Sometimes using a command line interface is not so friendly. It can be very unin
  * Provide a breakdown or detail for each feature that is most appropriate for your application
  * This section will be used to assess the value of the features built
 
-There are three main features that are currently functional in the application. Firstly we have the code editor. A user can access the code editor from the home page either as an existing user or they can sign in as a guest. Next, we have the login and profile pages. The login page allows a user to login or register for an account, whereas the profile page allows you to update the email and password of your account. Finally, the main purpose of this application is to allow you to run Synduce, and this is done at the click of a button on the code editor page. Once you have submitted a job for Synduce to run and it has completed, it will return to you the log output from Synduce. You can also check and update the job status also done through a button on the code editor page.
+There were a few features that we were able to get working for this iteration.
+
+Firstly we have the code editor. A user can access the code editor from the home page either as an existing user or they can sign in as a guest. Once there they can begin typing in OCaml scripts that will be sent to Synduce once done. For added convenience we incorporated an OCaml syntax highlighter and made it a dark mode editor to go easy on the eyes.
+
+Next, we have the login page. Here users that have already created an account with Synduce can login, authenticate their account, and continue to the code editor to begin coding.
+
+Thirdly, a user can access their profile page. Once a user has logged in, they can view their profile page and edit the accounts email address and update the password if they like. 
+
+Lastly, the main purpose of this application is to allow you to run Synduce, and this is done at the click of a button on the code editor page. Once you have submitted a job for Synduce to run and it has completed, it will return to you the log output from Synduce. ur partners have attested that the log output that we have is sufficient and is functional enough to understand what Synduce is doing. You can also check and update the job status also done through a button on the code editor page.
 
 ## Instructions
  * Clear instructions for how to use the application from the end-user's perspective

@@ -33,6 +33,9 @@ List **process-related** (i.e. team organization and how you work) decisions tha
  * Explain why (i.e. give a supporting argument) you consider a decision to be unsuccessful
  * Feel free to refer/link to process artifact(s).
 
+Even though we did have a pretty good idea of who was doing what, or more specifically what the different features of the application should be, sometimes we didn't actually follow through with separating the tasks between the team members. Multiple people would be working on the same feature which then slowed down development of other parts of the application. 
+
+Another related issue was that the different tasks themselves were not distributed chronologically. That is certain features required another feature to be completed before the new one could start to be worked on properly. This slightly backlogged development and could have been made smoother.
 
 #### Q3. Planned changes
 
