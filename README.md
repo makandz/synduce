@@ -16,17 +16,32 @@ There are three main features that are currently functional in the application. 
 
 ## Instructions
  * Clear instructions for how to use the application from the end-user's perspective
- * How do you access it? Are accounts pre-created or does a user register? Where do you start? etc. 
+ * How do you access it? Are accounts pre-created or does
+  a user register? Where do you start? etc. 
  * Provide clear steps for using each feature described above
  * This section is critical to testing your application and must be done carefully and thoughtfully
- 
+
+First you will need to go into an internet browser of your choice and type in the URL if the application. Refer to the bottom of the document for the application link. you will then land on this page:
+
+![home_page](md_images/home_page.png)
+
 Upon landing on the homepage, a user will have 3 main options:
 
 1. Log in as an existing user: If a user already has an account with us, they can login to it from the homepage. Once logged in, they will be brought to the code-editor page. 
+
+![log_in](md_images/login_procedure.png)
+
 2. Register for an account: If a user wishes to register for an account, they can do so by clicking the 'Register' button at the top right of the homepage. There, they can enter their email and password to create an account. Once registered, they will be logged in and redirected back to the code editor page.
+
+![register](md_images/registration_procedure.png)
+
 3. Use as a guest: If users simply wish to test Synduce without signing up, they can proceed directly to the code editor page via the 'Try It Now' button on the homepage.
 
+![guest_user](md_images/guest_user.png)
+
 Once at the code editor, a user can type code into it and submit the job to Synduce via the 'Execute Code' button. Synduce could take up to 15 minutes to return an answer, so users are free to close the tab, refresh the page, or log out. Once the job finishes, the results will be displayed under the code editor. If the job still hasn't finished, users can click the 'Request Update' button to manually ask the backend for the job's status.
+
+![guest_user](md_images/code_editor.png)
 
 Buttons for navigation can be found in the Nav Bar at all times. A logged in user will be able to see their profile and log out from here, while a guest/non-logged-in user will have the option to Register or Login from there. The 'Synduce' logo on the top left will bring one back to the homepage.
 

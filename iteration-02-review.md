@@ -18,6 +18,12 @@ List **process-related** (i.e. team organization and how you work) decisions tha
  * Explain why (i.e. give a supporting argument) you consider a decision to be successful.
  * Feel free to refer/link to process artifact(s).
 
+One thing that turned out quite well was the decisions on how to separate the work between the 6 of us. We were able to divide the group into to groups of backend and frontend developers. Then within each group we divided the work into different features of the application. Keeping in mind a modular approach to the application we were able to smoothly develop an MVP without any serious conflicts. 
+
+Related to this, having a specific person to do DevOps was also a great decision again keeping this modular and de-coupled system so that no one has to worry about the entire application and only perfecting their portion of the work. 
+
+Our decision to have the Discord as a communication platform was vital. We were able to quickly and easily have a conversation with our partners if we needed it. We could quickly set up a meeting if we needed to have a more involved conversation. If something was going wrong we could have a quick conversaton with them to see if we can find a solution. Any important but short changes to the project that should be notified to our partners was also easily done with Discord. 
+
 #### Q2. Decisions that did not turn out as well as we hoped
 
 List **process-related** (i.e. team organization and how you work) decisions that, in retrospect, were not as successful as you thought they would be.
@@ -35,6 +41,7 @@ List any **process-related** (i.e. team organization and how you work) changes y
  * Ordered from most to least important.
  * Explain why you are making a change.
 
+What we plan on having is a more concrete Git workflow. We would like to separate the development work on a dev branch and the deployed product would be on the main branch. Then on top of this have multiple branches for each specific feature and so on. This makes it easier to revert changes and to separate further parts of the application that are already working to parts that still need to be completed or fixed. This would also alow for a cleaner GitHub actions job dispatch event when we decide to merge to main as this would mean that we now want to deploy a new version of the application. 
 
 ## Product - Review
 
