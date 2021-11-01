@@ -14,13 +14,13 @@ Sometimes using a command line interface is not so friendly. It can be very unin
 
 There were a few features that we were able to get working for this iteration.
 
-Firstly we have the code editor. A user can access the code editor from the home page either as an existing user or they can sign in as a guest. Once there they can begin typing in OCaml scripts that will be sent to Synduce once done. For added convenience we incorporated an OCaml syntax highlighter and made it a dark mode editor to go easy on the eyes.
+Firstly we have the code editor. A user can access the code editor from the home page either as an existing user or they can use it as a guest. Once on the editor page, they can begin typing in OCaml scripts that will be sent to Synduce once done. For added convenience we incorporated an OCaml syntax highlighter and made it a dark mode editor to go easy on the eyes.
 
 Next, we have the login page. Here users that have already created an account with Synduce can login, authenticate their account, and continue to the code editor to begin coding.
 
 Thirdly, a user can access their profile page. Once a user has logged in, they can view their profile page and edit the accounts email address and update the password if they like. 
 
-Lastly, the main purpose of this application is to allow you to run Synduce, and this is done at the click of a button on the code editor page. Once you have submitted a job for Synduce to run and it has completed, it will return to you the log output from Synduce. ur partners have attested that the log output that we have is sufficient and is functional enough to understand what Synduce is doing. You can also check and update the job status also done through a button on the code editor page.
+Lastly, the main purpose of this application is to allow you to run Synduce, and this is done at the click of a button on the code editor page. Once you are satisfied with your code snippet you can submit the job to be done in the cloud for up to 15 minutes. Synduce will then synthesize your code, and once it has completed it will return to you the log output from Synduce. Our partners have attested that the log output that we have is sufficient and is functional enough to understand what Synduce is doing. The log output is nearly identical to the command line output and it only lacks terminal colouring. You can also check and update the job status also done through a button on the code editor page.
 
 ## Instructions
  * Clear instructions for how to use the application from the end-user's perspective
@@ -29,7 +29,7 @@ Lastly, the main purpose of this application is to allow you to run Synduce, and
  * Provide clear steps for using each feature described above
  * This section is critical to testing your application and must be done carefully and thoughtfully
 
-First you will need to go into an internet browser of your choice and type in the URL if the application. Refer to the bottom of the document for the application link. you will then land on this page:
+First a user will need to go into an internet browser of their choice and type in the URL of the application. Refer to the end of the document for the link to the web application. They will then land on the home page:
 
 ![home_page](md_images/home_page.png)
 
@@ -52,6 +52,18 @@ Once at the code editor, a user can type code into it and submit the job to Synd
 ![guest_user](md_images/code_editor.png)
 
 Buttons for navigation can be found in the Nav Bar at all times. A logged in user will be able to see their profile and log out from here, while a guest/non-logged-in user will have the option to Register or Login from there. The 'Synduce' logo on the top left will bring one back to the homepage.
+
+Here is the navigation bar for a user that has logged in:
+
+![user_navbar](md_images/logged_in_navbar.png)
+
+Here is what it would like to a guest user.
+
+![guest_navbar](md_images/guest_user_navbar.png)
+
+As mentioned a user with an account can also update profile information by clicking on their email in the navigation bar. They will be brought to the profile page. Once there, they can update their profile information as they wish.
+
+![profile](md_images/update_profile.png)
 
 ## Development requirements
  * If a developer were to set this up on their machine or a remote server, what are the technical requirements (e.g. OS, libraries, etc.)?

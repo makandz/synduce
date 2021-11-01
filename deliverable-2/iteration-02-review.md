@@ -18,11 +18,11 @@ List **process-related** (i.e. team organization and how you work) decisions tha
  * Explain why (i.e. give a supporting argument) you consider a decision to be successful.
  * Feel free to refer/link to process artifact(s).
 
-One thing that turned out quite well was the decisions on how to separate the work between the 6 of us. We were able to divide the group into to groups of backend and frontend developers. Then within each group we divided the work into different features of the application. Keeping in mind a modular approach to the application we were able to smoothly develop an MVP without any serious conflicts. 
+One process-related decision that turned out quite well was how we decided to separate the work between the 6 members of the team. We were able to divide the group into to subgroups of backend and frontend developers. Then within each group we divided the work into different features of the application. Keeping in mind a modular approach to the application we were able to smoothly develop an MVP without any serious conflicts. 
 
-Related to this, having a specific person to do DevOps was also a great decision again keeping this modular and de-coupled system so that no one has to worry about the entire application and only perfecting their portion of the work. 
+Related to this, having a specific person to do DevOps was also a great decision again keeping this modular and de-coupled development system so that no one has to worry about the entire application and only perfecting their portion of the work. 
 
-Our decision to have the Discord as a communication platform was vital. We were able to quickly and easily have a conversation with our partners if we needed it. We could quickly set up a meeting if we needed to have a more involved conversation. If something was going wrong we could have a quick conversaton with them to see if we can find a solution. Any important but short changes to the project that should be notified to our partners was also easily done with Discord. 
+Our decision to have a Discord server as a communication platform was vital. We were able to quickly and easily have a conversation with our partners and each other if we needed to. We could quickly set up a meeting if we needed to have a more involved conversation. If something was going wrong we could have a quick conversaton with them to see if we can find a solution. Any important but short changes to the project that should be notified to our partners was also easily done with Discord. Finally, if there were any links or other artifacts that we would like to share, that could also be done easily through Discord. 
 
 #### Q2. Decisions that did not turn out as well as we hoped
 
