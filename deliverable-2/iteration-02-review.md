@@ -10,15 +10,7 @@
 
 #### Q1. Decisions that turned out well
 
-List **process-related** (i.e. team organization and how you work) decisions that, in retrospect, turned out to be successful.
-
-
- * 2 - 4 decisions.
- * Ordered from most to least important.
- * Explain why (i.e. give a supporting argument) you consider a decision to be successful.
- * Feel free to refer/link to process artifact(s).
-
-One process-related decision that turned out quite well was how we decided to separate the work between the 6 members of the team. We were able to divide the group into to subgroups of backend and frontend developers. Then within each group we divided the work into different features of the application. Keeping in mind a modular approach to the application we were able to smoothly develop an MVP without any serious conflicts. 
+One process-related decision that turned out quite well was how we decided to separate the work between the 6 members of the team. We were able to divide the group into subgroups of backend and frontend developers. Within each group, we divided the work into different features of the application. Keeping in mind a modular approach to the application, we were able to smoothly develop an MVP without any serious conflicts. 
 
 Related to this, having a specific person to do DevOps was also a great decision again keeping this modular and de-coupled development system so that no one has to worry about the entire application and only perfecting their portion of the work. 
 
@@ -26,41 +18,23 @@ Our decision to have a Discord server as a communication platform was vital. We 
 
 #### Q2. Decisions that did not turn out as well as we hoped
 
-List **process-related** (i.e. team organization and how you work) decisions that, in retrospect, were not as successful as you thought they would be.
-
- * 2 - 4 decisions.
- * Ordered from most to least important.
- * Explain why (i.e. give a supporting argument) you consider a decision to be unsuccessful
- * Feel free to refer/link to process artifact(s).
-
 Even though we did have a pretty good idea of who was doing what, or more specifically what the different features of the application should be, sometimes we didn't actually follow through with separating the tasks between the team members. Multiple people would be working on the same feature which then slowed down development of other parts of the application. 
 
 Another related issue was that the different tasks themselves were not distributed chronologically. That is certain features required another feature to be completed before the new one could start to be worked on properly. This slightly backlogged development and could have been made smoother.
 
 #### Q3. Planned changes
 
-List any **process-related** (i.e. team organization and how you work) changes you are planning to make (if there are any)
-
- * Ordered from most to least important.
- * Explain why you are making a change.
-
-What we plan on having is a more concrete Git workflow. We would like to separate the development work on a dev branch and the deployed product would be on the main branch. Then on top of this have multiple branches for each specific feature and so on. This makes it easier to revert changes and to separate further parts of the application that are already working to parts that still need to be completed or fixed. This would also alow for a cleaner GitHub actions job dispatch event when we decide to merge to main as this would mean that we now want to deploy a new version of the application. 
+What we plan on having is a more concrete Git workflow. We would like to separate the development work on a dev branch and the deployed product would be on the main branch. Then on top of this have multiple branches for each specific feature and so on. This makes it easier to revert changes and to separate further parts of the application that are already working to parts that still need to be completed or fixed. Our GitHub Actions jobs are quite heavy on time, so this more disciplined approach would allow us to use a fully automated dispatch without worrying about wasting minutes.
 
 ## Product - Review
 
 #### Q4. How was your product demo?
- * How did you prepare your demo?
- * What did you manage to demo to your partner?
- * Did your partner accept the features?
- * Were there change requests?
- * What did you learn from the demo from either a process or product perspective?
- * *This section will be marked very leniently so keep it brief and just make sure the points are addressed*
 
 The preparation for the demo involved making sure the application and the features we had decided to complete for this iteration were complete and actually working. Then we just followed the basic steps to start up and use the application and provided a basic overview of what is working and what is to come.
 
-We were able to demo how to access the application and logging in or register for an account. Next we showed them how to open up the code editor and execute Synduce.
+We were able to demo how to access the application, logging in, and registering for an account. Next we showed them how to open up the code editor and execute Synduce.
 
-For the most part our partner was happy with the current state of the application as the main feature, that being executing Synduce over the web, is functional. The home page look and feel was also appreciated.
+For the most part our partner was happy with the current state of the application as the main feature (being executing Synduce over the web), was functional. The home page look and feel was also well-received.
 
 There were a few changes that they would like to see added. Firstly, Synduce actually has certain options that can be used in the command line. They would like to be able to select these options as well. Secondly, Synduce prints output to the console occasionally over the course of program execution. They would like to have the log output be displayed on the website in the same fashion, continuosly over the course of execution, rather than all th output bundled into one complete log at the end of execution.
 
