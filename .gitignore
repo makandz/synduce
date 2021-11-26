@@ -17,6 +17,8 @@
 !deploy.tf
 !deliverable-2
 !deliverable-2/**
+!deliverable-3
+!deliverable-3/**
 !md_images
 !md_images/**
 !README.md
