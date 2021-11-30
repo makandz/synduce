@@ -8,7 +8,6 @@ data "archive_file" "dummy" {
   }
 }
 
-
 # 1. Lambda to accept incoming jobs from API Gateway.
 resource "aws_lambda_function" "DispatchJob" {
   function_name = "DispatchJob"
@@ -125,12 +124,6 @@ resource "aws_iam_role" "RoleForLambdaRunJob" {
     })
   }
 }
-# Subscription for above to topic.
-resource "aws_sns_topic_subscription" "RunJobSubscriptionToQueuedJobs" {
-  topic_arn = aws_sns_topic.QueuedJobs.arn
-  protocol  = "lambda"
-  endpoint  = aws_lambda_function.RunJob.arn
-}
 # Resource-based policy for Lambda to allow subscription to invoke it
 resource "aws_lambda_permission" "AllowExecutionFromSNSTopicQueuedJobs" {
   action        = "lambda:InvokeFunction"
@@ -186,12 +179,6 @@ resource "aws_iam_role" "RoleForLambdaUpdateJobStatus" {
       ]
     })
   }
-}
-# Subscription for above to topic.
-resource "aws_sns_topic_subscription" "UpdateJobStatusSubscriptionToFinishedJobs" {
-  topic_arn = aws_sns_topic.FinishedJobs.arn
-  protocol  = "lambda"
-  endpoint  = aws_lambda_function.UpdateJobStatus.arn
 }
 # Resource-based policy for Lambda to allow subscription to invoke it
 resource "aws_lambda_permission" "AllowExecutionFromSNSTopicFinishedJobs" {

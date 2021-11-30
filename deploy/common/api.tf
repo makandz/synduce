@@ -18,17 +18,17 @@ resource "aws_apigatewayv2_api" "SynduceHTTPApi" {
 }
 
 # Create prod stage and deployment to it.
-resource "aws_apigatewayv2_deployment" "DeployToProd" {
-  api_id = aws_apigatewayv2_stage.prod.api_id
+resource "aws_apigatewayv2_deployment" "DeployToActive" {
+  api_id      = aws_apigatewayv2_stage.active.api_id
   description = "Deployed at ${timestamp()}"
 
   lifecycle {
     create_before_destroy = true
   }
 }
-resource "aws_apigatewayv2_stage" "prod" {
+resource "aws_apigatewayv2_stage" "active" {
   api_id = aws_apigatewayv2_api.SynduceHTTPApi.id
-  name   = "prod"
+  name   = "active"
 }
 
 # Create routes for /dispatchjob and /queryjob
