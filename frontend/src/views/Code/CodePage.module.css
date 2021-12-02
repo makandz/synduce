@@ -1,0 +1,45 @@
+.main {
+    margin-top: 1.5rem;
+}
+
+.editorWrapper {
+    margin: auto;
+    max-width: 1000px;
+}
+
+.editorWrapper > div > div {
+    height: 400px;
+}
+
+.executeWrapper {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.loadedPrevious {
+    color: grey;
+    font-size: 14px;
+}
+
+.requestUpdateButton {
+    margin-top: 10px;
+    background-color: #ff4b4b;
+    font-size: 12px;
+    padding: 10px;
+}
+
+.responseWrapper {
+    margin: auto;
+    max-width: 1000px;
+    font-weight: 500;
+}
+
+.responseWrapper > h2 {
+    margin-bottom: 0;
+    /* @todo remove this later */
+    font-family: "Manrope", sans-serif;
+}
+
+.responseWrapper > p {
+    margin-top: 5px;
+}

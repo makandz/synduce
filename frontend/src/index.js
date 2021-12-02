@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import "./css/homepagebody.css";
-import "./css/navbar.css";
-import "./css/shared.css";
-import "./css/loginform.css";
+import "./views/Home/HomePage.module.css";
+import "./components/Navbar/Navbar.module.css";
+import "./views/Login/LoginPage.module.css";
 import App from './App';
 
 ReactDOM.render(
@@ -13,5 +12,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-

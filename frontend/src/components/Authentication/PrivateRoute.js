@@ -1,4 +1,4 @@
-import { useAuth } from "../../hooks/Auth";
+import { useAuth } from "../../libs/hooks/Auth";
 import { Route, Redirect } from "react-router";
 
 const PrivateRoute = ({ children, ...rest }) => {

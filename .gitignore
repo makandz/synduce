@@ -15,7 +15,12 @@
 !.gitmodules
 !.terraform.lock.hcl
 !deploy.tf
+!deliverable-2
+!deliverable-2/**
+!md_images
+!md_images/**
 !README.md
+!iteration-02-review.md
 # Ignore all nested stuff even in included dirs.
 */**/node_modules
 *.tfstate
