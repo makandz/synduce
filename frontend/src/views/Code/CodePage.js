@@ -22,7 +22,7 @@ export default function CodePage() {
   function sendJob() {
     axios({
       method : "POST",
-      url: "https://p65v01zgya.execute-api.us-east-1.amazonaws.com/prod/dispatchjob",
+      url: "https://rhnq76qo4e.execute-api.us-east-1.amazonaws.com/active/dispatchjob",
       data: {
         code: editor.contentDOM.innerText
       },
@@ -44,7 +44,7 @@ export default function CodePage() {
     if (jobId !== null) {
       axios({
         method : "POST",
-        url: "https://p65v01zgya.execute-api.us-east-1.amazonaws.com/prod/queryjob",
+        url: "https://rhnq76qo4e.execute-api.us-east-1.amazonaws.com/active/queryjob",
         data: {
           jobID: jobId
         },
