@@ -34,13 +34,6 @@ export default function CodePage() {
       let newJobId = response.data['jobID'];
       setJobId(newJobId);
       localStorage.setItem('synduce-jobId', newJobId);
-
-      console.log(editor.EditorState);
-      console.log(typeof( editor.contentDOM.innerText));
-      console.log(editor.dom.getAttributeNames());
-      // editor.dom.
-      console.log(editor.contentDOM.getAttributeNames());
-
       localStorage.setItem('synduce-code', editor.contentDOM.innerText);
       poll();
     }, (error) => {
