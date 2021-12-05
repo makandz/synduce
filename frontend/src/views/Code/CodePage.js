@@ -19,6 +19,9 @@ export default function CodePage() {
 
   const editorRef = useRef();
 
+  // array of how many seconds to wait on the ith poll, with last value being the max wait.
+  const poll_rates = Array.from({length: 7}, (x, i) => Math.pow(2, i));
+
   function sendJob() {
     axios({
       method : "POST",
@@ -76,15 +79,16 @@ export default function CodePage() {
   }
 
   async function poll(){
+    let i = 0
     while(jobId && queryJob() != 0){
-      await sleep(2000);
+      await sleep(poll_rates[i] * 1000);
+      i = Math.min(poll_rates.length-1, i + 1);
     }
   }
 
   useEffect(() => {
     const state = EditorState.create({
       doc: "(** Your code goes here *)",
-      lineSeperator: "",
       extensions: [basicSetup, StreamLanguage.define(oCaml), oneDark]
     });
 
@@ -95,7 +99,7 @@ export default function CodePage() {
     // Load previous code
     let code = localStorage.getItem('synduce-code');
     if (code) {
-      view.contentDOM.innerText = state.toText(code);
+      view.contentDOM.innerText = code.replace(/\n\n/g, "\n");
       setPreviousWork(true);
     }
 
