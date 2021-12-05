@@ -35,6 +35,7 @@ export default function CodePage() {
       setJobId(newJobId);
       localStorage.setItem('synduce-jobId', newJobId);
       localStorage.setItem('synduce-code', editor.contentDOM.innerText);
+      poll();
     }, (error) => {
       console.log(error);
     });
@@ -57,29 +58,44 @@ export default function CodePage() {
         if (row.status.S === "FINISHED") {
           setJobResult(row.logs.S);
           setLoadState(2);
+          return 0;
         } else if (row.status.S === "RUNNING") {
           setLoadState(1);
+          return 1;
         }
       }, (error) => {
         console.log(error);
+        return 1;
       });
+    }
+    return 1;
+  }
+
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  async function poll(){
+    while(jobId && queryJob() != 0){
+      await sleep(2000);
     }
   }
 
   useEffect(() => {
     const state = EditorState.create({
       doc: "(** Your code goes here *)",
+      lineSeperator: "",
       extensions: [basicSetup, StreamLanguage.define(oCaml), oneDark]
     });
 
     let view = new EditorView({ state, parent: editorRef.current });
-    setEditor(view);
     setJobId(localStorage.getItem("synduce-jobId"));
-
+    setEditor(view);
+    
     // Load previous code
     let code = localStorage.getItem('synduce-code');
     if (code) {
-      view.contentDOM.innerText = code;
+      view.contentDOM.innerText = state.toText(code);
       setPreviousWork(true);
     }
 
