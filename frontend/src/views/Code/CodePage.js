@@ -34,7 +34,7 @@ export default function CodePage() {
       let newJobId = response.data['jobID'];
       setJobId(newJobId);
       localStorage.setItem('synduce-jobId', newJobId);
-      localStorage.setItem('synduce-code', editor.contentDOM.innerText);
+      localStorage.setItem('synduce-code', editor.contentDOM.innerText.replace(/\n\n/g, "\n"));
       poll();
     }, (error) => {
       console.log(error);
@@ -84,7 +84,6 @@ export default function CodePage() {
   useEffect(() => {
     const state = EditorState.create({
       doc: "(** Your code goes here *)",
-      lineSeperator: "",
       extensions: [basicSetup, StreamLanguage.define(oCaml), oneDark]
     });
 
