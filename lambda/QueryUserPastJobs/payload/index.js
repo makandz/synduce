@@ -2,6 +2,7 @@ const { DynamoDBClient, BatchExecuteStatementCommand } = require("@aws-sdk/clien
 
 exports.handler = async (event) => {
 	// Extract userID from http request body.
+  const body = JSON.parse(event["body"]);
   const userID = body["userID"];
 
 	// Query job in DB.
