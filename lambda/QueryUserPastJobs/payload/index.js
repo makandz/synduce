@@ -1,27 +1,24 @@
-const { DynamoDBClient, BatchExecuteStatementCommand } = require("@aws-sdk/client-dynamodb");
+const { DynamoDBClient, QueryCommand } = require("@aws-sdk/client-dynamodb");
 
 exports.handler = async (event) => {
 	// Extract userID from http request body.
-  const body = JSON.parse(event["body"]);
-  const userID = body["userID"];
+  const body = JSON.parse(event.body);
+  const userID = body.userID;
+  console.log(userID);
 
 	// Query job in DB.
-	const dbClient = new DynamoDBClient({ region: 'us-east-1' });
-  const params = {
-    Statements: [
-      {
-        Statement: "SELECT code FROM JobInfo WHERE userID=?",
-        Parameters: [
-          {'S': userID}
-        ]
-      }
-    ]
-  };
-  // Return 500 if error.
   let response;
+	const dbClient = new DynamoDBClient({ region: 'us-east-1' });
 	try {
-		response = await dbClient.send(new BatchExecuteStatementCommand(params));
-		console.log('dbClient Response Item', response.Responses[0].Item);
+		response = await dbClient.send(new QueryCommand({
+		  TableName: "JobInfo",
+		  ProjectionExpression: "code,timeSent",
+		  KeyConditionExpression: "userID = :val",
+      ExpressionAttributeValues: {
+        ":val": {'S': userID}
+      }
+		}));
+		console.log('dbClient Response Item', response.Items);
 	} catch (err) {
 		console.error("Error:", err);
     return {
@@ -30,7 +27,16 @@ exports.handler = async (event) => {
     };
 	}
 
-  // Return user's past job code files to frontend.
+  // Extract past jobs' code from Items 
+  const pastJobsCode = response.Items.map(item => {
+      return {
+        code: item.code.S, 
+        timeSent: item.timeSent.S
+      }
+  });
+  console.log(pastJobsCode)
+  
+  // Return to frontend.
   return {
     statusCode: 200,
     headers: {
@@ -38,8 +44,6 @@ exports.handler = async (event) => {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "OPTIONS,POST"
     },
-    body: JSON.stringify({
-      row: response.Responses[0].Item
-    })
+    body: JSON.stringify(pastJobsCode)
   };
 };
