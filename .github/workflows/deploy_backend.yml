@@ -59,3 +59,10 @@ jobs:
         npm ci
         zip -r QueryJobPayload.zip *
         aws lambda update-function-code --function-name QueryJob --zip-file fileb://QueryJobPayload.zip
+
+    - name: Upload to QueryUserPastJobs
+      run: |
+        cd $GITHUB_WORKSPACE/lambda/QueryUserPastJobs/payload
+        npm ci
+        zip -r QueryUserPastJobsPayload.zip *
+        aws lambda update-function-code --function-name QueryUserPastJobs --zip-file fileb://QueryUserPastJobsPayload.zip

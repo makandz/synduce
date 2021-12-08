@@ -1,18 +1,17 @@
 const { DynamoDBClient, BatchExecuteStatementCommand } = require("@aws-sdk/client-dynamodb");
 
 exports.handler = async (event) => {
-	// Extract jobID from http request body.
-  const body = JSON.parse(event["body"]);
-  const jobID = body["jobID"];
+	// Extract userID from http request body.
+  const userID = body["userID"];
 
 	// Query job in DB.
 	const dbClient = new DynamoDBClient({ region: 'us-east-1' });
   const params = {
     Statements: [
       {
-        Statement: "SELECT status, logs FROM JobInfo WHERE jobID=?",
+        Statement: "SELECT code FROM JobInfo WHERE userID=?",
         Parameters: [
-          {'S': jobID}
+          {'S': userID}
         ]
       }
     ]
@@ -26,11 +25,11 @@ exports.handler = async (event) => {
 		console.error("Error:", err);
     return {
       statusCode: 500,
-      body: JSON.stringify('Unable to fetch jobID status.')
+      body: JSON.stringify("Unable to fetch user's past jobs.")
     };
 	}
 
-  // Return jobID status and logs to frontend.
+  // Return user's past job code files to frontend.
   return {
     statusCode: 200,
     headers: {

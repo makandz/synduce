@@ -1,14 +1,14 @@
 import { basicSetup } from "@codemirror/basic-setup";
+import { oCaml } from "@codemirror/legacy-modes/mode/mllike";
 import { EditorState } from "@codemirror/state";
-import { EditorView } from "@codemirror/view";
-import {StreamLanguage} from "@codemirror/stream-parser";
-import { oCaml } from "@codemirror/legacy-modes/mode/mllike"
+import { StreamLanguage } from "@codemirror/stream-parser";
 import { oneDark } from "@codemirror/theme-one-dark";
-import {useEffect, useRef, useState} from "react";
-import styles from "./CodePage.module.css";
-import baseStyles from '../../components/Styling.module.css';
+import { EditorView } from "@codemirror/view";
 import axios from "axios";
+import { useEffect, useRef, useState } from "react";
 import DisplayBox from "../../components/Forms/DisplayBox/DisplayBox";
+import baseStyles from '../../components/Styling.module.css';
+import styles from "./CodePage.module.css";
 
 export default function CodePage() {
   const [editor, setEditor] = useState(null);
@@ -20,7 +20,7 @@ export default function CodePage() {
   const editorRef = useRef();
 
   // array of how many seconds to wait on the ith poll, with last value being the max wait.
-  const poll_rates = Array.from({length: 7}, (x, i) => Math.pow(2, i));
+  const poll_rates = Array.from({length: 7}, (_, i) => Math.pow(2, i));
 
   function sendJob() {
     axios({
