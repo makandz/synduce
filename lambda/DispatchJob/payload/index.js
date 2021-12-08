@@ -16,13 +16,14 @@ exports.handler = async (event) => {
   const params = {
     Statements: [
       {
-        Statement: "INSERT INTO JobInfo VALUE {'userID':?, 'jobID':?, 'status':?, 'logs':?, 'code':? }",
+        Statement: "INSERT INTO JobInfo VALUE {'userID':?, 'jobID':?, 'status':?, 'logs':?, 'code':?, 'timeSent':? }",
         Parameters: [
           {'S': userID},
           {'S': jobID},
           {'S': "RUNNING"},
           {'S': ""},
           {'S': code},
+          {'S': Date().toLocaleString()}
         ]
       }
     ]

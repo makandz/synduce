@@ -12,7 +12,7 @@ exports.handler = async (event) => {
 	try {
 		response = await dbClient.send(new QueryCommand({
 		  TableName: "JobInfo",
-		  ProjectionExpression: "code",
+		  ProjectionExpression: "code,timeSent",
 		  KeyConditionExpression: "userID = :val",
       ExpressionAttributeValues: {
         ":val": {'S': userID}
@@ -27,7 +27,16 @@ exports.handler = async (event) => {
     };
 	}
 
-  // Extract past jobs' code from Items and return to frontend.
+  // Extract past jobs' code from Items 
+  const pastJobsCode = response.Items.map(item => {
+      return {
+        code: item.code.S, 
+        timeSent: item.timeSent.S
+      }
+  });
+  console.log(pastJobsCode)
+  
+  // Return to frontend.
   return {
     statusCode: 200,
     headers: {
@@ -35,6 +44,6 @@ exports.handler = async (event) => {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "OPTIONS,POST"
     },
-    body: JSON.stringify(response.Items.map(item => item.code.S))
+    body: JSON.stringify(pastJobsCode)
   };
 };
