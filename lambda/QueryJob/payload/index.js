@@ -10,7 +10,7 @@ exports.handler = async (event) => {
   const params = {
     Statements: [
       {
-        Statement: "SELECT * FROM JobStatuses WHERE jobID=?",
+        Statement: "SELECT * FROM JobInfo WHERE jobID=?",
         Parameters: [
           {'S': jobID}
         ]

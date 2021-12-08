@@ -53,7 +53,7 @@ resource "aws_iam_role" "RoleForLambdaDispatchJob" {
     })
   }
   inline_policy {
-    name = "WriteToDynamoDBTableJobStatuses"
+    name = "WriteToDynamoDBTableJobInfo"
     policy = jsonencode({
       "Version" : "2012-10-17",
       "Statement" : [
@@ -65,7 +65,7 @@ resource "aws_iam_role" "RoleForLambdaDispatchJob" {
             "dynamodb:PartiQLInsert"
           ],
           "Effect" : "Allow",
-          "Resource" : aws_dynamodb_table.JobStatuses.arn
+          "Resource" : aws_dynamodb_table.JobInfo.arn
         }
       ]
     })
@@ -162,7 +162,7 @@ resource "aws_iam_role" "RoleForLambdaUpdateJobStatus" {
   })
   managed_policy_arns = ["arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"]
   inline_policy {
-    name = "UpdateDynamoDBTableJobStatuses"
+    name = "UpdateDynamoDBTableJobInfo"
     policy = jsonencode({
       "Version" : "2012-10-17",
       "Statement" : [
@@ -174,7 +174,7 @@ resource "aws_iam_role" "RoleForLambdaUpdateJobStatus" {
             "dynamodb:PartiQLUpdate"
           ],
           "Effect" : "Allow",
-          "Resource" : aws_dynamodb_table.JobStatuses.arn
+          "Resource" : aws_dynamodb_table.JobInfo.arn
         }
       ]
     })
@@ -214,7 +214,7 @@ resource "aws_iam_role" "RoleForLambdaQueryJob" {
   })
   managed_policy_arns = ["arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"]
   inline_policy {
-    name = "QueryDynamoDBTableJobStatuses"
+    name = "QueryDynamoDBTableJobInfo"
     policy = jsonencode({
       "Version" : "2012-10-17",
       "Statement" : [
@@ -224,7 +224,7 @@ resource "aws_iam_role" "RoleForLambdaQueryJob" {
             "dynamodb:PartiQLSelect"
           ],
           "Effect" : "Allow",
-          "Resource" : aws_dynamodb_table.JobStatuses.arn
+          "Resource" : aws_dynamodb_table.JobInfo.arn
         }
       ]
     })

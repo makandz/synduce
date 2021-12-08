@@ -12,7 +12,7 @@ exports.handler = async (event) => {
   const params = {
     Statements: [
       {
-        Statement: "UPDATE JobStatuses SET status=?,logs=? WHERE jobID=?",
+        Statement: "UPDATE JobInfo SET status=?,logs=? WHERE jobID=?",
         Parameters: [
           {'S': status},
           {'S': logs},

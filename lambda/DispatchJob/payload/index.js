@@ -15,7 +15,7 @@ exports.handler = async (event) => {
   const params = {
     Statements: [
       {
-        Statement: "INSERT INTO JobStatuses VALUE {'userID':?, 'jobID':?, 'status':?, 'logs':?  }",
+        Statement: "INSERT INTO JobInfo VALUE {'userID':?, 'jobID':?, 'status':?, 'logs':?  }",
         Parameters: [
           {'S': "guest"}, // TODO: Change this based on how Cognito auth works.
           {'S': jobID},

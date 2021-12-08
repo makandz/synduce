@@ -18,7 +18,7 @@ resource "aws_iam_role" "RoleForGithubActionsUploadToLambda" {
   })
   managed_policy_arns = ["arn:aws:iam::aws:policy/AWSLambda_FullAccess"]
   inline_policy {
-    name = "QueryDynamoDBTableJobStatuses"
+    name = "QueryDynamoDBTableJobInfo"
     policy = jsonencode({
       "Version" : "2012-10-17",
       "Statement" : [
@@ -28,7 +28,7 @@ resource "aws_iam_role" "RoleForGithubActionsUploadToLambda" {
             "dynamodb:PartiQLSelect"
           ],
           "Effect" : "Allow",
-          "Resource" : aws_dynamodb_table.JobStatuses.arn
+          "Resource" : aws_dynamodb_table.JobInfo.arn
         }
       ]
     })
