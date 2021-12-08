@@ -6,21 +6,23 @@ exports.handler = async (event) => {
   // Create jobID
   const jobID = uuidv4();
 
-  // Extract code body from http request body.
-  const body = JSON.parse(event["body"]);
-  const code = body["code"];
+  // Extract code body and user ID from http request body.
+  const body = JSON.parse(event.body);
+  const userID = body.userID;
+  const code = body.code;
 
   // Add job to DB.
   const dbClient = new DynamoDBClient({ region: 'us-east-1' });
   const params = {
     Statements: [
       {
-        Statement: "INSERT INTO JobInfo VALUE {'userID':?, 'jobID':?, 'status':?, 'logs':?  }",
+        Statement: "INSERT INTO JobInfo VALUE {'userID':?, 'jobID':?, 'status':?, 'logs':?, 'code':? }",
         Parameters: [
-          {'S': "guest"}, // TODO: Change this based on how Cognito auth works.
+          {'S': userID},
           {'S': jobID},
           {'S': "RUNNING"},
-          {'S': ""}
+          {'S': ""},
+          {'S': code},
         ]
       }
     ]
@@ -38,8 +40,9 @@ exports.handler = async (event) => {
 
   // Publish message to SNS.
   const messagePayload = {
-    "jobID": jobID,
-    "code": code
+    userID: userID,
+    jobID: jobID,
+    code: code
   };
   const client = new SNSClient();
   await client.send(new PublishCommand({

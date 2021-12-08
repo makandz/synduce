@@ -3,20 +3,18 @@ const { DynamoDBClient, BatchExecuteStatementCommand } = require("@aws-sdk/clien
 exports.handler = async (event) => {
 	// Extract code body from http request body.
 	const message = JSON.parse(event['Records'][0]["Sns"]["Message"]);
-	const jobID = message["jobID"];
-	const logs = message["logs"];
-	const status = message["status"];
 
 	// Update job in DB.
 	const dbClient = new DynamoDBClient({ region: 'us-east-1' });
   const params = {
     Statements: [
       {
-        Statement: "UPDATE JobInfo SET status=?,logs=? WHERE jobID=?",
+        Statement: "UPDATE JobInfo SET status=?,logs=? WHERE jobID=? AND userID=?",
         Parameters: [
-          {'S': status},
-          {'S': logs},
-          {'S': jobID},
+          {'S': message.status},
+          {'S': message.logs},
+          {'S': message.jobID},
+          {'S': message.userID}
         ]
       }
     ]

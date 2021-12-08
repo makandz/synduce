@@ -2,17 +2,17 @@ const { DynamoDBClient, BatchExecuteStatementCommand } = require("@aws-sdk/clien
 
 exports.handler = async (event) => {
 	// Extract jobID from http request body.
-  const body = JSON.parse(event["body"]);
-  const jobID = body["jobID"];
+  const body = JSON.parse(event.body);
 
 	// Query job in DB.
 	const dbClient = new DynamoDBClient({ region: 'us-east-1' });
   const params = {
     Statements: [
       {
-        Statement: "SELECT status, logs FROM JobInfo WHERE jobID=?",
+        Statement: "SELECT status, logs FROM JobInfo WHERE jobID=? AND userID=?",
         Parameters: [
-          {'S': jobID}
+          {'S': body.jobID},
+          {'S': body.userID}
         ]
       }
     ]
