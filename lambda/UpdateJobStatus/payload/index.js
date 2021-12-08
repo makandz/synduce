@@ -2,7 +2,7 @@ const { DynamoDBClient, BatchExecuteStatementCommand } = require("@aws-sdk/clien
 
 exports.handler = async (event) => {
 	// Extract code body from http request body.
-	const message = JSON.parse(event['Records'][0]["Sns"]["Message"]);
+	const message = JSON.parse(event["Records"][0]["Sns"]["Message"]);
 
 	// Update job in DB.
 	const dbClient = new DynamoDBClient({ region: 'us-east-1' });
@@ -21,7 +21,7 @@ exports.handler = async (event) => {
   };
 	try {
 		const response = await dbClient.send(new BatchExecuteStatementCommand(params));
-		console.log('dbClient Response', response.Responses[0].Error);
+		console.log('dbClient Response', response);
 	} catch (err) {
 		console.error("Error:", err);
 	}

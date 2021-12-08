@@ -5,7 +5,7 @@ import json
 
 def handler(event, context):
     # Extract code from SNS message.
-    message = json.loads(event['Records'][0]["Sns"]["Message"])
+    message = json.loads(event["Records"][0]["Sns"]["Message"])
     
     # Write code to temporary file for Synduce to read.
     # Forcibly terminate this if it runs for more than 00:14:30 = 870 seconds.

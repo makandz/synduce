@@ -27,6 +27,7 @@ export default function CodePage() {
       method : "POST",
       url: "https://rhnq76qo4e.execute-api.us-east-1.amazonaws.com/active/dispatchjob",
       data: {
+        userID: "guest", // TODO: Change this to Firebase UID.
         code: editor.contentDOM.innerText
       },
       responseType: 'json',
@@ -50,7 +51,8 @@ export default function CodePage() {
         method : "POST",
         url: "https://rhnq76qo4e.execute-api.us-east-1.amazonaws.com/active/queryjob",
         data: {
-          jobID: jobId
+          userID: "guest",
+          jobID: jobId,
         },
         responseType: 'json',
         headers: {
@@ -80,7 +82,7 @@ export default function CodePage() {
 
   async function poll(){
     let i = 0
-    while(jobId && queryJob() != 0){
+    while(jobId && queryJob() !== 0){
       await sleep(poll_rates[i] * 1000);
       i = Math.min(poll_rates.length-1, i + 1);
     }
