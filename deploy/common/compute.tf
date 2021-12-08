@@ -188,7 +188,7 @@ resource "aws_lambda_permission" "AllowExecutionFromSNSTopicFinishedJobs" {
   source_arn    = aws_sns_topic.FinishedJobs.arn
 }
 
-# 4. Lambda to query database for finished job as proxy for frontend.
+# 4. Lambda to query database for finished job status as proxy for frontend.
 resource "aws_lambda_function" "QueryJob" {
   function_name = "QueryJob"
   role          = aws_iam_role.RoleForLambdaQueryJob.arn
@@ -236,4 +236,54 @@ resource "aws_lambda_permission" "AllowQueryJobExecutionFromAPIGateway" {
   function_name = aws_lambda_function.QueryJob.function_name
   principal     = "apigateway.amazonaws.com"
   source_arn    = "${aws_apigatewayv2_api.SynduceHTTPApi.execution_arn}/*/*/queryjob"
+}
+
+# 4. Lambda to query database for all user past jobs as proxy for frontend.
+resource "aws_lambda_function" "QueryUserPastJobs" {
+  function_name = "QueryUserPastJobs"
+  role          = aws_iam_role.RoleForLambdaQueryUserPastJobs.arn
+  handler       = "index.handler"
+  runtime       = "nodejs14.x"
+  filename      = "dummy.zip"
+}
+# Role for the above.
+resource "aws_iam_role" "RoleForLambdaQueryUserPastJobs" {
+  name = "RoleForLambdaQueryUserPastJobs"
+  assume_role_policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Action" : "sts:AssumeRole",
+        "Principal" : {
+          "Service" : "lambda.amazonaws.com"
+        },
+        "Effect" : "Allow",
+        "Sid" : ""
+      }
+    ]
+  })
+  managed_policy_arns = ["arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"]
+  inline_policy {
+    name = "QueryDynamoDBTableJobInfo"
+    policy = jsonencode({
+      "Version" : "2012-10-17",
+      "Statement" : [
+        {
+          "Action" : [
+            "dynamodb:Query",
+            "dynamodb:PartiQLSelect"
+          ],
+          "Effect" : "Allow",
+          "Resource" : aws_dynamodb_table.JobInfo.arn
+        }
+      ]
+    })
+  }
+}
+# Resource based permission to allow trigger from API Gateway.
+resource "aws_lambda_permission" "AllowQueryUserPastJobsExecutionFromAPIGateway" {
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.QueryUserPastJobs.function_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "${aws_apigatewayv2_api.SynduceHTTPApi.execution_arn}/*/*/queryuserpastjobs"
 }
