@@ -35,17 +35,17 @@ resource "aws_apigatewayv2_stage" "active" {
 resource "aws_apigatewayv2_route" "dispatchjob" {
   api_id    = aws_apigatewayv2_api.SynduceHTTPApi.id
   route_key = "POST /dispatchjob"
-  target = "integrations/${aws_apigatewayv2_integration.DispatchJobIntegration.id}"
+  target    = "integrations/${aws_apigatewayv2_integration.DispatchJobIntegration.id}"
 }
 resource "aws_apigatewayv2_route" "queryjob" {
   api_id    = aws_apigatewayv2_api.SynduceHTTPApi.id
   route_key = "POST /queryjob"
-  target = "integrations/${aws_apigatewayv2_integration.QueryJobIntegration.id}"
+  target    = "integrations/${aws_apigatewayv2_integration.QueryJobIntegration.id}"
 }
 resource "aws_apigatewayv2_route" "queryuserpastjobs" {
   api_id    = aws_apigatewayv2_api.SynduceHTTPApi.id
   route_key = "POST /queryuserpastjobs"
-  target = "integrations/${aws_apigatewayv2_integration.QueryUserPastJobsIntegration.id}"
+  target    = "integrations/${aws_apigatewayv2_integration.QueryUserPastJobsIntegration.id}"
 }
 
 # Integrations with Lambdas.
