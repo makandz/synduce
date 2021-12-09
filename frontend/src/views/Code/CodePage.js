@@ -9,6 +9,7 @@ import { useEffect, useRef, useState } from "react";
 import DisplayBox from "../../components/Forms/DisplayBox/DisplayBox";
 import baseStyles from '../../components/Styling.module.css';
 import styles from "./CodePage.module.css";
+import { useAuth, useProvideAuth } from "../../libs/hooks/Auth";
 
 export default function CodePage() {
   const [editor, setEditor] = useState(null);
@@ -18,6 +19,8 @@ export default function CodePage() {
   const [jobResult, setJobResult] = useState("N/A");
 
   const editorRef = useRef();
+  const auth = useAuth();
+  console.log(auth);
 
   // array of how many seconds to wait on the ith poll, with last value being the max wait.
   const poll_rates = Array.from({length: 7}, (_, i) => Math.pow(2, i));
@@ -27,7 +30,7 @@ export default function CodePage() {
       method : "POST",
       url: "https://rhnq76qo4e.execute-api.us-east-1.amazonaws.com/active/dispatchjob",
       data: {
-        userID: "guest", // TODO: Change this to Firebase UID.
+        userID: auth?.user?.uid || "guest",
         code: editor.contentDOM.innerText
       },
       responseType: 'json',
@@ -51,7 +54,7 @@ export default function CodePage() {
         method : "POST",
         url: "https://rhnq76qo4e.execute-api.us-east-1.amazonaws.com/active/queryjob",
         data: {
-          userID: "guest",
+          userID: auth?.user?.uid || "guest",
           jobID: jobId,
         },
         responseType: 'json',
