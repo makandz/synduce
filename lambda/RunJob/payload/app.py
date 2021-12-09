@@ -13,7 +13,7 @@ def handler(event, context):
     with open("/tmp/tmp.ml", "w") as f:
         f.writelines(message["code"])
     try:
-        proc = subprocess.run(["/home/opam/Synduce/_build/default/bin/Synduce.exe", "/tmp/tmp.ml"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=870)
+        proc = subprocess.run(["/home/opam/Synduce/_build/default/bin/Synduce.exe", "/tmp/tmp.ml", "--json"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=870)
         status = "FINISHED"
     except subprocess.TimeoutExpired:
         status = "TIMEOUT"
