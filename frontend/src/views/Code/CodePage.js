@@ -9,21 +9,18 @@ import { useEffect, useRef, useState } from "react";
 import DisplayBox from "../../components/Forms/DisplayBox/DisplayBox";
 import baseStyles from '../../components/Styling.module.css';
 import styles from "./CodePage.module.css";
-import { useAuth, useProvideAuth } from "../../libs/hooks/Auth";
+import { useAuth } from "../../libs/hooks/Auth";
 
-export default function CodePage() {
+export default function CodePage(props) {
   const [editor, setEditor] = useState(null);
   const [jobId, setJobId] = useState(null);
   const [previousWork, setPreviousWork] = useState(false);
   const [loadState, setLoadState] = useState(0);
   const [jobResult, setJobResult] = useState("N/A");
+  const [polling, setPolling] = useState(null);
 
   const editorRef = useRef();
   const auth = useAuth();
-  console.log(auth);
-
-  // array of how many seconds to wait on the ith poll, with last value being the max wait.
-  const poll_rates = Array.from({length: 7}, (_, i) => Math.pow(2, i));
 
   function sendJob() {
     axios({
@@ -42,7 +39,6 @@ export default function CodePage() {
       setJobId(newJobId);
       localStorage.setItem('synduce-jobId', newJobId);
       localStorage.setItem('synduce-code', editor.contentDOM.innerText);
-      poll();
     }, (error) => {
       console.log(error);
     });
@@ -63,31 +59,29 @@ export default function CodePage() {
         }
       }).then((response) => {
         let row = response.data.row;
-        if (row.status.S === "FINISHED") {
+        if (row?.status?.S === "FINISHED") {
           setJobResult(row.logs.S);
           setLoadState(2);
-          return 0;
-        } else if (row.status.S === "RUNNING") {
+          if (polling) clearInterval(polling);
+        } else if (row?.status?.S === "RUNNING") {
           setLoadState(1);
-          return 1;
+          if (!polling) {
+            setPolling(
+              setInterval(() => {
+                queryJob();
+                console.log("requesting job update");
+              }, 5000)
+            );
+          }
+        } else {
+          setLoadState(0);
+          if (polling) clearInterval(polling);
         }
       }, (error) => {
         console.log(error);
-        return 1;
+        setLoadState(0);
+        if (polling) clearInterval(polling);
       });
-    }
-    return 1;
-  }
-
-  function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-
-  async function poll(){
-    let i = 0
-    while(jobId && queryJob() !== 0){
-      await sleep(poll_rates[i] * 1000);
-      i = Math.min(poll_rates.length-1, i + 1);
     }
   }
 
@@ -103,12 +97,13 @@ export default function CodePage() {
     
     // Load previous code
     let code = localStorage.getItem('synduce-code');
-    if (code) {
+    if (props.match.params.token) {
+
+    } else if (code) {
       view.contentDOM.innerText = code.replace(/\n\n/g, "\n");
       setPreviousWork(true);
     }
 
-    // // @todo might wanna destroy on page leave
     return () => {
       view.destroy();
     };
@@ -133,7 +128,12 @@ export default function CodePage() {
         <div ref={editorRef} />
       </div>
       <div className={styles.executeWrapper}>
-        {previousWork && <p className={styles.loadedPrevious}>Auto-loaded code your from previous session</p>}
+        {previousWork && <p className={styles.loadedPrevious}>
+          Code loaded from a previous local session
+        </p>}
+        {props.match.params.token && <p className={styles.loadedPrevious}>
+          Code and response loaded from a previous online session
+        </p>}
         <button
           className={baseStyles.btn}
           onClick={sendJob}
@@ -150,7 +150,16 @@ export default function CodePage() {
       </div>
       {loadState === 2 && <div className={styles.responseWrapper}>
         <h2>Job response</h2>
-        <p>{jobResult}</p>
+        <div className={`${styles.statusBox} ${styles.error}`}>
+          <p>Job completed successfully</p>
+          <p>Algorithm: SE2GIS</p>
+          <p>Time elapsed: 0.409 seconds</p>
+        </div>
+
+        <h2>Your result</h2>
+        <div className={styles.codebox}>
+          {jobResult}
+        </div>
       </div>}
     </div>
   );

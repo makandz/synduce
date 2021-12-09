@@ -36,7 +36,7 @@ export default function Navbar() {
           </div>
         ) : (
           <div className={styles.opts}>
-            <Link to="/profile">
+            <Link to="/projects">
               {auth.user.email}
             </Link>
 

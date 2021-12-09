@@ -5,7 +5,7 @@ import DisplayBox from "../../components/Forms/DisplayBox/DisplayBox";
 import baseStyles from '../../components/Styling.module.css';
 import styles from "./ProfilePage.module.css";
 
-const Profile = () => {
+const ProfilePage = () => {
   const [password, setPassword] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -107,4 +107,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ProfilePage;

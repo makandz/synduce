@@ -43,3 +43,36 @@
 .responseWrapper > p {
     margin-top: 5px;
 }
+
+.statusBox {
+    margin-top: 5px;
+    padding: 10px 10px 15px;
+    border-radius: 10px;
+}
+
+.statusBox > p {
+    margin: 0;
+}
+
+.statusBox > p:first-child {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.statusBox.success {
+    background-color: #AFE1AF;
+}
+
+.statusBox.error {
+    background-color: #f6a48d;
+}
+
+.codebox {
+    background-color: #282C34;
+    padding: 10px;
+    color: white;
+    font-family: monospace;
+    font-size: 14px;
+    border-radius: 10px;
+    margin-top: 5px;
+}

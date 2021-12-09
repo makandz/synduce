@@ -1,0 +1,24 @@
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 0 20px 20px;
+}
+
+.miniTitle {
+    font-size: 1.25rem;
+    margin-bottom: 4px;
+    font-family: "Manrope", sans-serif;
+    font-weight: bold;
+}
+
+.projectList {
+    margin: 0 0 20px;
+}
+
+.projectList > li {
+    margin-bottom: 5px;
+}
+
+.editProfileBtn {
+    padding: 12px;
+}
