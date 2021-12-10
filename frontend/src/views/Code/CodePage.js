@@ -58,8 +58,10 @@ export default function CodePage(props) {
       data: {
         userID: auth?.user?.uid || "guest",
         code: editor.contentDOM.innerText,
-        flags: parseOptions(options, 'flag'),
-        numerics: parseOptions(options, 'range')
+        options: {
+          flags: parseOptions(options, 'flag'),
+          numerics: parseOptions(options, 'range')
+        }
       },
       responseType: 'json',
       headers: {
