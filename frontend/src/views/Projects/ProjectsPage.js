@@ -1,6 +1,5 @@
 import baseStyles from '../../components/Styling.module.css';
 import styles from "./ProjectsPage.module.css";
-import {Link} from "react-router-dom";
 import {useHistory} from "react-router";
 import {useEffect, useState} from "react";
 import axios from "axios";
@@ -8,12 +7,17 @@ import {useAuth} from "../../libs/hooks/Auth";
 
 export default function ProjectsPage() {
   const auth = useAuth();
-  
+
   const history = useHistory();
   const [projects, setProjects] = useState([
     // { id: "239x8n23189x", date: "September 2, 2021 [10:32 AM UTC]"}
   ]);
 
+  const loadCode = (code) => {
+    localStorage.setItem("synduce-pastJobCode", code);
+    history.push("code/pastjob")
+  }
+  
   useEffect(() => {
     axios({
       method : "POST",
@@ -26,7 +30,7 @@ export default function ProjectsPage() {
         'Content-Type': 'application/json'
       }
     }).then((response) => {
-      console.log(response);
+      setProjects(response.data);
     }, (error) => {
       console.log(error);
     });
@@ -42,8 +46,8 @@ export default function ProjectsPage() {
         <div className={styles.miniTitle}>History</div>
         <ul className={styles.projectList}>
           {(projects !== null && projects.length !== 0) ? (
-            projects.map((e, i) => (
-              <li><Link to={`code/${e.id}`}>Run on {e.date}</Link></li>
+            projects.map(e => (
+              <li><a onClick={() => loadCode(e.code)}>Run on {e.timeSent}</a></li>
             ))
           ) : (
             <li>You have no projects, run one via the code editor!</li>

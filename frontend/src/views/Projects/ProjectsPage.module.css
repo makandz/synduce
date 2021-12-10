@@ -22,3 +22,7 @@
 .editProfileBtn {
     padding: 12px;
 }
+
+.projectList a {
+    cursor: pointer;
+}
