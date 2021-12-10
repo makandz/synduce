@@ -2,17 +2,35 @@ import baseStyles from '../../components/Styling.module.css';
 import styles from "./ProjectsPage.module.css";
 import {Link} from "react-router-dom";
 import {useHistory} from "react-router";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import axios from "axios";
+import {useAuth} from "../../libs/hooks/Auth";
 
 export default function ProjectsPage() {
+  const auth = useAuth();
+  
   const history = useHistory();
   const [projects, setProjects] = useState([
     // { id: "239x8n23189x", date: "September 2, 2021 [10:32 AM UTC]"}
   ]);
 
-  const loadProjects = () => {
-    // @todo
-  }
+  useEffect(() => {
+    axios({
+      method : "POST",
+      url: "https://rhnq76qo4e.execute-api.us-east-1.amazonaws.com/active/queryuserpastjobs",
+      data: {
+        userID: auth?.user?.uid
+      },
+      responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then((response) => {
+      console.log(response);
+    }, (error) => {
+      console.log(error);
+    });
+  }, []);
 
   return (
     <>
