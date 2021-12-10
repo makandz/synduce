@@ -4,13 +4,12 @@ import {useHistory} from "react-router";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {useAuth} from "../../libs/hooks/Auth";
+import {Link} from "react-router-dom";
 
 export default function ProjectsPage() {
   const auth = useAuth();
   const history = useHistory();
-  const [projects, setProjects] = useState([
-    // { id: "239x8n23189x", date: "September 2, 2021 [10:32 AM UTC]"}
-  ]);
+  const [projects, setProjects] = useState(null);
 
   const loadCode = (code) => {
     localStorage.setItem("synduce-pastJobCode", code);
@@ -42,7 +41,7 @@ export default function ProjectsPage() {
       </h1>
 
       <div className={styles.container}>
-        <div className={styles.miniTitle}>History</div>
+        <div className={styles.miniTitle}>Code History</div>
         <ul className={styles.projectList}>
           {(projects !== null && projects.length !== 0) ? (
             projects.map(e => (
@@ -52,6 +51,9 @@ export default function ProjectsPage() {
             <li>You have no projects, run one via the code editor!</li>
           )}
         </ul>
+        <p className={styles.startNewProject}>
+          or <Link to="code">start a new project instead</Link>
+        </p>
         <div className={styles.miniTitle}>Your Account</div>
         <button
           className={`${baseStyles.btn} ${styles.editProfileBtn}`}

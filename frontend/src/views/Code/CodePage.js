@@ -135,7 +135,6 @@ export default function CodePage(props) {
     });
 
     let view = new EditorView({ state, parent: editorRef.current });
-    setJobId(localStorage.getItem("synduce-jobId"));
     setEditor(view);
     
     // Load previous code
@@ -144,7 +143,7 @@ export default function CodePage(props) {
       const code = localStorage.getItem("synduce-pastJobCode");
       if (code)
         view.contentDOM.innerText = code.replace(/\n\n/g, "\n");
-      sendJob(); // query for loading a job
+      // sendJob(); // query for loading a job
     } else if (code) {
       view.contentDOM.innerText = code.replace(/\n\n/g, "\n");
       setPreviousWork(true);
@@ -152,6 +151,9 @@ export default function CodePage(props) {
 
     return () => {
       view.destroy();
+      // Only load job response if not loading pastjob
+      if (props.match.params.token !== 'pastjob')
+        setJobId(localStorage.getItem("synduce-jobId"));
     };
   }, []);
 
