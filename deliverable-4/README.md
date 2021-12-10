@@ -57,11 +57,16 @@ We also use Firebase for our authentication needs. In order to have this set up 
 This application has separate frontend and backend components. The backend is hosted completely on AWS while the frontend is hosted on Heroku. GitHub Actions handle automated deployment to both of these services.
 
 The Actions script `deploy_backend.yml` handles deploying our code to AWS. Specifically: 
-1. It downloads all npm dependencies for three of our four Lambda functions and then zips them up to prepare for pushing to AWS.
-2. It builds and tags a Docker image for our fourth container-backed Lambda.
-3. It deploys each of the zipped payloads to the first three Lambdas via the AWS CLI.
+1. It downloads all npm dependencies for four of our five Lambda functions and then zips them up to prepare for pushing to AWS.
+2. It builds and tags a Docker image for our fifth container-backed Lambda.
+3. It deploys each of the zipped payloads to the first four Lambdas via the AWS CLI.
 4. It pushes the tagged container image to AWS ECR via the AWS CLI, then redeploys the fourth Lambda.
 
 The Actions script `deploy_frontend.yml` handles deploying our frontend code to Heroku. This involved compiling our React application into a static site and then pushing it to Heroku.
 
-Both scripts use credentials stored in this repository's Secrets to ensure that no confidential information is exposed. You will need to update these if you are changing the host accounts.
+Both scripts use credentials stored in this repository's Secrets to ensure that no confidential information is exposed. The following Secrets are required:
+* AWS_ACCESS_KEY_ID: The programmatic access key for the host AWS account. Follow the instructions [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey) to make one.
+* AWS_SECRET_ACCESS_KEY: The programmatic secret access key for the host AWS account. This will be obtained along with the access key in the previous step.
+* HEROKU_API_KEY: The API key for the host Heroku account.
+* HEROKU_EMAIL: The email address of the host Heroku account.
+* ROLE_TO_ASSUME: The ARN (Amazon Resource Number) of the Role on AWS to run the Actions under. This Role will be automatically created by Terraform on initialization. Please copy this value by going to `IAM -> Roles -> RoleForGithubActionsUploadToLambda`.
