@@ -8,7 +8,7 @@ exports.handler = async (event) => {
 
   // Extract code body and user ID from http request body.
   const body = JSON.parse(event.body);
-  const userID = body.userID === "guest" ? uuidv4() : body.userID;
+  const userID = body.userID;
   const code = body.code;
   const options = body.options;
 
