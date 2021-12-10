@@ -5,14 +5,16 @@ import { StreamLanguage } from "@codemirror/stream-parser";
 import { oneDark } from "@codemirror/theme-one-dark";
 import { EditorView } from "@codemirror/view";
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
+import {useContext, useEffect, useRef, useState} from "react";
 import DisplayBox from "../../components/Forms/DisplayBox/DisplayBox";
 import baseStyles from '../../components/Styling.module.css';
 import styles from "./CodePage.module.css";
 import { useAuth } from "../../libs/hooks/Auth";
+import DataContext from "../../libs/contexts/dataContext";
 
 export default function CodePage(props) {
   const auth = useAuth();
+  const [data] = useContext(DataContext);
 
   const [editor, setEditor] = useState(null);
   const [jobId, setJobId] = useState(null);
@@ -140,7 +142,7 @@ export default function CodePage(props) {
     // Load previous code
     let code = localStorage.getItem('synduce-code');
     if (props.match.params.token === 'pastjob') {
-      const code = localStorage.getItem("synduce-pastJobCode");
+      const code = data.pastJobCode;
       if (code)
         view.contentDOM.innerText = code.replace(/\n\n/g, "\n");
       // sendJob(); // query for loading a job

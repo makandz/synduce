@@ -8,10 +8,15 @@ import CodePage from "./views/Code/CodePage";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import RegisterPage from "./views/Register/RegisterPage";
 import ProjectsPage from "./views/Projects/ProjectsPage";
+import DataContext from "./libs/contexts/dataContext";
+import {useState} from "react";
+import data from "./libs/data";
 
 export default function App() {
+  const dataState = useState(data);
+
   return (
-    <>
+    <DataContext.Provider value={dataState}>
       <ProvideAuth>
         <Router forceRefresh={false}>
           <Navbar />
@@ -36,6 +41,6 @@ export default function App() {
           </Switch>
         </Router>
       </ProvideAuth>
-    </>
+    </DataContext.Provider>
   );
 }
