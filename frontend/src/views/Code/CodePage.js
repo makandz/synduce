@@ -12,6 +12,8 @@ import styles from "./CodePage.module.css";
 import { useAuth } from "../../libs/hooks/Auth";
 
 export default function CodePage(props) {
+  const auth = useAuth();
+
   const [editor, setEditor] = useState(null);
   const [jobId, setJobId] = useState(null);
   const [previousWork, setPreviousWork] = useState(false);
@@ -48,7 +50,6 @@ export default function CodePage(props) {
   )
 
   const editorRef = useRef();
-  const auth = useAuth();
 
   function sendJob() {
     console.log(options)
@@ -104,10 +105,15 @@ export default function CodePage(props) {
         let row = response.data.row;
 
         if (row?.status?.S === "FINISHED") {
-          setJobResult(row.logs.S);
+          try {
+            setJobResult({ success: true, data: JSON.parse(row.logs.S)});
+          } catch (e) {
+            setJobResult({ success: false, data: row.logs.S});
+          }
+
           setLoadState(2);
 
-        } else if (row?.status?.S === "RUNNING") {
+        } else if (row === {} || row?.status?.S === "RUNNING") {
           setLoadState(1);
           setTimeout(() => {
             queryJob();
@@ -224,16 +230,27 @@ export default function CodePage(props) {
       {loadState === 2 && (
         <div className={styles.responseWrapper}>
           <h2>Job response</h2>
-          <div className={`${styles.statusBox} ${styles.success}`}>
-            <p>Job completed successfully</p>
-            <p>Algorithm: SE2GIS</p>
-            <p>Time elapsed: 0.409 seconds</p>
-          </div>
+            {jobResult.success ? (
+              <div className={`${styles.statusBox} ${styles.success}`}>
+                <p>Job completed successfully</p>
+                <p>Algorithm: {jobResult.data.algorithm}</p>
+                <p>Time elapsed: {jobResult.data.total_elapsed.toFixed(2)} seconds</p>
+              </div>
+            ) : (
+              <div className={`${styles.statusBox} ${styles.error}`}>
+                <p>Job run failed</p>
+                <p>${jobResult.data}</p>
+              </div>
+            )}
 
-          <h2>Your result</h2>
-          <div className={styles.codebox}>
-            {jobResult}
-          </div>
+          {jobResult.success && (
+            <>
+              <h2>Your result</h2>
+              <div className={styles.codebox}>
+                {jobResult.data.solution.trim()}
+              </div>
+            </>
+          )}
         </div>
       )}
     </div>
