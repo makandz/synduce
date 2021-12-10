@@ -12,7 +12,7 @@
 }
 
 .projectList {
-    margin: 0 0 20px;
+    margin: 0 0 0;
 }
 
 .projectList > li {
@@ -25,4 +25,13 @@
 
 .projectList a {
     cursor: pointer;
+}
+
+.startNewProject {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.startNewProject a {
+    font-weight: bold;
 }

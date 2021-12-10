@@ -1,20 +1,33 @@
 import baseStyles from '../../components/Styling.module.css';
 import styles from "./ProjectsPage.module.css";
 import {useHistory} from "react-router";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import {useAuth} from "../../libs/hooks/Auth";
+import {Link} from "react-router-dom";
+import DataContext from "../../libs/contexts/dataContext";
 
 export default function ProjectsPage() {
   const auth = useAuth();
   const history = useHistory();
-  const [projects, setProjects] = useState([
-    // { id: "239x8n23189x", date: "September 2, 2021 [10:32 AM UTC]"}
-  ]);
+  const [projects, setProjects] = useState(null);
+  const [data, setData] = useContext(DataContext);
 
-  const loadCode = (code) => {
-    localStorage.setItem("synduce-pastJobCode", code);
-    history.push("code/pastjob")
+  const loadCode = (code, logs) => {
+    let log;
+    try {
+      log = { success: true, data: JSON.parse(logs) };
+    } catch (e) {
+      log = { success: false, data: logs };
+    }
+
+    setData({
+      ...data,
+      pastJobCode: code,
+      pastJobResult: log
+    });
+
+    history.push("code/pastjob");
   }
   
   useEffect(() => {
@@ -42,16 +55,19 @@ export default function ProjectsPage() {
       </h1>
 
       <div className={styles.container}>
-        <div className={styles.miniTitle}>History</div>
+        <div className={styles.miniTitle}>Code History</div>
         <ul className={styles.projectList}>
           {(projects !== null && projects.length !== 0) ? (
             projects.map(e => (
-              <li><a onClick={() => loadCode(e.code)}>Run on {e.timeSent}</a></li>
+              <li><a onClick={() => loadCode(e.code, e.logs)}>Run on {e.timeSent}</a></li>
             ))
           ) : (
             <li>You have no projects, run one via the code editor!</li>
           )}
         </ul>
+        <p className={styles.startNewProject}>
+          or <Link to="code">start a new project instead</Link>
+        </p>
         <div className={styles.miniTitle}>Your Account</div>
         <button
           className={`${baseStyles.btn} ${styles.editProfileBtn}`}

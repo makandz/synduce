@@ -5,14 +5,16 @@ import { StreamLanguage } from "@codemirror/stream-parser";
 import { oneDark } from "@codemirror/theme-one-dark";
 import { EditorView } from "@codemirror/view";
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
+import {useContext, useEffect, useRef, useState} from "react";
 import DisplayBox from "../../components/Forms/DisplayBox/DisplayBox";
 import baseStyles from '../../components/Styling.module.css';
 import styles from "./CodePage.module.css";
 import { useAuth } from "../../libs/hooks/Auth";
+import DataContext from "../../libs/contexts/dataContext";
 
 export default function CodePage(props) {
   const auth = useAuth();
+  const [data] = useContext(DataContext);
 
   const [editor, setEditor] = useState(null);
   const [jobId, setJobId] = useState(null);
@@ -135,16 +137,18 @@ export default function CodePage(props) {
     });
 
     let view = new EditorView({ state, parent: editorRef.current });
-    setJobId(localStorage.getItem("synduce-jobId"));
     setEditor(view);
     
     // Load previous code
     let code = localStorage.getItem('synduce-code');
     if (props.match.params.token === 'pastjob') {
-      const code = localStorage.getItem("synduce-pastJobCode");
-      if (code)
+      const code = data.pastJobCode;
+      if (code) {
+        console.log(data);
         view.contentDOM.innerText = code.replace(/\n\n/g, "\n");
-      sendJob(); // query for loading a job
+        setJobResult(data.pastJobResult);
+        setLoadState(2);
+      }
     } else if (code) {
       view.contentDOM.innerText = code.replace(/\n\n/g, "\n");
       setPreviousWork(true);
@@ -152,6 +156,9 @@ export default function CodePage(props) {
 
     return () => {
       view.destroy();
+      // Only load job response if not loading pastjob
+      if (props.match.params.token !== 'pastjob')
+        setJobId(localStorage.getItem("synduce-jobId"));
     };
   }, []);
 
