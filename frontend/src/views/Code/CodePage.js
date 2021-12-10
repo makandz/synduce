@@ -112,7 +112,6 @@ export default function CodePage(props) {
           }
 
           setLoadState(2);
-
         } else if (row === {} || row?.status?.S === "RUNNING") {
           setLoadState(1);
           setTimeout(() => {
@@ -141,8 +140,11 @@ export default function CodePage(props) {
     
     // Load previous code
     let code = localStorage.getItem('synduce-code');
-    if (props.match.params.token) {
-
+    if (props.match.params.token === 'pastjob') {
+      const code = localStorage.getItem("synduce-pastJobCode");
+      if (code)
+        view.contentDOM.innerText = code.replace(/\n\n/g, "\n");
+      sendJob(); // query for loading a job
     } else if (code) {
       view.contentDOM.innerText = code.replace(/\n\n/g, "\n");
       setPreviousWork(true);
