@@ -8,8 +8,9 @@ exports.handler = async (event) => {
 
   // Extract code body and user ID from http request body.
   const body = JSON.parse(event.body);
-  const userID = body.userID;
+  const userID = body.userID === "guest" ? uuidv4() : body.userID;
   const code = body.code;
+  const options = body.options;
 
   // Add job to DB.
   const dbClient = new DynamoDBClient({ region: 'us-east-1' });
@@ -39,11 +40,17 @@ exports.handler = async (event) => {
     };
   }
 
+  // Parse options into string
+  const flags = Object.entries(options.flags).map(([flag, enabled]) => enabled ? flag : "").join(" ").trim();
+  const numerics = Object.entries(options.numerics).map(([opt, amount]) => `${opt} ${amount}`).join(" ").trim();
+  const optStr = `${flags} ${numerics}`.trim();
+
   // Publish message to SNS.
   const messagePayload = {
     userID: userID,
     jobID: jobID,
-    code: code
+    code: code,
+    options: optStr
   };
   const client = new SNSClient();
   await client.send(new PublishCommand({
