@@ -13,8 +13,20 @@ export default function ProjectsPage() {
   const [projects, setProjects] = useState(null);
   const [data, setData] = useContext(DataContext);
 
-  const loadCode = (code) => {
-    setData({ ...data, pastJobCode: code })
+  const loadCode = (code, logs) => {
+    let log;
+    try {
+      log = { success: true, data: JSON.parse(logs) };
+    } catch (e) {
+      log = { success: false, data: logs };
+    }
+
+    setData({
+      ...data,
+      pastJobCode: code,
+      pastJobResult: log
+    });
+
     history.push("code/pastjob");
   }
   
@@ -47,7 +59,7 @@ export default function ProjectsPage() {
         <ul className={styles.projectList}>
           {(projects !== null && projects.length !== 0) ? (
             projects.map(e => (
-              <li><a onClick={() => loadCode(e.code)}>Run on {e.timeSent}</a></li>
+              <li><a onClick={() => loadCode(e.code, e.logs)}>Run on {e.timeSent}</a></li>
             ))
           ) : (
             <li>You have no projects, run one via the code editor!</li>

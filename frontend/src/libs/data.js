@@ -1,5 +1,6 @@
 const data = {
-  pastJobCode: ""
+  pastJobCode: "",
+  pastJobResult: { }
 }
 
 export default data;

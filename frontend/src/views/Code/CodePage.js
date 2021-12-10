@@ -143,9 +143,12 @@ export default function CodePage(props) {
     let code = localStorage.getItem('synduce-code');
     if (props.match.params.token === 'pastjob') {
       const code = data.pastJobCode;
-      if (code)
+      if (code) {
+        console.log(data);
         view.contentDOM.innerText = code.replace(/\n\n/g, "\n");
-      // sendJob(); // query for loading a job
+        setJobResult(data.pastJobResult);
+        setLoadState(2);
+      }
     } else if (code) {
       view.contentDOM.innerText = code.replace(/\n\n/g, "\n");
       setPreviousWork(true);
