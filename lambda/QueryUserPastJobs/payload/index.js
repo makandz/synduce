@@ -4,7 +4,6 @@ exports.handler = async (event) => {
 	// Extract userID from http request body.
   const body = JSON.parse(event.body);
   const userID = body.userID;
-  console.log(userID);
 
 	// Query job in DB.
   let response;
@@ -26,6 +25,14 @@ exports.handler = async (event) => {
       body: JSON.stringify("Unable to fetch user's past jobs.")
     };
 	}
+
+  // Do this late to prevent timing attacks on the placeholder value
+  if (userID === "guest") {
+    return {
+      statusCode: 500,
+      body: JSON.stringify("Unable to fetch user's past jobs.")
+    };
+  }
 
   // Extract past jobs' code from Items 
   const pastJobsCode = response.Items.map(item => {
