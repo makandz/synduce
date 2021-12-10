@@ -6,13 +6,13 @@
 
  Dear Danya and Victor, 
 
- First off, we would like to thank you for giving us the opportunity to work with you, and that you trusted us to build an application that you found to be a useful addition to your set of research tools. We really appreciate all the time and help you have offered us throughout the term. 
+ First off, we would like to thank you for giving us the opportunity to work with you, and for trusting us to build an application that you found to be a useful addition to your set of research tools. We really appreciate all the time and help you have given us throughout the term. 
  
  --- What we did (underlined) ---
 
  We were able to complete a large majority of the features and users story that you asked of us. Of course our primary objective was to allow users to run Synduce over the internet without the need to download, build, and run Synduce in a command line interface. We provide you a much cleaner and intuitive interface through our web application, where you can write any scripts you would like with the built-in code editor and then to run Synduce at the click of a button. You can then view log activity once the job has complete and see what Synduce was up to behind the scenes. 
 
- We also added some other features that would be quite useful to a research team. A user has the ability to create an account, which would allow them to view previous job history if they wish. You can also update your accounts password if you wish. **add some more stuff here**
+ We also added some other features that would be quite useful to a research team. A user has the ability to create an account, which would allow them to view previous job history if they wish. You can also update your accounts password if you wish. We have also added the ability to add and remove command line options for Synduce. **add more here**
 
  --- What is yet to be done (underlined) ---
 
@@ -20,7 +20,11 @@
 
  --- Handoff instructions ---
 
- All the information that you will need to deploy the application including where to add credential information, how to edit and run the GitHub Actions scripts, and instructions on what you need from the project repository and how instructions to handoff the code base, are available in a README.md in the project repository under the "deliverable-4" directory. A link to that directory is here: **link to d4 folder in repo**
+ All the information that you will need to deploy the application and information you will need for development, are available in a [README.md](https://github.com/csc301-fall-2021/team-project-16-software-engineering-lab-uoft/blob/main/deliverable-4/README.md) in the project repository under the "deliverable-4" directory. 
+
+ In terms of the AWS credentials and Secrets required to deploy the app are already all done for you. You can verify the information if you wish. For Heroku you will need to add th Secrets in the GitHub Actions script in `.github/deploy_frontend.yml` to yours so you can deploy automatically. We will need to decomission the current web application on Heroku so you can use the Synduce domain name. We will/have already let you know about this. Finally the Firebase ownership has already been transferred to you.
+
+ In terms of handing off the project repository itself, you can fork the current [repository](https://github.com/csc301-fall-2021/team-project-16-software-engineering-lab-uoft). 
 
  You will also find extensive documentation and progress reports in the project repository that you can have a look at for additional information under the "deliverable-*" directory in the project repository. Most of these reports are not required to running and deploying the application but are available for your convenience. 
 
