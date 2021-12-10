@@ -43,7 +43,7 @@ exports.handler = async (event) => {
   // Parse options into string
   const flags = Object.entries(options.flags).map(([flag, enabled]) => enabled ? flag : "").join(" ").trim();
   const numerics = Object.entries(options.numerics).map(([opt, amount]) => `${opt} ${amount}`).join(" ").trim();
-  const optStr = `${flags} ${numerics}`;
+  const optStr = `${flags} ${numerics}`.trim();
 
   // Publish message to SNS.
   const messagePayload = {

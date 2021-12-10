@@ -6,7 +6,6 @@ import json
 def handler(event, context):
     # Extract code from SNS message.
     message = json.loads(event["Records"][0]["Sns"]["Message"])
-    print(message)
     
     # Write code to temporary file for Synduce to read.
     # Forcibly terminate this if it runs for more than 00:14:30 = 870 seconds.
@@ -14,7 +13,7 @@ def handler(event, context):
     with open("/tmp/tmp.ml", "w") as f:
         f.writelines(message["code"])
     try:
-        proc = subprocess.run(["/home/opam/Synduce/_build/default/bin/Synduce.exe", "/tmp/tmp.ml", message["options"] + "--json"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=870)
+        proc = subprocess.run(f"/home/opam/Synduce/_build/default/bin/Synduce.exe /tmp/tmp.ml --json {message['options']}", stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=870, shell=True)
         status = "FINISHED"
     except subprocess.TimeoutExpired:
         status = "TIMEOUT"
