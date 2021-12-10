@@ -17,18 +17,49 @@ export default function CodePage(props) {
   const [previousWork, setPreviousWork] = useState(false);
   const [loadState, setLoadState] = useState(0);
   const [jobResult, setJobResult] = useState("N/A");
-  const [polling, setPolling] = useState(null);
+  const [options] = useState([
+    {
+      type: "range",
+      code: "-n",
+      value: 124,
+      options: { min: 1, max: 1024 },
+      description: "unfolding limit in intermediate verification steps"
+    }, {
+      type: "flag",
+      code: "-N",
+      value: true,
+      description: "allow bounded check for classifying counterexamples"
+    }, {
+      type: "flag",
+      code: "-B",
+      value: false,
+      description: "allow bounded check to verify lemmas"
+    }, {
+      type: "flag",
+      code: "--no-lifting",
+      value: false,
+      description: "disallow lifting"
+    }, {
+      type: "flag",
+      code: "--no-gropt",
+      value: false,
+      description: "disallow grammar optimizations"
+    }]
+  )
 
   const editorRef = useRef();
   const auth = useAuth();
 
   function sendJob() {
+    console.log(options)
     axios({
       method : "POST",
       url: "https://rhnq76qo4e.execute-api.us-east-1.amazonaws.com/active/dispatchjob",
       data: {
         userID: auth?.user?.uid || "guest",
-        code: editor.contentDOM.innerText
+        code: editor.contentDOM.innerText,
+        flags: parseOptions(options, 'flag'),
+        numerics: parseOptions(options, 'range')
       },
       responseType: 'json',
       headers: {
@@ -44,6 +75,16 @@ export default function CodePage(props) {
     });
   }
 
+  const parseOptions = (opts, type) => {
+    let final = {};
+    opts.forEach((e) => {
+      if (e.type === type)
+        final[e.code] = e.value
+    });
+
+    return final;
+  }
+
   function queryJob() {
     if (jobId !== null) {
       axios({
@@ -51,7 +92,7 @@ export default function CodePage(props) {
         url: "https://rhnq76qo4e.execute-api.us-east-1.amazonaws.com/active/queryjob",
         data: {
           userID: auth?.user?.uid || "guest",
-          jobID: jobId,
+          jobID: jobId
         },
         responseType: 'json',
         headers: {
@@ -59,28 +100,23 @@ export default function CodePage(props) {
         }
       }).then((response) => {
         let row = response.data.row;
+
         if (row?.status?.S === "FINISHED") {
           setJobResult(row.logs.S);
           setLoadState(2);
-          if (polling) clearInterval(polling);
+
         } else if (row?.status?.S === "RUNNING") {
           setLoadState(1);
-          if (!polling) {
-            setPolling(
-              setInterval(() => {
-                queryJob();
-                console.log("requesting job update");
-              }, 5000)
-            );
-          }
+          setTimeout(() => {
+            queryJob();
+            console.log("requesting job update");
+          }, 5000);
         } else {
           setLoadState(0);
-          if (polling) clearInterval(polling);
         }
       }, (error) => {
         console.log(error);
         setLoadState(0);
-        if (polling) clearInterval(polling);
       });
     }
   }
@@ -148,19 +184,56 @@ export default function CodePage(props) {
           Request job update
         </button>
       </div>
-      {loadState === 2 && <div className={styles.responseWrapper}>
-        <h2>Job response</h2>
-        <div className={`${styles.statusBox} ${styles.error}`}>
-          <p>Job completed successfully</p>
-          <p>Algorithm: SE2GIS</p>
-          <p>Time elapsed: 0.409 seconds</p>
+      <div className={styles.optionsWrapper}>
+        <h2>Request options</h2>
+        <div className={styles.requestOptions}>
+          {options.map(e => (
+            (e.type === "flag" && (
+              <div>
+                <input
+                  type="checkbox"
+                  defaultChecked={e.value}
+                  onChange={(event) => e.value = event.target.checked}
+                />
+                <label>
+                  {e.description.at(0).toUpperCase() + e.description.slice(1)} [{e.code}]
+                </label>
+              </div>
+            )) || (e.type && (
+              <div>
+                <input
+                  type="range"
+                  min={e.options.min}
+                  max={e.options.max}
+                  defaultValue={e.value}
+                  onChange={(event) => e.value = event.target.value}
+                />
+                <label>
+                  <strong className={styles.rangeValue}>
+                    {e.value}
+                  </strong>
+                  {e.description.at(0).toUpperCase() + e.description.slice(1)} [{e.code}]
+                </label>
+              </div>
+            ))
+          ))}
         </div>
+      </div>
+      {loadState === 2 && (
+        <div className={styles.responseWrapper}>
+          <h2>Job response</h2>
+          <div className={`${styles.statusBox} ${styles.success}`}>
+            <p>Job completed successfully</p>
+            <p>Algorithm: SE2GIS</p>
+            <p>Time elapsed: 0.409 seconds</p>
+          </div>
 
-        <h2>Your result</h2>
-        <div className={styles.codebox}>
-          {jobResult}
+          <h2>Your result</h2>
+          <div className={styles.codebox}>
+            {jobResult}
+          </div>
         </div>
-      </div>}
+      )}
     </div>
   );
 }

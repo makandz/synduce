@@ -28,15 +28,20 @@
     padding: 10px;
 }
 
+.optionsWrapper {
+    max-width: 1000px;
+    margin: auto;
+}
+
 .responseWrapper {
     margin: auto;
     max-width: 1000px;
     font-weight: 500;
+    padding-bottom: 20px;
 }
 
-.responseWrapper > h2 {
+.responseWrapper > h2, .optionsWrapper > h2 {
     margin-bottom: 0;
-    /* @todo remove this later */
     font-family: "Manrope", sans-serif;
 }
 
@@ -75,4 +80,17 @@
     font-size: 14px;
     border-radius: 10px;
     margin-top: 5px;
+}
+
+.requestOptions div input {
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.requestOptions div {
+    margin-top: 5px;
+}
+
+.requestOptions .rangeValue {
+    margin-right: 5px;
 }
