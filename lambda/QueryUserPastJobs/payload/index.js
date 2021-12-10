@@ -11,7 +11,7 @@ exports.handler = async (event) => {
 	try {
 		response = await dbClient.send(new QueryCommand({
 		  TableName: "JobInfo",
-		  ProjectionExpression: "code,timeSent",
+		  ProjectionExpression: "code,timeSent,logs",
 		  KeyConditionExpression: "userID = :val",
       ExpressionAttributeValues: {
         ":val": {'S': userID}
@@ -38,7 +38,8 @@ exports.handler = async (event) => {
   const pastJobsCode = response.Items.map(item => {
       return {
         code: item.code.S, 
-        timeSent: item.timeSent.S
+        timeSent: item.timeSent.S,
+        logs: item.logs.S
       }
   });
   console.log(pastJobsCode)
