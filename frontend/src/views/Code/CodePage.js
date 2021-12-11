@@ -248,7 +248,7 @@ export default function CodePage(props) {
             ) : (
               <div className={`${styles.statusBox} ${styles.error}`}>
                 <p>Job run failed</p>
-                <p>${jobResult.data}</p>
+                <p>{jobResult.data}</p>
               </div>
             )}
 
